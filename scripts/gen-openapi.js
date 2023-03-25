@@ -149,7 +149,7 @@ function emptyOpenApiSchema(){
         "openapi": "3.0.2",
         "info": {
             "title": "Chrome DevTools Protocol",
-            "description": "This is auto-generated OpenAPI 3.0 specification for Chrome Dev Tools Protocol.",
+            "description": "Auto-generated OpenAPI 3.0 specification for Chrome Dev Tools Protocol's types, events, commands",
             "version": "1.0.0"
         },
         "paths": {
