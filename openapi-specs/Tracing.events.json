@@ -1,0 +1,70 @@
+{
+    "openapi": "3.0.2",
+    "info": {
+        "title": "Chrome DevTools Protocol",
+        "description": "Auto-generated OpenAPI 3.0 specification for Chrome Dev Tools Protocol's types, events, commands",
+        "version": "1.0.0"
+    },
+    "paths": {},
+    "components": {
+        "schemas": {
+            "EventBufferUsageParams": {
+                "type": "object",
+                "properties": {
+                    "percentFull": {
+                        "description": "A number in range [0..1] that indicates the used size of event buffer as a fraction of its\ntotal size.",
+                        "type": "number"
+                    },
+                    "eventCount": {
+                        "description": "An approximate number of events in the trace log.",
+                        "type": "number"
+                    },
+                    "value": {
+                        "description": "A number in range [0..1] that indicates the used size of event buffer as a fraction of its\ntotal size.",
+                        "type": "number"
+                    }
+                }
+            },
+            "EventDataCollectedParams": {
+                "description": "Contains a bucket of collected trace events. When tracing is stopped collected events will be\nsent as a sequence of dataCollected events followed by tracingComplete event.",
+                "type": "object",
+                "properties": {
+                    "value": {
+                        "type": "array",
+                        "items": {
+                            "type": "object"
+                        }
+                    }
+                },
+                "required": [
+                    "value"
+                ]
+            },
+            "EventTracingCompleteParams": {
+                "description": "Signals that tracing is stopped and there is no trace buffers pending flush, all data were\ndelivered via dataCollected events.",
+                "type": "object",
+                "properties": {
+                    "dataLossOccurred": {
+                        "description": "Indicates whether some trace data is known to have been lost, e.g. because the trace ring\nbuffer wrapped around.",
+                        "type": "boolean"
+                    },
+                    "stream": {
+                        "description": "A handle of the stream that holds resulting trace data.",
+                        "$ref": "./IO.types.json#/components/schemas/TypeStreamHandle"
+                    },
+                    "traceFormat": {
+                        "description": "Trace data format of returned stream.",
+                        "$ref": "./Tracing.types.json#/components/schemas/TypeStreamFormat"
+                    },
+                    "streamCompression": {
+                        "description": "Compression format of returned stream.",
+                        "$ref": "./Tracing.types.json#/components/schemas/TypeStreamCompression"
+                    }
+                },
+                "required": [
+                    "dataLossOccurred"
+                ]
+            }
+        }
+    }
+}

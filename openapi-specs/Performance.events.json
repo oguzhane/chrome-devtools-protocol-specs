@@ -1,0 +1,34 @@
+{
+    "openapi": "3.0.2",
+    "info": {
+        "title": "Chrome DevTools Protocol",
+        "description": "Auto-generated OpenAPI 3.0 specification for Chrome Dev Tools Protocol's types, events, commands",
+        "version": "1.0.0"
+    },
+    "paths": {},
+    "components": {
+        "schemas": {
+            "EventMetricsParams": {
+                "description": "Current values of the metrics.",
+                "type": "object",
+                "properties": {
+                    "metrics": {
+                        "description": "Current values of the metrics.",
+                        "type": "array",
+                        "items": {
+                            "$ref": "./Performance.types.json#/components/schemas/TypeMetric"
+                        }
+                    },
+                    "title": {
+                        "description": "Timestamp title.",
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "metrics",
+                    "title"
+                ]
+            }
+        }
+    }
+}

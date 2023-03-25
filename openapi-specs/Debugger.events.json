@@ -1,0 +1,254 @@
+{
+    "openapi": "3.0.2",
+    "info": {
+        "title": "Chrome DevTools Protocol",
+        "description": "Auto-generated OpenAPI 3.0 specification for Chrome Dev Tools Protocol's types, events, commands",
+        "version": "1.0.0"
+    },
+    "paths": {},
+    "components": {
+        "schemas": {
+            "EventBreakpointResolvedParams": {
+                "description": "Fired when breakpoint is resolved to an actual script and location.",
+                "type": "object",
+                "properties": {
+                    "breakpointId": {
+                        "description": "Breakpoint unique identifier.",
+                        "$ref": "./Debugger.types.json#/components/schemas/TypeBreakpointId"
+                    },
+                    "location": {
+                        "description": "Actual breakpoint location.",
+                        "$ref": "./Debugger.types.json#/components/schemas/TypeLocation"
+                    }
+                },
+                "required": [
+                    "breakpointId",
+                    "location"
+                ]
+            },
+            "EventPausedParams": {
+                "description": "Fired when the virtual machine stopped on breakpoint or exception or any other stop criteria.",
+                "type": "object",
+                "properties": {
+                    "callFrames": {
+                        "description": "Call stack the virtual machine stopped on.",
+                        "type": "array",
+                        "items": {
+                            "$ref": "./Debugger.types.json#/components/schemas/TypeCallFrame"
+                        }
+                    },
+                    "reason": {
+                        "description": "Pause reason.",
+                        "type": "string"
+                    },
+                    "data": {
+                        "description": "Object containing break-specific auxiliary properties.",
+                        "type": "object"
+                    },
+                    "hitBreakpoints": {
+                        "description": "Hit breakpoints IDs",
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "asyncStackTrace": {
+                        "description": "Async stack trace, if any.",
+                        "$ref": "./Runtime.types.json#/components/schemas/TypeStackTrace"
+                    },
+                    "asyncStackTraceId": {
+                        "description": "Async stack trace, if any.",
+                        "$ref": "./Runtime.types.json#/components/schemas/TypeStackTraceId"
+                    },
+                    "asyncCallStackTraceId": {
+                        "description": "Never present, will be removed.",
+                        "$ref": "./Runtime.types.json#/components/schemas/TypeStackTraceId"
+                    }
+                },
+                "required": [
+                    "callFrames",
+                    "reason"
+                ]
+            },
+            "EventResumedParams": {
+                "description": "Fired when the virtual machine resumed execution."
+            },
+            "EventScriptFailedToParseParams": {
+                "description": "Fired when virtual machine fails to parse the script.",
+                "type": "object",
+                "properties": {
+                    "scriptId": {
+                        "description": "Identifier of the script parsed.",
+                        "$ref": "./Runtime.types.json#/components/schemas/TypeScriptId"
+                    },
+                    "url": {
+                        "description": "URL or name of the script parsed (if any).",
+                        "type": "string"
+                    },
+                    "startLine": {
+                        "description": "Line offset of the script within the resource with given URL (for script tags).",
+                        "type": "integer"
+                    },
+                    "startColumn": {
+                        "description": "Column offset of the script within the resource with given URL.",
+                        "type": "integer"
+                    },
+                    "endLine": {
+                        "description": "Last line of the script.",
+                        "type": "integer"
+                    },
+                    "endColumn": {
+                        "description": "Length of the last line of the script.",
+                        "type": "integer"
+                    },
+                    "executionContextId": {
+                        "description": "Specifies script creation context.",
+                        "$ref": "./Runtime.types.json#/components/schemas/TypeExecutionContextId"
+                    },
+                    "hash": {
+                        "description": "Content hash of the script, SHA-256.",
+                        "type": "string"
+                    },
+                    "executionContextAuxData": {
+                        "description": "Embedder-specific auxiliary data.",
+                        "type": "object"
+                    },
+                    "sourceMapURL": {
+                        "description": "URL of source map associated with script (if any).",
+                        "type": "string"
+                    },
+                    "hasSourceURL": {
+                        "description": "True, if this script has sourceURL.",
+                        "type": "boolean"
+                    },
+                    "isModule": {
+                        "description": "True, if this script is ES6 module.",
+                        "type": "boolean"
+                    },
+                    "length": {
+                        "description": "This script length.",
+                        "type": "integer"
+                    },
+                    "stackTrace": {
+                        "description": "JavaScript top stack frame of where the script parsed event was triggered if available.",
+                        "$ref": "./Runtime.types.json#/components/schemas/TypeStackTrace"
+                    },
+                    "codeOffset": {
+                        "description": "If the scriptLanguage is WebAssembly, the code section offset in the module.",
+                        "type": "integer"
+                    },
+                    "scriptLanguage": {
+                        "description": "The language of the script.",
+                        "$ref": "./Debugger.types.json#/components/schemas/TypeScriptLanguage"
+                    },
+                    "embedderName": {
+                        "description": "The name the embedder supplied for this script.",
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "scriptId",
+                    "url",
+                    "startLine",
+                    "startColumn",
+                    "endLine",
+                    "endColumn",
+                    "executionContextId",
+                    "hash"
+                ]
+            },
+            "EventScriptParsedParams": {
+                "description": "Fired when virtual machine parses script. This event is also fired for all known and uncollected\nscripts upon enabling debugger.",
+                "type": "object",
+                "properties": {
+                    "scriptId": {
+                        "description": "Identifier of the script parsed.",
+                        "$ref": "./Runtime.types.json#/components/schemas/TypeScriptId"
+                    },
+                    "url": {
+                        "description": "URL or name of the script parsed (if any).",
+                        "type": "string"
+                    },
+                    "startLine": {
+                        "description": "Line offset of the script within the resource with given URL (for script tags).",
+                        "type": "integer"
+                    },
+                    "startColumn": {
+                        "description": "Column offset of the script within the resource with given URL.",
+                        "type": "integer"
+                    },
+                    "endLine": {
+                        "description": "Last line of the script.",
+                        "type": "integer"
+                    },
+                    "endColumn": {
+                        "description": "Length of the last line of the script.",
+                        "type": "integer"
+                    },
+                    "executionContextId": {
+                        "description": "Specifies script creation context.",
+                        "$ref": "./Runtime.types.json#/components/schemas/TypeExecutionContextId"
+                    },
+                    "hash": {
+                        "description": "Content hash of the script, SHA-256.",
+                        "type": "string"
+                    },
+                    "executionContextAuxData": {
+                        "description": "Embedder-specific auxiliary data.",
+                        "type": "object"
+                    },
+                    "isLiveEdit": {
+                        "description": "True, if this script is generated as a result of the live edit operation.",
+                        "type": "boolean"
+                    },
+                    "sourceMapURL": {
+                        "description": "URL of source map associated with script (if any).",
+                        "type": "string"
+                    },
+                    "hasSourceURL": {
+                        "description": "True, if this script has sourceURL.",
+                        "type": "boolean"
+                    },
+                    "isModule": {
+                        "description": "True, if this script is ES6 module.",
+                        "type": "boolean"
+                    },
+                    "length": {
+                        "description": "This script length.",
+                        "type": "integer"
+                    },
+                    "stackTrace": {
+                        "description": "JavaScript top stack frame of where the script parsed event was triggered if available.",
+                        "$ref": "./Runtime.types.json#/components/schemas/TypeStackTrace"
+                    },
+                    "codeOffset": {
+                        "description": "If the scriptLanguage is WebAssembly, the code section offset in the module.",
+                        "type": "integer"
+                    },
+                    "scriptLanguage": {
+                        "description": "The language of the script.",
+                        "$ref": "./Debugger.types.json#/components/schemas/TypeScriptLanguage"
+                    },
+                    "debugSymbols": {
+                        "description": "If the scriptLanguage is WebASsembly, the source of debug symbols for the module.",
+                        "$ref": "./Debugger.types.json#/components/schemas/TypeDebugSymbols"
+                    },
+                    "embedderName": {
+                        "description": "The name the embedder supplied for this script.",
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "scriptId",
+                    "url",
+                    "startLine",
+                    "startColumn",
+                    "endLine",
+                    "endColumn",
+                    "executionContextId",
+                    "hash"
+                ]
+            }
+        }
+    }
+}

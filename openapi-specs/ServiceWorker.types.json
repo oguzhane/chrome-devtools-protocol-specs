@@ -1,0 +1,119 @@
+{
+    "openapi": "3.0.2",
+    "info": {
+        "title": "Chrome DevTools Protocol",
+        "description": "Auto-generated OpenAPI 3.0 specification for Chrome Dev Tools Protocol's types, events, commands",
+        "version": "1.0.0"
+    },
+    "paths": {},
+    "components": {
+        "schemas": {
+            "TypeRegistrationId": {
+                "type": "string"
+            },
+            "TypeServiceWorkerErrorMessage": {
+                "description": "ServiceWorker error message.",
+                "type": "object",
+                "properties": {
+                    "errorMessage": {
+                        "type": "string"
+                    },
+                    "registrationId": {
+                        "$ref": "./ServiceWorker.types.json#/components/schemas/TypeRegistrationId"
+                    },
+                    "versionId": {
+                        "type": "string"
+                    },
+                    "sourceURL": {
+                        "type": "string"
+                    },
+                    "lineNumber": {
+                        "type": "integer"
+                    },
+                    "columnNumber": {
+                        "type": "integer"
+                    }
+                },
+                "required": [
+                    "errorMessage",
+                    "registrationId",
+                    "versionId",
+                    "sourceURL",
+                    "lineNumber",
+                    "columnNumber"
+                ]
+            },
+            "TypeServiceWorkerRegistration": {
+                "description": "ServiceWorker registration.",
+                "type": "object",
+                "properties": {
+                    "registrationId": {
+                        "$ref": "./ServiceWorker.types.json#/components/schemas/TypeRegistrationId"
+                    },
+                    "scopeURL": {
+                        "type": "string"
+                    },
+                    "isDeleted": {
+                        "type": "boolean"
+                    }
+                },
+                "required": [
+                    "registrationId",
+                    "scopeURL",
+                    "isDeleted"
+                ]
+            },
+            "TypeServiceWorkerVersion": {
+                "description": "ServiceWorker version.",
+                "type": "object",
+                "properties": {
+                    "versionId": {
+                        "type": "string"
+                    },
+                    "registrationId": {
+                        "$ref": "./ServiceWorker.types.json#/components/schemas/TypeRegistrationId"
+                    },
+                    "scriptURL": {
+                        "type": "string"
+                    },
+                    "runningStatus": {
+                        "$ref": "./ServiceWorker.types.json#/components/schemas/TypeServiceWorkerVersionRunningStatus"
+                    },
+                    "status": {
+                        "$ref": "./ServiceWorker.types.json#/components/schemas/TypeServiceWorkerVersionStatus"
+                    },
+                    "scriptLastModified": {
+                        "description": "The Last-Modified header value of the main script.",
+                        "type": "number"
+                    },
+                    "scriptResponseTime": {
+                        "description": "The time at which the response headers of the main script were received from the server.\nFor cached script it is the last time the cache entry was validated.",
+                        "type": "number"
+                    },
+                    "controlledClients": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "./Target.types.json#/components/schemas/TypeTargetId"
+                        }
+                    },
+                    "targetId": {
+                        "$ref": "./Target.types.json#/components/schemas/TypeTargetId"
+                    }
+                },
+                "required": [
+                    "versionId",
+                    "registrationId",
+                    "scriptURL",
+                    "runningStatus",
+                    "status"
+                ]
+            },
+            "TypeServiceWorkerVersionRunningStatus": {
+                "type": "string"
+            },
+            "TypeServiceWorkerVersionStatus": {
+                "type": "string"
+            }
+        }
+    }
+}

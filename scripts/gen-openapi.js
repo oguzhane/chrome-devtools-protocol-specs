@@ -163,21 +163,14 @@ function emptyOpenApiSchema(){
 
 function saveSchemaStore() {
     const files = {
-        'Network.types.json': emptyOpenApiSchema(),
-        'Network.events.json': emptyOpenApiSchema(),
-
-        'Page.types.json': emptyOpenApiSchema(),
-        'Page.events.json': emptyOpenApiSchema(),
-
-        'Runtime.types.json': emptyOpenApiSchema(),
-        'Runtime.events.json': emptyOpenApiSchema(),
-
-        'Security.types.json': emptyOpenApiSchema(),
-        'Security.events.json': emptyOpenApiSchema(),
     }
 
     for (const [id, schema] of Object.entries(schemaStore)) {
         const [domain, modelGroup, modelName, modelSubPath] = parseSchemaId(id);
+
+        if (!files[`${domain}`]) {
+            files[`${domain}`] = emptyOpenApiSchema();
+        }
 
         files[`${domain}`].components.schemas[`${path.basename(id)}`] = schema;
     }
@@ -188,13 +181,17 @@ function saveSchemaStore() {
 }
 
 function generateSchemaStore() {
+    console.info("generating..");
+
     for (const [key, value] of Object.entries(protocol)) {
         let subs = key.split(".");
         if (subs.length !== 3) continue;
     
         let [domain, modelGroup, modelName] = subs;
-    
-        if (modelGroup !== "events" || modelName !== "requestWillBeSent") continue;
+        
+        console.log(subs);
+
+        if (modelGroup !== "events") continue;
     
         makeSchema(domain, modelGroup, modelName);
     }    
@@ -202,3 +199,5 @@ function generateSchemaStore() {
 
 generateSchemaStore()
 saveSchemaStore();
+
+console.info("done.");

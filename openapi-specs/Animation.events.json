@@ -1,0 +1,52 @@
+{
+    "openapi": "3.0.2",
+    "info": {
+        "title": "Chrome DevTools Protocol",
+        "description": "Auto-generated OpenAPI 3.0 specification for Chrome Dev Tools Protocol's types, events, commands",
+        "version": "1.0.0"
+    },
+    "paths": {},
+    "components": {
+        "schemas": {
+            "EventAnimationCanceledParams": {
+                "description": "Event for when an animation has been cancelled.",
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "description": "Id of the animation that was cancelled.",
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "id"
+                ]
+            },
+            "EventAnimationCreatedParams": {
+                "description": "Event for each animation that has been created.",
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "description": "Id of the animation that was created.",
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "id"
+                ]
+            },
+            "EventAnimationStartedParams": {
+                "description": "Event for animation that has been started.",
+                "type": "object",
+                "properties": {
+                    "animation": {
+                        "description": "Animation that was started.",
+                        "$ref": "./Animation.types.json#/components/schemas/TypeAnimation"
+                    }
+                },
+                "required": [
+                    "animation"
+                ]
+            }
+        }
+    }
+}

@@ -1,0 +1,38 @@
+{
+    "openapi": "3.0.2",
+    "info": {
+        "title": "Chrome DevTools Protocol",
+        "description": "Auto-generated OpenAPI 3.0 specification for Chrome Dev Tools Protocol's types, events, commands",
+        "version": "1.0.0"
+    },
+    "paths": {},
+    "components": {
+        "schemas": {
+            "TypeRequestId": {
+                "description": "Device request id.",
+                "type": "string"
+            },
+            "TypePromptDevice": {
+                "description": "Device information displayed in a user prompt to select a device.",
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "$ref": "./DeviceAccess.types.json#/components/schemas/TypeDeviceId"
+                    },
+                    "name": {
+                        "description": "Display name as it appears in a device request user prompt.",
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "id",
+                    "name"
+                ]
+            },
+            "TypeDeviceId": {
+                "description": "A device id.",
+                "type": "string"
+            }
+        }
+    }
+}

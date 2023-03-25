@@ -1,0 +1,834 @@
+{
+    "openapi": "3.0.2",
+    "info": {
+        "title": "Chrome DevTools Protocol",
+        "description": "Auto-generated OpenAPI 3.0 specification for Chrome Dev Tools Protocol's types, events, commands",
+        "version": "1.0.0"
+    },
+    "paths": {},
+    "components": {
+        "schemas": {
+            "EventDataReceivedParams": {
+                "description": "Fired when data chunk was received over the network.",
+                "type": "object",
+                "properties": {
+                    "requestId": {
+                        "description": "Request identifier.",
+                        "$ref": "./Network.types.json#/components/schemas/TypeRequestId"
+                    },
+                    "timestamp": {
+                        "description": "Timestamp.",
+                        "$ref": "./Network.types.json#/components/schemas/TypeMonotonicTime"
+                    },
+                    "dataLength": {
+                        "description": "Data chunk length.",
+                        "type": "integer"
+                    },
+                    "encodedDataLength": {
+                        "description": "Actual bytes received (might be less than dataLength for compressed encodings).",
+                        "type": "integer"
+                    }
+                },
+                "required": [
+                    "requestId",
+                    "timestamp",
+                    "dataLength",
+                    "encodedDataLength"
+                ]
+            },
+            "EventEventSourceMessageReceivedParams": {
+                "description": "Fired when EventSource message is received.",
+                "type": "object",
+                "properties": {
+                    "requestId": {
+                        "description": "Request identifier.",
+                        "$ref": "./Network.types.json#/components/schemas/TypeRequestId"
+                    },
+                    "timestamp": {
+                        "description": "Timestamp.",
+                        "$ref": "./Network.types.json#/components/schemas/TypeMonotonicTime"
+                    },
+                    "eventName": {
+                        "description": "Message type.",
+                        "type": "string"
+                    },
+                    "eventId": {
+                        "description": "Message identifier.",
+                        "type": "string"
+                    },
+                    "data": {
+                        "description": "Message content.",
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "requestId",
+                    "timestamp",
+                    "eventName",
+                    "eventId",
+                    "data"
+                ]
+            },
+            "EventLoadingFailedParams": {
+                "description": "Fired when HTTP request has failed to load.",
+                "type": "object",
+                "properties": {
+                    "requestId": {
+                        "description": "Request identifier.",
+                        "$ref": "./Network.types.json#/components/schemas/TypeRequestId"
+                    },
+                    "timestamp": {
+                        "description": "Timestamp.",
+                        "$ref": "./Network.types.json#/components/schemas/TypeMonotonicTime"
+                    },
+                    "type": {
+                        "description": "Resource type.",
+                        "$ref": "./Network.types.json#/components/schemas/TypeResourceType"
+                    },
+                    "errorText": {
+                        "description": "User friendly error message.",
+                        "type": "string"
+                    },
+                    "canceled": {
+                        "description": "True if loading was canceled.",
+                        "type": "boolean"
+                    },
+                    "blockedReason": {
+                        "description": "The reason why loading was blocked, if any.",
+                        "$ref": "./Network.types.json#/components/schemas/TypeBlockedReason"
+                    },
+                    "corsErrorStatus": {
+                        "description": "The reason why loading was blocked by CORS, if any.",
+                        "$ref": "./Network.types.json#/components/schemas/TypeCorsErrorStatus"
+                    }
+                },
+                "required": [
+                    "requestId",
+                    "timestamp",
+                    "type",
+                    "errorText"
+                ]
+            },
+            "EventLoadingFinishedParams": {
+                "description": "Fired when HTTP request has finished loading.",
+                "type": "object",
+                "properties": {
+                    "requestId": {
+                        "description": "Request identifier.",
+                        "$ref": "./Network.types.json#/components/schemas/TypeRequestId"
+                    },
+                    "timestamp": {
+                        "description": "Timestamp.",
+                        "$ref": "./Network.types.json#/components/schemas/TypeMonotonicTime"
+                    },
+                    "encodedDataLength": {
+                        "description": "Total number of bytes received for this request.",
+                        "type": "number"
+                    },
+                    "shouldReportCorbBlocking": {
+                        "description": "Set when 1) response was blocked by Cross-Origin Read Blocking and also\n2) this needs to be reported to the DevTools console.",
+                        "type": "boolean"
+                    }
+                },
+                "required": [
+                    "requestId",
+                    "timestamp",
+                    "encodedDataLength"
+                ]
+            },
+            "EventRequestInterceptedParams": {
+                "description": "Details of an intercepted HTTP request, which must be either allowed, blocked, modified or\nmocked.\nDeprecated, use Fetch.requestPaused instead.",
+                "type": "object",
+                "properties": {
+                    "interceptionId": {
+                        "description": "Each request the page makes will have a unique id, however if any redirects are encountered\nwhile processing that fetch, they will be reported with the same id as the original fetch.\nLikewise if HTTP authentication is needed then the same fetch id will be used.",
+                        "$ref": "./Network.types.json#/components/schemas/TypeInterceptionId"
+                    },
+                    "request": {
+                        "$ref": "./Network.types.json#/components/schemas/TypeRequest"
+                    },
+                    "frameId": {
+                        "description": "The id of the frame that initiated the request.",
+                        "$ref": "./Page.types.json#/components/schemas/TypeFrameId"
+                    },
+                    "resourceType": {
+                        "description": "How the requested resource will be used.",
+                        "$ref": "./Network.types.json#/components/schemas/TypeResourceType"
+                    },
+                    "isNavigationRequest": {
+                        "description": "Whether this is a navigation request, which can abort the navigation completely.",
+                        "type": "boolean"
+                    },
+                    "isDownload": {
+                        "description": "Set if the request is a navigation that will result in a download.\nOnly present after response is received from the server (i.e. HeadersReceived stage).",
+                        "type": "boolean"
+                    },
+                    "redirectUrl": {
+                        "description": "Redirect location, only sent if a redirect was intercepted.",
+                        "type": "string"
+                    },
+                    "authChallenge": {
+                        "description": "Details of the Authorization Challenge encountered. If this is set then\ncontinueInterceptedRequest must contain an authChallengeResponse.",
+                        "$ref": "./Network.types.json#/components/schemas/TypeAuthChallenge"
+                    },
+                    "responseErrorReason": {
+                        "description": "Response error if intercepted at response stage or if redirect occurred while intercepting\nrequest.",
+                        "$ref": "./Network.types.json#/components/schemas/TypeErrorReason"
+                    },
+                    "responseStatusCode": {
+                        "description": "Response code if intercepted at response stage or if redirect occurred while intercepting\nrequest or auth retry occurred.",
+                        "type": "integer"
+                    },
+                    "responseHeaders": {
+                        "description": "Response headers if intercepted at the response stage or if redirect occurred while\nintercepting request or auth retry occurred.",
+                        "$ref": "./Network.types.json#/components/schemas/TypeHeaders"
+                    },
+                    "requestId": {
+                        "description": "If the intercepted request had a corresponding requestWillBeSent event fired for it, then\nthis requestId will be the same as the requestId present in the requestWillBeSent event.",
+                        "$ref": "./Network.types.json#/components/schemas/TypeRequestId"
+                    }
+                },
+                "required": [
+                    "interceptionId",
+                    "request",
+                    "frameId",
+                    "resourceType",
+                    "isNavigationRequest"
+                ]
+            },
+            "EventRequestServedFromCacheParams": {
+                "description": "Fired if request ended up loading from cache.",
+                "type": "object",
+                "properties": {
+                    "requestId": {
+                        "description": "Request identifier.",
+                        "$ref": "./Network.types.json#/components/schemas/TypeRequestId"
+                    }
+                },
+                "required": [
+                    "requestId"
+                ]
+            },
+            "EventRequestWillBeSentParams": {
+                "description": "Fired when page is about to send HTTP request.",
+                "type": "object",
+                "properties": {
+                    "requestId": {
+                        "description": "Request identifier.",
+                        "$ref": "./Network.types.json#/components/schemas/TypeRequestId"
+                    },
+                    "loaderId": {
+                        "description": "Loader identifier. Empty string if the request is fetched from worker.",
+                        "$ref": "./Network.types.json#/components/schemas/TypeLoaderId"
+                    },
+                    "documentURL": {
+                        "description": "URL of the document this request is loaded for.",
+                        "type": "string"
+                    },
+                    "request": {
+                        "description": "Request data.",
+                        "$ref": "./Network.types.json#/components/schemas/TypeRequest"
+                    },
+                    "timestamp": {
+                        "description": "Timestamp.",
+                        "$ref": "./Network.types.json#/components/schemas/TypeMonotonicTime"
+                    },
+                    "wallTime": {
+                        "description": "Timestamp.",
+                        "$ref": "./Network.types.json#/components/schemas/TypeTimeSinceEpoch"
+                    },
+                    "initiator": {
+                        "description": "Request initiator.",
+                        "$ref": "./Network.types.json#/components/schemas/TypeInitiator"
+                    },
+                    "redirectHasExtraInfo": {
+                        "description": "In the case that redirectResponse is populated, this flag indicates whether\nrequestWillBeSentExtraInfo and responseReceivedExtraInfo events will be or were emitted\nfor the request which was just redirected.",
+                        "type": "boolean"
+                    },
+                    "redirectResponse": {
+                        "description": "Redirect response data.",
+                        "$ref": "./Network.types.json#/components/schemas/TypeResponse"
+                    },
+                    "type": {
+                        "description": "Type of this resource.",
+                        "$ref": "./Network.types.json#/components/schemas/TypeResourceType"
+                    },
+                    "frameId": {
+                        "description": "Frame identifier.",
+                        "$ref": "./Page.types.json#/components/schemas/TypeFrameId"
+                    },
+                    "hasUserGesture": {
+                        "description": "Whether the request is initiated by a user gesture. Defaults to false.",
+                        "type": "boolean"
+                    }
+                },
+                "required": [
+                    "requestId",
+                    "loaderId",
+                    "documentURL",
+                    "request",
+                    "timestamp",
+                    "wallTime",
+                    "initiator",
+                    "redirectHasExtraInfo"
+                ]
+            },
+            "EventResourceChangedPriorityParams": {
+                "description": "Fired when resource loading priority is changed",
+                "type": "object",
+                "properties": {
+                    "requestId": {
+                        "description": "Request identifier.",
+                        "$ref": "./Network.types.json#/components/schemas/TypeRequestId"
+                    },
+                    "newPriority": {
+                        "description": "New priority",
+                        "$ref": "./Network.types.json#/components/schemas/TypeResourcePriority"
+                    },
+                    "timestamp": {
+                        "description": "Timestamp.",
+                        "$ref": "./Network.types.json#/components/schemas/TypeMonotonicTime"
+                    }
+                },
+                "required": [
+                    "requestId",
+                    "newPriority",
+                    "timestamp"
+                ]
+            },
+            "EventSignedExchangeReceivedParams": {
+                "description": "Fired when a signed exchange was received over the network",
+                "type": "object",
+                "properties": {
+                    "requestId": {
+                        "description": "Request identifier.",
+                        "$ref": "./Network.types.json#/components/schemas/TypeRequestId"
+                    },
+                    "info": {
+                        "description": "Information about the signed exchange response.",
+                        "$ref": "./Network.types.json#/components/schemas/TypeSignedExchangeInfo"
+                    }
+                },
+                "required": [
+                    "requestId",
+                    "info"
+                ]
+            },
+            "EventResponseReceivedParams": {
+                "description": "Fired when HTTP response is available.",
+                "type": "object",
+                "properties": {
+                    "requestId": {
+                        "description": "Request identifier.",
+                        "$ref": "./Network.types.json#/components/schemas/TypeRequestId"
+                    },
+                    "loaderId": {
+                        "description": "Loader identifier. Empty string if the request is fetched from worker.",
+                        "$ref": "./Network.types.json#/components/schemas/TypeLoaderId"
+                    },
+                    "timestamp": {
+                        "description": "Timestamp.",
+                        "$ref": "./Network.types.json#/components/schemas/TypeMonotonicTime"
+                    },
+                    "type": {
+                        "description": "Resource type.",
+                        "$ref": "./Network.types.json#/components/schemas/TypeResourceType"
+                    },
+                    "response": {
+                        "description": "Response data.",
+                        "$ref": "./Network.types.json#/components/schemas/TypeResponse"
+                    },
+                    "hasExtraInfo": {
+                        "description": "Indicates whether requestWillBeSentExtraInfo and responseReceivedExtraInfo events will be\nor were emitted for this request.",
+                        "type": "boolean"
+                    },
+                    "frameId": {
+                        "description": "Frame identifier.",
+                        "$ref": "./Page.types.json#/components/schemas/TypeFrameId"
+                    }
+                },
+                "required": [
+                    "requestId",
+                    "loaderId",
+                    "timestamp",
+                    "type",
+                    "response",
+                    "hasExtraInfo"
+                ]
+            },
+            "EventWebSocketClosedParams": {
+                "description": "Fired when WebSocket is closed.",
+                "type": "object",
+                "properties": {
+                    "requestId": {
+                        "description": "Request identifier.",
+                        "$ref": "./Network.types.json#/components/schemas/TypeRequestId"
+                    },
+                    "timestamp": {
+                        "description": "Timestamp.",
+                        "$ref": "./Network.types.json#/components/schemas/TypeMonotonicTime"
+                    }
+                },
+                "required": [
+                    "requestId",
+                    "timestamp"
+                ]
+            },
+            "EventWebSocketCreatedParams": {
+                "description": "Fired upon WebSocket creation.",
+                "type": "object",
+                "properties": {
+                    "requestId": {
+                        "description": "Request identifier.",
+                        "$ref": "./Network.types.json#/components/schemas/TypeRequestId"
+                    },
+                    "url": {
+                        "description": "WebSocket request URL.",
+                        "type": "string"
+                    },
+                    "initiator": {
+                        "description": "Request initiator.",
+                        "$ref": "./Network.types.json#/components/schemas/TypeInitiator"
+                    }
+                },
+                "required": [
+                    "requestId",
+                    "url"
+                ]
+            },
+            "EventWebSocketFrameErrorParams": {
+                "description": "Fired when WebSocket message error occurs.",
+                "type": "object",
+                "properties": {
+                    "requestId": {
+                        "description": "Request identifier.",
+                        "$ref": "./Network.types.json#/components/schemas/TypeRequestId"
+                    },
+                    "timestamp": {
+                        "description": "Timestamp.",
+                        "$ref": "./Network.types.json#/components/schemas/TypeMonotonicTime"
+                    },
+                    "errorMessage": {
+                        "description": "WebSocket error message.",
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "requestId",
+                    "timestamp",
+                    "errorMessage"
+                ]
+            },
+            "EventWebSocketFrameReceivedParams": {
+                "description": "Fired when WebSocket message is received.",
+                "type": "object",
+                "properties": {
+                    "requestId": {
+                        "description": "Request identifier.",
+                        "$ref": "./Network.types.json#/components/schemas/TypeRequestId"
+                    },
+                    "timestamp": {
+                        "description": "Timestamp.",
+                        "$ref": "./Network.types.json#/components/schemas/TypeMonotonicTime"
+                    },
+                    "response": {
+                        "description": "WebSocket response data.",
+                        "$ref": "./Network.types.json#/components/schemas/TypeWebSocketFrame"
+                    }
+                },
+                "required": [
+                    "requestId",
+                    "timestamp",
+                    "response"
+                ]
+            },
+            "EventWebSocketFrameSentParams": {
+                "description": "Fired when WebSocket message is sent.",
+                "type": "object",
+                "properties": {
+                    "requestId": {
+                        "description": "Request identifier.",
+                        "$ref": "./Network.types.json#/components/schemas/TypeRequestId"
+                    },
+                    "timestamp": {
+                        "description": "Timestamp.",
+                        "$ref": "./Network.types.json#/components/schemas/TypeMonotonicTime"
+                    },
+                    "response": {
+                        "description": "WebSocket response data.",
+                        "$ref": "./Network.types.json#/components/schemas/TypeWebSocketFrame"
+                    }
+                },
+                "required": [
+                    "requestId",
+                    "timestamp",
+                    "response"
+                ]
+            },
+            "EventWebSocketHandshakeResponseReceivedParams": {
+                "description": "Fired when WebSocket handshake response becomes available.",
+                "type": "object",
+                "properties": {
+                    "requestId": {
+                        "description": "Request identifier.",
+                        "$ref": "./Network.types.json#/components/schemas/TypeRequestId"
+                    },
+                    "timestamp": {
+                        "description": "Timestamp.",
+                        "$ref": "./Network.types.json#/components/schemas/TypeMonotonicTime"
+                    },
+                    "response": {
+                        "description": "WebSocket response data.",
+                        "$ref": "./Network.types.json#/components/schemas/TypeWebSocketResponse"
+                    }
+                },
+                "required": [
+                    "requestId",
+                    "timestamp",
+                    "response"
+                ]
+            },
+            "EventWebSocketWillSendHandshakeRequestParams": {
+                "description": "Fired when WebSocket is about to initiate handshake.",
+                "type": "object",
+                "properties": {
+                    "requestId": {
+                        "description": "Request identifier.",
+                        "$ref": "./Network.types.json#/components/schemas/TypeRequestId"
+                    },
+                    "timestamp": {
+                        "description": "Timestamp.",
+                        "$ref": "./Network.types.json#/components/schemas/TypeMonotonicTime"
+                    },
+                    "wallTime": {
+                        "description": "UTC Timestamp.",
+                        "$ref": "./Network.types.json#/components/schemas/TypeTimeSinceEpoch"
+                    },
+                    "request": {
+                        "description": "WebSocket request data.",
+                        "$ref": "./Network.types.json#/components/schemas/TypeWebSocketRequest"
+                    }
+                },
+                "required": [
+                    "requestId",
+                    "timestamp",
+                    "wallTime",
+                    "request"
+                ]
+            },
+            "EventWebTransportCreatedParams": {
+                "description": "Fired upon WebTransport creation.",
+                "type": "object",
+                "properties": {
+                    "transportId": {
+                        "description": "WebTransport identifier.",
+                        "$ref": "./Network.types.json#/components/schemas/TypeRequestId"
+                    },
+                    "url": {
+                        "description": "WebTransport request URL.",
+                        "type": "string"
+                    },
+                    "timestamp": {
+                        "description": "Timestamp.",
+                        "$ref": "./Network.types.json#/components/schemas/TypeMonotonicTime"
+                    },
+                    "initiator": {
+                        "description": "Request initiator.",
+                        "$ref": "./Network.types.json#/components/schemas/TypeInitiator"
+                    }
+                },
+                "required": [
+                    "transportId",
+                    "url",
+                    "timestamp"
+                ]
+            },
+            "EventWebTransportConnectionEstablishedParams": {
+                "description": "Fired when WebTransport handshake is finished.",
+                "type": "object",
+                "properties": {
+                    "transportId": {
+                        "description": "WebTransport identifier.",
+                        "$ref": "./Network.types.json#/components/schemas/TypeRequestId"
+                    },
+                    "timestamp": {
+                        "description": "Timestamp.",
+                        "$ref": "./Network.types.json#/components/schemas/TypeMonotonicTime"
+                    }
+                },
+                "required": [
+                    "transportId",
+                    "timestamp"
+                ]
+            },
+            "EventWebTransportClosedParams": {
+                "description": "Fired when WebTransport is disposed.",
+                "type": "object",
+                "properties": {
+                    "transportId": {
+                        "description": "WebTransport identifier.",
+                        "$ref": "./Network.types.json#/components/schemas/TypeRequestId"
+                    },
+                    "timestamp": {
+                        "description": "Timestamp.",
+                        "$ref": "./Network.types.json#/components/schemas/TypeMonotonicTime"
+                    }
+                },
+                "required": [
+                    "transportId",
+                    "timestamp"
+                ]
+            },
+            "EventRequestWillBeSentExtraInfoParams": {
+                "description": "Fired when additional information about a requestWillBeSent event is available from the\nnetwork stack. Not every requestWillBeSent event will have an additional\nrequestWillBeSentExtraInfo fired for it, and there is no guarantee whether requestWillBeSent\nor requestWillBeSentExtraInfo will be fired first for the same request.",
+                "type": "object",
+                "properties": {
+                    "requestId": {
+                        "description": "Request identifier. Used to match this information to an existing requestWillBeSent event.",
+                        "$ref": "./Network.types.json#/components/schemas/TypeRequestId"
+                    },
+                    "associatedCookies": {
+                        "description": "A list of cookies potentially associated to the requested URL. This includes both cookies sent with\nthe request and the ones not sent; the latter are distinguished by having blockedReason field set.",
+                        "type": "array",
+                        "items": {
+                            "$ref": "./Network.types.json#/components/schemas/TypeBlockedCookieWithReason"
+                        }
+                    },
+                    "headers": {
+                        "description": "Raw request headers as they will be sent over the wire.",
+                        "$ref": "./Network.types.json#/components/schemas/TypeHeaders"
+                    },
+                    "connectTiming": {
+                        "description": "Connection timing information for the request.",
+                        "$ref": "./Network.types.json#/components/schemas/TypeConnectTiming"
+                    },
+                    "clientSecurityState": {
+                        "description": "The client security state set for the request.",
+                        "$ref": "./Network.types.json#/components/schemas/TypeClientSecurityState"
+                    },
+                    "siteHasCookieInOtherPartition": {
+                        "description": "Whether the site has partitioned cookies stored in a partition different than the current one.",
+                        "type": "boolean"
+                    }
+                },
+                "required": [
+                    "requestId",
+                    "associatedCookies",
+                    "headers",
+                    "connectTiming"
+                ]
+            },
+            "EventResponseReceivedExtraInfoParams": {
+                "description": "Fired when additional information about a responseReceived event is available from the network\nstack. Not every responseReceived event will have an additional responseReceivedExtraInfo for\nit, and responseReceivedExtraInfo may be fired before or after responseReceived.",
+                "type": "object",
+                "properties": {
+                    "requestId": {
+                        "description": "Request identifier. Used to match this information to another responseReceived event.",
+                        "$ref": "./Network.types.json#/components/schemas/TypeRequestId"
+                    },
+                    "blockedCookies": {
+                        "description": "A list of cookies which were not stored from the response along with the corresponding\nreasons for blocking. The cookies here may not be valid due to syntax errors, which\nare represented by the invalid cookie line string instead of a proper cookie.",
+                        "type": "array",
+                        "items": {
+                            "$ref": "./Network.types.json#/components/schemas/TypeBlockedSetCookieWithReason"
+                        }
+                    },
+                    "headers": {
+                        "description": "Raw response headers as they were received over the wire.",
+                        "$ref": "./Network.types.json#/components/schemas/TypeHeaders"
+                    },
+                    "resourceIPAddressSpace": {
+                        "description": "The IP address space of the resource. The address space can only be determined once the transport\nestablished the connection, so we can't send it in `requestWillBeSentExtraInfo`.",
+                        "$ref": "./Network.types.json#/components/schemas/TypeIpAddressSpace"
+                    },
+                    "statusCode": {
+                        "description": "The status code of the response. This is useful in cases the request failed and no responseReceived\nevent is triggered, which is the case for, e.g., CORS errors. This is also the correct status code\nfor cached requests, where the status in responseReceived is a 200 and this will be 304.",
+                        "type": "integer"
+                    },
+                    "headersText": {
+                        "description": "Raw response header text as it was received over the wire. The raw text may not always be\navailable, such as in the case of HTTP/2 or QUIC.",
+                        "type": "string"
+                    },
+                    "cookiePartitionKey": {
+                        "description": "The cookie partition key that will be used to store partitioned cookies set in this response.\nOnly sent when partitioned cookies are enabled.",
+                        "type": "string"
+                    },
+                    "cookiePartitionKeyOpaque": {
+                        "description": "True if partitioned cookies are enabled, but the partition key is not serializeable to string.",
+                        "type": "boolean"
+                    }
+                },
+                "required": [
+                    "requestId",
+                    "blockedCookies",
+                    "headers",
+                    "resourceIPAddressSpace",
+                    "statusCode"
+                ]
+            },
+            "EventTrustTokenOperationDoneParams": {
+                "description": "Fired exactly once for each Trust Token operation. Depending on\nthe type of the operation and whether the operation succeeded or\nfailed, the event is fired before the corresponding request was sent\nor after the response was received.",
+                "type": "object",
+                "properties": {
+                    "status": {
+                        "description": "Detailed success or error status of the operation.\n'AlreadyExists' also signifies a successful operation, as the result\nof the operation already exists und thus, the operation was abort\npreemptively (e.g. a cache hit).",
+                        "type": "string"
+                    },
+                    "type": {
+                        "$ref": "./Network.types.json#/components/schemas/TypeTrustTokenOperationType"
+                    },
+                    "requestId": {
+                        "$ref": "./Network.types.json#/components/schemas/TypeRequestId"
+                    },
+                    "topLevelOrigin": {
+                        "description": "Top level origin. The context in which the operation was attempted.",
+                        "type": "string"
+                    },
+                    "issuerOrigin": {
+                        "description": "Origin of the issuer in case of a \"Issuance\" or \"Redemption\" operation.",
+                        "type": "string"
+                    },
+                    "issuedTokenCount": {
+                        "description": "The number of obtained Trust Tokens on a successful \"Issuance\" operation.",
+                        "type": "integer"
+                    }
+                },
+                "required": [
+                    "status",
+                    "type",
+                    "requestId"
+                ]
+            },
+            "EventSubresourceWebBundleMetadataReceivedParams": {
+                "description": "Fired once when parsing the .wbn file has succeeded.\nThe event contains the information about the web bundle contents.",
+                "type": "object",
+                "properties": {
+                    "requestId": {
+                        "description": "Request identifier. Used to match this information to another event.",
+                        "$ref": "./Network.types.json#/components/schemas/TypeRequestId"
+                    },
+                    "urls": {
+                        "description": "A list of URLs of resources in the subresource Web Bundle.",
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "required": [
+                    "requestId",
+                    "urls"
+                ]
+            },
+            "EventSubresourceWebBundleMetadataErrorParams": {
+                "description": "Fired once when parsing the .wbn file has failed.",
+                "type": "object",
+                "properties": {
+                    "requestId": {
+                        "description": "Request identifier. Used to match this information to another event.",
+                        "$ref": "./Network.types.json#/components/schemas/TypeRequestId"
+                    },
+                    "errorMessage": {
+                        "description": "Error message",
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "requestId",
+                    "errorMessage"
+                ]
+            },
+            "EventSubresourceWebBundleInnerResponseParsedParams": {
+                "description": "Fired when handling requests for resources within a .wbn file.\nNote: this will only be fired for resources that are requested by the webpage.",
+                "type": "object",
+                "properties": {
+                    "innerRequestId": {
+                        "description": "Request identifier of the subresource request",
+                        "$ref": "./Network.types.json#/components/schemas/TypeRequestId"
+                    },
+                    "innerRequestURL": {
+                        "description": "URL of the subresource resource.",
+                        "type": "string"
+                    },
+                    "bundleRequestId": {
+                        "description": "Bundle request identifier. Used to match this information to another event.\nThis made be absent in case when the instrumentation was enabled only\nafter webbundle was parsed.",
+                        "$ref": "./Network.types.json#/components/schemas/TypeRequestId"
+                    }
+                },
+                "required": [
+                    "innerRequestId",
+                    "innerRequestURL"
+                ]
+            },
+            "EventSubresourceWebBundleInnerResponseErrorParams": {
+                "description": "Fired when request for resources within a .wbn file failed.",
+                "type": "object",
+                "properties": {
+                    "innerRequestId": {
+                        "description": "Request identifier of the subresource request",
+                        "$ref": "./Network.types.json#/components/schemas/TypeRequestId"
+                    },
+                    "innerRequestURL": {
+                        "description": "URL of the subresource resource.",
+                        "type": "string"
+                    },
+                    "errorMessage": {
+                        "description": "Error message",
+                        "type": "string"
+                    },
+                    "bundleRequestId": {
+                        "description": "Bundle request identifier. Used to match this information to another event.\nThis made be absent in case when the instrumentation was enabled only\nafter webbundle was parsed.",
+                        "$ref": "./Network.types.json#/components/schemas/TypeRequestId"
+                    }
+                },
+                "required": [
+                    "innerRequestId",
+                    "innerRequestURL",
+                    "errorMessage"
+                ]
+            },
+            "EventReportingApiReportAddedParams": {
+                "description": "Is sent whenever a new report is added.\nAnd after 'enableReportingApi' for all existing reports.",
+                "type": "object",
+                "properties": {
+                    "report": {
+                        "$ref": "./Network.types.json#/components/schemas/TypeReportingApiReport"
+                    }
+                },
+                "required": [
+                    "report"
+                ]
+            },
+            "EventReportingApiReportUpdatedParams": {
+                "type": "object",
+                "properties": {
+                    "report": {
+                        "$ref": "./Network.types.json#/components/schemas/TypeReportingApiReport"
+                    }
+                },
+                "required": [
+                    "report"
+                ]
+            },
+            "EventReportingApiEndpointsChangedForOriginParams": {
+                "type": "object",
+                "properties": {
+                    "origin": {
+                        "description": "Origin of the document(s) which configured the endpoints.",
+                        "type": "string"
+                    },
+                    "endpoints": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "./Network.types.json#/components/schemas/TypeReportingApiEndpoint"
+                        }
+                    }
+                },
+                "required": [
+                    "origin",
+                    "endpoints"
+                ]
+            }
+        }
+    }
+}

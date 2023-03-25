@@ -1,0 +1,64 @@
+{
+    "openapi": "3.0.2",
+    "info": {
+        "title": "Chrome DevTools Protocol",
+        "description": "Auto-generated OpenAPI 3.0 specification for Chrome Dev Tools Protocol's types, events, commands",
+        "version": "1.0.0"
+    },
+    "paths": {},
+    "components": {
+        "schemas": {
+            "EventFontsUpdatedParams": {
+                "description": "Fires whenever a web font is updated.  A non-empty font parameter indicates a successfully loaded\nweb font.",
+                "type": "object",
+                "properties": {
+                    "font": {
+                        "description": "The web font that has loaded.",
+                        "$ref": "./CSS.types.json#/components/schemas/TypeFontFace"
+                    }
+                }
+            },
+            "EventMediaQueryResultChangedParams": {
+                "description": "Fires whenever a MediaQuery result changes (for example, after a browser window has been\nresized.) The current implementation considers only viewport-dependent media features."
+            },
+            "EventStyleSheetAddedParams": {
+                "description": "Fired whenever an active document stylesheet is added.",
+                "type": "object",
+                "properties": {
+                    "header": {
+                        "description": "Added stylesheet metainfo.",
+                        "$ref": "./CSS.types.json#/components/schemas/TypeCssStyleSheetHeader"
+                    }
+                },
+                "required": [
+                    "header"
+                ]
+            },
+            "EventStyleSheetChangedParams": {
+                "description": "Fired whenever a stylesheet is changed as a result of the client operation.",
+                "type": "object",
+                "properties": {
+                    "styleSheetId": {
+                        "$ref": "./CSS.types.json#/components/schemas/TypeStyleSheetId"
+                    }
+                },
+                "required": [
+                    "styleSheetId"
+                ]
+            },
+            "EventStyleSheetRemovedParams": {
+                "description": "Fired whenever an active document stylesheet is removed.",
+                "type": "object",
+                "properties": {
+                    "styleSheetId": {
+                        "description": "Identifier of the removed stylesheet.",
+                        "$ref": "./CSS.types.json#/components/schemas/TypeStyleSheetId"
+                    }
+                },
+                "required": [
+                    "styleSheetId"
+                ]
+            }
+        }
+    }
+}

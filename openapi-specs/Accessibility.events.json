@@ -1,0 +1,42 @@
+{
+    "openapi": "3.0.2",
+    "info": {
+        "title": "Chrome DevTools Protocol",
+        "description": "Auto-generated OpenAPI 3.0 specification for Chrome Dev Tools Protocol's types, events, commands",
+        "version": "1.0.0"
+    },
+    "paths": {},
+    "components": {
+        "schemas": {
+            "EventLoadCompleteParams": {
+                "description": "The loadComplete event mirrors the load complete event sent by the browser to assistive\ntechnology when the web page has finished loading.",
+                "type": "object",
+                "properties": {
+                    "root": {
+                        "description": "New document root node.",
+                        "$ref": "./Accessibility.types.json#/components/schemas/TypeAxNode"
+                    }
+                },
+                "required": [
+                    "root"
+                ]
+            },
+            "EventNodesUpdatedParams": {
+                "description": "The nodesUpdated event is sent every time a previously requested node has changed the in tree.",
+                "type": "object",
+                "properties": {
+                    "nodes": {
+                        "description": "Updated node data.",
+                        "type": "array",
+                        "items": {
+                            "$ref": "./Accessibility.types.json#/components/schemas/TypeAxNode"
+                        }
+                    }
+                },
+                "required": [
+                    "nodes"
+                ]
+            }
+        }
+    }
+}

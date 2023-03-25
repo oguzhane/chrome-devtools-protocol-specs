@@ -1,0 +1,217 @@
+{
+    "openapi": "3.0.2",
+    "info": {
+        "title": "Chrome DevTools Protocol",
+        "description": "Auto-generated OpenAPI 3.0 specification for Chrome Dev Tools Protocol's types, events, commands",
+        "version": "1.0.0"
+    },
+    "paths": {},
+    "components": {
+        "schemas": {
+            "TypeAxNode": {
+                "description": "A node in the accessibility tree.",
+                "type": "object",
+                "properties": {
+                    "nodeId": {
+                        "description": "Unique identifier for this node.",
+                        "$ref": "./Accessibility.types.json#/components/schemas/TypeAxNodeId"
+                    },
+                    "ignored": {
+                        "description": "Whether this node is ignored for accessibility",
+                        "type": "boolean"
+                    },
+                    "ignoredReasons": {
+                        "description": "Collection of reasons why this node is hidden.",
+                        "type": "array",
+                        "items": {
+                            "$ref": "./Accessibility.types.json#/components/schemas/TypeAxProperty"
+                        }
+                    },
+                    "role": {
+                        "description": "This `Node`'s role, whether explicit or implicit.",
+                        "$ref": "./Accessibility.types.json#/components/schemas/TypeAxValue"
+                    },
+                    "chromeRole": {
+                        "description": "This `Node`'s Chrome raw role.",
+                        "$ref": "./Accessibility.types.json#/components/schemas/TypeAxValue"
+                    },
+                    "name": {
+                        "description": "The accessible name for this `Node`.",
+                        "$ref": "./Accessibility.types.json#/components/schemas/TypeAxValue"
+                    },
+                    "description": {
+                        "description": "The accessible description for this `Node`.",
+                        "$ref": "./Accessibility.types.json#/components/schemas/TypeAxValue"
+                    },
+                    "value": {
+                        "description": "The value for this `Node`.",
+                        "$ref": "./Accessibility.types.json#/components/schemas/TypeAxValue"
+                    },
+                    "properties": {
+                        "description": "All other properties",
+                        "type": "array",
+                        "items": {
+                            "$ref": "./Accessibility.types.json#/components/schemas/TypeAxProperty"
+                        }
+                    },
+                    "parentId": {
+                        "description": "ID for this node's parent.",
+                        "$ref": "./Accessibility.types.json#/components/schemas/TypeAxNodeId"
+                    },
+                    "childIds": {
+                        "description": "IDs for each of this node's child nodes.",
+                        "type": "array",
+                        "items": {
+                            "$ref": "./Accessibility.types.json#/components/schemas/TypeAxNodeId"
+                        }
+                    },
+                    "backendDOMNodeId": {
+                        "description": "The backend ID for the associated DOM node, if any.",
+                        "$ref": "./DOM.types.json#/components/schemas/TypeBackendNodeId"
+                    },
+                    "frameId": {
+                        "description": "The frame ID for the frame associated with this nodes document.",
+                        "$ref": "./Page.types.json#/components/schemas/TypeFrameId"
+                    }
+                },
+                "required": [
+                    "nodeId",
+                    "ignored"
+                ]
+            },
+            "TypeAxNodeId": {
+                "description": "Unique accessibility node identifier.",
+                "type": "string"
+            },
+            "TypeAxProperty": {
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "description": "The name of this property.",
+                        "$ref": "./Accessibility.types.json#/components/schemas/TypeAxPropertyName"
+                    },
+                    "value": {
+                        "description": "The value of this property.",
+                        "$ref": "./Accessibility.types.json#/components/schemas/TypeAxValue"
+                    }
+                },
+                "required": [
+                    "name",
+                    "value"
+                ]
+            },
+            "TypeAxPropertyName": {
+                "description": "Values of AXProperty name:\n- from 'busy' to 'roledescription': states which apply to every AX node\n- from 'live' to 'root': attributes which apply to nodes in live regions\n- from 'autocomplete' to 'valuetext': attributes which apply to widgets\n- from 'checked' to 'selected': states which apply to widgets\n- from 'activedescendant' to 'owns' - relationships between elements other than parent/child/sibling.",
+                "type": "string"
+            },
+            "TypeAxValue": {
+                "description": "A single computed AX property.",
+                "type": "object",
+                "properties": {
+                    "type": {
+                        "description": "The type of this value.",
+                        "$ref": "./Accessibility.types.json#/components/schemas/TypeAxValueType"
+                    },
+                    "value": {
+                        "description": "The computed value of this property.",
+                        "type": "any"
+                    },
+                    "relatedNodes": {
+                        "description": "One or more related nodes, if applicable.",
+                        "type": "array",
+                        "items": {
+                            "$ref": "./Accessibility.types.json#/components/schemas/TypeAxRelatedNode"
+                        }
+                    },
+                    "sources": {
+                        "description": "The sources which contributed to the computation of this property.",
+                        "type": "array",
+                        "items": {
+                            "$ref": "./Accessibility.types.json#/components/schemas/TypeAxValueSource"
+                        }
+                    }
+                },
+                "required": [
+                    "type"
+                ]
+            },
+            "TypeAxValueType": {
+                "description": "Enum of possible property types.",
+                "type": "string"
+            },
+            "TypeAxRelatedNode": {
+                "type": "object",
+                "properties": {
+                    "backendDOMNodeId": {
+                        "description": "The BackendNodeId of the related DOM node.",
+                        "$ref": "./DOM.types.json#/components/schemas/TypeBackendNodeId"
+                    },
+                    "idref": {
+                        "description": "The IDRef value provided, if any.",
+                        "type": "string"
+                    },
+                    "text": {
+                        "description": "The text alternative of this node in the current context.",
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "backendDOMNodeId"
+                ]
+            },
+            "TypeAxValueSource": {
+                "description": "A single source for a computed AX property.",
+                "type": "object",
+                "properties": {
+                    "type": {
+                        "description": "What type of source this is.",
+                        "$ref": "./Accessibility.types.json#/components/schemas/TypeAxValueSourceType"
+                    },
+                    "value": {
+                        "description": "The value of this property source.",
+                        "$ref": "./Accessibility.types.json#/components/schemas/TypeAxValue"
+                    },
+                    "attribute": {
+                        "description": "The name of the relevant attribute, if any.",
+                        "type": "string"
+                    },
+                    "attributeValue": {
+                        "description": "The value of the relevant attribute, if any.",
+                        "$ref": "./Accessibility.types.json#/components/schemas/TypeAxValue"
+                    },
+                    "superseded": {
+                        "description": "Whether this source is superseded by a higher priority source.",
+                        "type": "boolean"
+                    },
+                    "nativeSource": {
+                        "description": "The native markup source for this value, e.g. a <label> element.",
+                        "$ref": "./Accessibility.types.json#/components/schemas/TypeAxValueNativeSourceType"
+                    },
+                    "nativeSourceValue": {
+                        "description": "The value, such as a node or node list, of the native source.",
+                        "$ref": "./Accessibility.types.json#/components/schemas/TypeAxValue"
+                    },
+                    "invalid": {
+                        "description": "Whether the value for this property is invalid.",
+                        "type": "boolean"
+                    },
+                    "invalidReason": {
+                        "description": "Reason for the value being invalid, if it is.",
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "type"
+                ]
+            },
+            "TypeAxValueSourceType": {
+                "description": "Enum of possible property sources.",
+                "type": "string"
+            },
+            "TypeAxValueNativeSourceType": {
+                "description": "Enum of possible native property sources (as a subtype of a particular AXValueSourceType).",
+                "type": "string"
+            }
+        }
+    }
+}

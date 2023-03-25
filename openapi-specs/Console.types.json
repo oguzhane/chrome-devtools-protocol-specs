@@ -1,0 +1,48 @@
+{
+    "openapi": "3.0.2",
+    "info": {
+        "title": "Chrome DevTools Protocol",
+        "description": "Auto-generated OpenAPI 3.0 specification for Chrome Dev Tools Protocol's types, events, commands",
+        "version": "1.0.0"
+    },
+    "paths": {},
+    "components": {
+        "schemas": {
+            "TypeConsoleMessage": {
+                "description": "Console message.",
+                "type": "object",
+                "properties": {
+                    "source": {
+                        "description": "Message source.",
+                        "type": "string"
+                    },
+                    "level": {
+                        "description": "Message severity.",
+                        "type": "string"
+                    },
+                    "text": {
+                        "description": "Message text.",
+                        "type": "string"
+                    },
+                    "url": {
+                        "description": "URL of the message origin.",
+                        "type": "string"
+                    },
+                    "line": {
+                        "description": "Line number in the resource that generated this message (1-based).",
+                        "type": "integer"
+                    },
+                    "column": {
+                        "description": "Column number in the resource that generated this message (1-based).",
+                        "type": "integer"
+                    }
+                },
+                "required": [
+                    "source",
+                    "level",
+                    "text"
+                ]
+            }
+        }
+    }
+}

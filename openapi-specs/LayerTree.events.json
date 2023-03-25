@@ -1,0 +1,42 @@
+{
+    "openapi": "3.0.2",
+    "info": {
+        "title": "Chrome DevTools Protocol",
+        "description": "Auto-generated OpenAPI 3.0 specification for Chrome Dev Tools Protocol's types, events, commands",
+        "version": "1.0.0"
+    },
+    "paths": {},
+    "components": {
+        "schemas": {
+            "EventLayerPaintedParams": {
+                "type": "object",
+                "properties": {
+                    "layerId": {
+                        "description": "The id of the painted layer.",
+                        "$ref": "./LayerTree.types.json#/components/schemas/TypeLayerId"
+                    },
+                    "clip": {
+                        "description": "Clip rectangle.",
+                        "$ref": "./DOM.types.json#/components/schemas/TypeRect"
+                    }
+                },
+                "required": [
+                    "layerId",
+                    "clip"
+                ]
+            },
+            "EventLayerTreeDidChangeParams": {
+                "type": "object",
+                "properties": {
+                    "layers": {
+                        "description": "Layer tree, absent if not in the comspositing mode.",
+                        "type": "array",
+                        "items": {
+                            "$ref": "./LayerTree.types.json#/components/schemas/TypeLayer"
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

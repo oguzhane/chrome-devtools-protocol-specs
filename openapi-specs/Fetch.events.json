@@ -1,0 +1,101 @@
+{
+    "openapi": "3.0.2",
+    "info": {
+        "title": "Chrome DevTools Protocol",
+        "description": "Auto-generated OpenAPI 3.0 specification for Chrome Dev Tools Protocol's types, events, commands",
+        "version": "1.0.0"
+    },
+    "paths": {},
+    "components": {
+        "schemas": {
+            "EventRequestPausedParams": {
+                "description": "Issued when the domain is enabled and the request URL matches the\nspecified filter. The request is paused until the client responds\nwith one of continueRequest, failRequest or fulfillRequest.\nThe stage of the request can be determined by presence of responseErrorReason\nand responseStatusCode -- the request is at the response stage if either\nof these fields is present and in the request stage otherwise.",
+                "type": "object",
+                "properties": {
+                    "requestId": {
+                        "description": "Each request the page makes will have a unique id.",
+                        "$ref": "./Fetch.types.json#/components/schemas/TypeRequestId"
+                    },
+                    "request": {
+                        "description": "The details of the request.",
+                        "$ref": "./Network.types.json#/components/schemas/TypeRequest"
+                    },
+                    "frameId": {
+                        "description": "The id of the frame that initiated the request.",
+                        "$ref": "./Page.types.json#/components/schemas/TypeFrameId"
+                    },
+                    "resourceType": {
+                        "description": "How the requested resource will be used.",
+                        "$ref": "./Network.types.json#/components/schemas/TypeResourceType"
+                    },
+                    "responseErrorReason": {
+                        "description": "Response error if intercepted at response stage.",
+                        "$ref": "./Network.types.json#/components/schemas/TypeErrorReason"
+                    },
+                    "responseStatusCode": {
+                        "description": "Response code if intercepted at response stage.",
+                        "type": "integer"
+                    },
+                    "responseStatusText": {
+                        "description": "Response status text if intercepted at response stage.",
+                        "type": "string"
+                    },
+                    "responseHeaders": {
+                        "description": "Response headers if intercepted at the response stage.",
+                        "type": "array",
+                        "items": {
+                            "$ref": "./Fetch.types.json#/components/schemas/TypeHeaderEntry"
+                        }
+                    },
+                    "networkId": {
+                        "description": "If the intercepted request had a corresponding Network.requestWillBeSent event fired for it,\nthen this networkId will be the same as the requestId present in the requestWillBeSent event.",
+                        "$ref": "./Network.types.json#/components/schemas/TypeRequestId"
+                    },
+                    "redirectedRequestId": {
+                        "description": "If the request is due to a redirect response from the server, the id of the request that\nhas caused the redirect.",
+                        "$ref": "./Fetch.types.json#/components/schemas/TypeRequestId"
+                    }
+                },
+                "required": [
+                    "requestId",
+                    "request",
+                    "frameId",
+                    "resourceType"
+                ]
+            },
+            "EventAuthRequiredParams": {
+                "description": "Issued when the domain is enabled with handleAuthRequests set to true.\nThe request is paused until client responds with continueWithAuth.",
+                "type": "object",
+                "properties": {
+                    "requestId": {
+                        "description": "Each request the page makes will have a unique id.",
+                        "$ref": "./Fetch.types.json#/components/schemas/TypeRequestId"
+                    },
+                    "request": {
+                        "description": "The details of the request.",
+                        "$ref": "./Network.types.json#/components/schemas/TypeRequest"
+                    },
+                    "frameId": {
+                        "description": "The id of the frame that initiated the request.",
+                        "$ref": "./Page.types.json#/components/schemas/TypeFrameId"
+                    },
+                    "resourceType": {
+                        "description": "How the requested resource will be used.",
+                        "$ref": "./Network.types.json#/components/schemas/TypeResourceType"
+                    },
+                    "authChallenge": {
+                        "description": "Details of the Authorization Challenge encountered.\nIf this is set, client should respond with continueRequest that\ncontains AuthChallengeResponse.",
+                        "$ref": "./Fetch.types.json#/components/schemas/TypeAuthChallenge"
+                    }
+                },
+                "required": [
+                    "requestId",
+                    "request",
+                    "frameId",
+                    "resourceType",
+                    "authChallenge"
+                ]
+            }
+        }
+    }
+}

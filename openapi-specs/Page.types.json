@@ -1,0 +1,283 @@
+{
+    "openapi": "3.0.2",
+    "info": {
+        "title": "Chrome DevTools Protocol",
+        "description": "Auto-generated OpenAPI 3.0 specification for Chrome Dev Tools Protocol's types, events, commands",
+        "version": "1.0.0"
+    },
+    "paths": {},
+    "components": {
+        "schemas": {
+            "TypeFrameId": {
+                "description": "Unique frame identifier.",
+                "type": "string"
+            },
+            "TypeViewport": {
+                "description": "Viewport for capturing screenshot.",
+                "type": "object",
+                "properties": {
+                    "x": {
+                        "description": "X offset in device independent pixels (dip).",
+                        "type": "number"
+                    },
+                    "y": {
+                        "description": "Y offset in device independent pixels (dip).",
+                        "type": "number"
+                    },
+                    "width": {
+                        "description": "Rectangle width in device independent pixels (dip).",
+                        "type": "number"
+                    },
+                    "height": {
+                        "description": "Rectangle height in device independent pixels (dip).",
+                        "type": "number"
+                    },
+                    "scale": {
+                        "description": "Page scale factor.",
+                        "type": "number"
+                    }
+                },
+                "required": [
+                    "x",
+                    "y",
+                    "width",
+                    "height",
+                    "scale"
+                ]
+            },
+            "TypeFrame": {
+                "description": "Information about the Frame on the page.",
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "description": "Frame unique identifier.",
+                        "$ref": "./Page.types.json#/components/schemas/TypeFrameId"
+                    },
+                    "parentId": {
+                        "description": "Parent frame identifier.",
+                        "$ref": "./Page.types.json#/components/schemas/TypeFrameId"
+                    },
+                    "loaderId": {
+                        "description": "Identifier of the loader associated with this frame.",
+                        "$ref": "./Network.types.json#/components/schemas/TypeLoaderId"
+                    },
+                    "name": {
+                        "description": "Frame's name as specified in the tag.",
+                        "type": "string"
+                    },
+                    "url": {
+                        "description": "Frame document's URL without fragment.",
+                        "type": "string"
+                    },
+                    "urlFragment": {
+                        "description": "Frame document's URL fragment including the '#'.",
+                        "type": "string"
+                    },
+                    "domainAndRegistry": {
+                        "description": "Frame document's registered domain, taking the public suffixes list into account.\nExtracted from the Frame's url.\nExample URLs: http://www.google.com/file.html -> \"google.com\"\n              http://a.b.co.uk/file.html      -> \"b.co.uk\"",
+                        "type": "string"
+                    },
+                    "securityOrigin": {
+                        "description": "Frame document's security origin.",
+                        "type": "string"
+                    },
+                    "mimeType": {
+                        "description": "Frame document's mimeType as determined by the browser.",
+                        "type": "string"
+                    },
+                    "unreachableUrl": {
+                        "description": "If the frame failed to load, this contains the URL that could not be loaded. Note that unlike url above, this URL may contain a fragment.",
+                        "type": "string"
+                    },
+                    "adFrameStatus": {
+                        "description": "Indicates whether this frame was tagged as an ad and why.",
+                        "$ref": "./Page.types.json#/components/schemas/TypeAdFrameStatus"
+                    },
+                    "secureContextType": {
+                        "description": "Indicates whether the main document is a secure context and explains why that is the case.",
+                        "$ref": "./Page.types.json#/components/schemas/TypeSecureContextType"
+                    },
+                    "crossOriginIsolatedContextType": {
+                        "description": "Indicates whether this is a cross origin isolated context.",
+                        "$ref": "./Page.types.json#/components/schemas/TypeCrossOriginIsolatedContextType"
+                    },
+                    "gatedAPIFeatures": {
+                        "description": "Indicated which gated APIs / features are available.",
+                        "type": "array",
+                        "items": {
+                            "$ref": "./Page.types.json#/components/schemas/TypeGatedApiFeatures"
+                        }
+                    }
+                },
+                "required": [
+                    "id",
+                    "loaderId",
+                    "url",
+                    "domainAndRegistry",
+                    "securityOrigin",
+                    "mimeType",
+                    "secureContextType",
+                    "crossOriginIsolatedContextType",
+                    "gatedAPIFeatures"
+                ]
+            },
+            "TypeAdFrameStatus": {
+                "description": "Indicates whether a frame has been identified as an ad and why.",
+                "type": "object",
+                "properties": {
+                    "adFrameType": {
+                        "$ref": "./Page.types.json#/components/schemas/TypeAdFrameType"
+                    },
+                    "explanations": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "./Page.types.json#/components/schemas/TypeAdFrameExplanation"
+                        }
+                    }
+                },
+                "required": [
+                    "adFrameType"
+                ]
+            },
+            "TypeAdFrameType": {
+                "description": "Indicates whether a frame has been identified as an ad.",
+                "type": "string"
+            },
+            "TypeAdFrameExplanation": {
+                "type": "string"
+            },
+            "TypeSecureContextType": {
+                "description": "Indicates whether the frame is a secure context and why it is the case.",
+                "type": "string"
+            },
+            "TypeCrossOriginIsolatedContextType": {
+                "description": "Indicates whether the frame is cross-origin isolated and why it is the case.",
+                "type": "string"
+            },
+            "TypeGatedApiFeatures": {
+                "type": "string"
+            },
+            "TypeNavigationType": {
+                "description": "The type of a frameNavigated event.",
+                "type": "string"
+            },
+            "TypeClientNavigationReason": {
+                "type": "string"
+            },
+            "TypeClientNavigationDisposition": {
+                "type": "string"
+            },
+            "TypeDialogType": {
+                "description": "Javascript dialog type.",
+                "type": "string"
+            },
+            "TypeBackForwardCacheNotRestoredExplanation": {
+                "type": "object",
+                "properties": {
+                    "type": {
+                        "description": "Type of the reason",
+                        "$ref": "./Page.types.json#/components/schemas/TypeBackForwardCacheNotRestoredReasonType"
+                    },
+                    "reason": {
+                        "description": "Not restored reason",
+                        "$ref": "./Page.types.json#/components/schemas/TypeBackForwardCacheNotRestoredReason"
+                    },
+                    "context": {
+                        "description": "Context associated with the reason. The meaning of this context is\ndependent on the reason:\n- EmbedderExtensionSentMessageToCachedFrame: the extension ID.",
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "type",
+                    "reason"
+                ]
+            },
+            "TypeBackForwardCacheNotRestoredReasonType": {
+                "description": "Types of not restored reasons for back-forward cache.",
+                "type": "string"
+            },
+            "TypeBackForwardCacheNotRestoredReason": {
+                "description": "List of not restored reasons for back-forward cache.",
+                "type": "string"
+            },
+            "TypeBackForwardCacheNotRestoredExplanationTree": {
+                "type": "object",
+                "properties": {
+                    "url": {
+                        "description": "URL of each frame",
+                        "type": "string"
+                    },
+                    "explanations": {
+                        "description": "Not restored reasons of each frame",
+                        "type": "array",
+                        "items": {
+                            "$ref": "./Page.types.json#/components/schemas/TypeBackForwardCacheNotRestoredExplanation"
+                        }
+                    },
+                    "children": {
+                        "description": "Array of children frame",
+                        "type": "array",
+                        "items": {
+                            "$ref": "./Page.types.json#/components/schemas/TypeBackForwardCacheNotRestoredExplanationTree"
+                        }
+                    }
+                },
+                "required": [
+                    "url",
+                    "explanations",
+                    "children"
+                ]
+            },
+            "TypePrerenderFinalStatus": {
+                "description": "List of FinalStatus reasons for Prerender2.",
+                "type": "string"
+            },
+            "TypePrefetchStatus": {
+                "description": "List of Prefetch status, which refers to PreloadingTriggeringOutcome.",
+                "type": "string"
+            },
+            "TypeScreencastFrameMetadata": {
+                "description": "Screencast frame metadata.",
+                "type": "object",
+                "properties": {
+                    "offsetTop": {
+                        "description": "Top offset in DIP.",
+                        "type": "number"
+                    },
+                    "pageScaleFactor": {
+                        "description": "Page scale factor.",
+                        "type": "number"
+                    },
+                    "deviceWidth": {
+                        "description": "Device screen width in DIP.",
+                        "type": "number"
+                    },
+                    "deviceHeight": {
+                        "description": "Device screen height in DIP.",
+                        "type": "number"
+                    },
+                    "scrollOffsetX": {
+                        "description": "Position of horizontal scroll in CSS pixels.",
+                        "type": "number"
+                    },
+                    "scrollOffsetY": {
+                        "description": "Position of vertical scroll in CSS pixels.",
+                        "type": "number"
+                    },
+                    "timestamp": {
+                        "description": "Frame swap timestamp.",
+                        "$ref": "./Network.types.json#/components/schemas/TypeTimeSinceEpoch"
+                    }
+                },
+                "required": [
+                    "offsetTop",
+                    "pageScaleFactor",
+                    "deviceWidth",
+                    "deviceHeight",
+                    "scrollOffsetX",
+                    "scrollOffsetY"
+                ]
+            }
+        }
+    }
+}

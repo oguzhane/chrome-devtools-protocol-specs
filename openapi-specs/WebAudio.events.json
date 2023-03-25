@@ -1,0 +1,235 @@
+{
+    "openapi": "3.0.2",
+    "info": {
+        "title": "Chrome DevTools Protocol",
+        "description": "Auto-generated OpenAPI 3.0 specification for Chrome Dev Tools Protocol's types, events, commands",
+        "version": "1.0.0"
+    },
+    "paths": {},
+    "components": {
+        "schemas": {
+            "EventContextCreatedParams": {
+                "description": "Notifies that a new BaseAudioContext has been created.",
+                "type": "object",
+                "properties": {
+                    "context": {
+                        "$ref": "./WebAudio.types.json#/components/schemas/TypeBaseAudioContext"
+                    }
+                },
+                "required": [
+                    "context"
+                ]
+            },
+            "EventContextWillBeDestroyedParams": {
+                "description": "Notifies that an existing BaseAudioContext will be destroyed.",
+                "type": "object",
+                "properties": {
+                    "contextId": {
+                        "$ref": "./WebAudio.types.json#/components/schemas/TypeGraphObjectId"
+                    }
+                },
+                "required": [
+                    "contextId"
+                ]
+            },
+            "EventContextChangedParams": {
+                "description": "Notifies that existing BaseAudioContext has changed some properties (id stays the same)..",
+                "type": "object",
+                "properties": {
+                    "context": {
+                        "$ref": "./WebAudio.types.json#/components/schemas/TypeBaseAudioContext"
+                    }
+                },
+                "required": [
+                    "context"
+                ]
+            },
+            "EventAudioListenerCreatedParams": {
+                "description": "Notifies that the construction of an AudioListener has finished.",
+                "type": "object",
+                "properties": {
+                    "listener": {
+                        "$ref": "./WebAudio.types.json#/components/schemas/TypeAudioListener"
+                    }
+                },
+                "required": [
+                    "listener"
+                ]
+            },
+            "EventAudioListenerWillBeDestroyedParams": {
+                "description": "Notifies that a new AudioListener has been created.",
+                "type": "object",
+                "properties": {
+                    "contextId": {
+                        "$ref": "./WebAudio.types.json#/components/schemas/TypeGraphObjectId"
+                    },
+                    "listenerId": {
+                        "$ref": "./WebAudio.types.json#/components/schemas/TypeGraphObjectId"
+                    }
+                },
+                "required": [
+                    "contextId",
+                    "listenerId"
+                ]
+            },
+            "EventAudioNodeCreatedParams": {
+                "description": "Notifies that a new AudioNode has been created.",
+                "type": "object",
+                "properties": {
+                    "node": {
+                        "$ref": "./WebAudio.types.json#/components/schemas/TypeAudioNode"
+                    }
+                },
+                "required": [
+                    "node"
+                ]
+            },
+            "EventAudioNodeWillBeDestroyedParams": {
+                "description": "Notifies that an existing AudioNode has been destroyed.",
+                "type": "object",
+                "properties": {
+                    "contextId": {
+                        "$ref": "./WebAudio.types.json#/components/schemas/TypeGraphObjectId"
+                    },
+                    "nodeId": {
+                        "$ref": "./WebAudio.types.json#/components/schemas/TypeGraphObjectId"
+                    }
+                },
+                "required": [
+                    "contextId",
+                    "nodeId"
+                ]
+            },
+            "EventAudioParamCreatedParams": {
+                "description": "Notifies that a new AudioParam has been created.",
+                "type": "object",
+                "properties": {
+                    "param": {
+                        "$ref": "./WebAudio.types.json#/components/schemas/TypeAudioParam"
+                    }
+                },
+                "required": [
+                    "param"
+                ]
+            },
+            "EventAudioParamWillBeDestroyedParams": {
+                "description": "Notifies that an existing AudioParam has been destroyed.",
+                "type": "object",
+                "properties": {
+                    "contextId": {
+                        "$ref": "./WebAudio.types.json#/components/schemas/TypeGraphObjectId"
+                    },
+                    "nodeId": {
+                        "$ref": "./WebAudio.types.json#/components/schemas/TypeGraphObjectId"
+                    },
+                    "paramId": {
+                        "$ref": "./WebAudio.types.json#/components/schemas/TypeGraphObjectId"
+                    }
+                },
+                "required": [
+                    "contextId",
+                    "nodeId",
+                    "paramId"
+                ]
+            },
+            "EventNodesConnectedParams": {
+                "description": "Notifies that two AudioNodes are connected.",
+                "type": "object",
+                "properties": {
+                    "contextId": {
+                        "$ref": "./WebAudio.types.json#/components/schemas/TypeGraphObjectId"
+                    },
+                    "sourceId": {
+                        "$ref": "./WebAudio.types.json#/components/schemas/TypeGraphObjectId"
+                    },
+                    "destinationId": {
+                        "$ref": "./WebAudio.types.json#/components/schemas/TypeGraphObjectId"
+                    },
+                    "sourceOutputIndex": {
+                        "type": "number"
+                    },
+                    "destinationInputIndex": {
+                        "type": "number"
+                    }
+                },
+                "required": [
+                    "contextId",
+                    "sourceId",
+                    "destinationId"
+                ]
+            },
+            "EventNodesDisconnectedParams": {
+                "description": "Notifies that AudioNodes are disconnected. The destination can be null, and it means all the outgoing connections from the source are disconnected.",
+                "type": "object",
+                "properties": {
+                    "contextId": {
+                        "$ref": "./WebAudio.types.json#/components/schemas/TypeGraphObjectId"
+                    },
+                    "sourceId": {
+                        "$ref": "./WebAudio.types.json#/components/schemas/TypeGraphObjectId"
+                    },
+                    "destinationId": {
+                        "$ref": "./WebAudio.types.json#/components/schemas/TypeGraphObjectId"
+                    },
+                    "sourceOutputIndex": {
+                        "type": "number"
+                    },
+                    "destinationInputIndex": {
+                        "type": "number"
+                    }
+                },
+                "required": [
+                    "contextId",
+                    "sourceId",
+                    "destinationId"
+                ]
+            },
+            "EventNodeParamConnectedParams": {
+                "description": "Notifies that an AudioNode is connected to an AudioParam.",
+                "type": "object",
+                "properties": {
+                    "contextId": {
+                        "$ref": "./WebAudio.types.json#/components/schemas/TypeGraphObjectId"
+                    },
+                    "sourceId": {
+                        "$ref": "./WebAudio.types.json#/components/schemas/TypeGraphObjectId"
+                    },
+                    "destinationId": {
+                        "$ref": "./WebAudio.types.json#/components/schemas/TypeGraphObjectId"
+                    },
+                    "sourceOutputIndex": {
+                        "type": "number"
+                    }
+                },
+                "required": [
+                    "contextId",
+                    "sourceId",
+                    "destinationId"
+                ]
+            },
+            "EventNodeParamDisconnectedParams": {
+                "description": "Notifies that an AudioNode is disconnected to an AudioParam.",
+                "type": "object",
+                "properties": {
+                    "contextId": {
+                        "$ref": "./WebAudio.types.json#/components/schemas/TypeGraphObjectId"
+                    },
+                    "sourceId": {
+                        "$ref": "./WebAudio.types.json#/components/schemas/TypeGraphObjectId"
+                    },
+                    "destinationId": {
+                        "$ref": "./WebAudio.types.json#/components/schemas/TypeGraphObjectId"
+                    },
+                    "sourceOutputIndex": {
+                        "type": "number"
+                    }
+                },
+                "required": [
+                    "contextId",
+                    "sourceId",
+                    "destinationId"
+                ]
+            }
+        }
+    }
+}

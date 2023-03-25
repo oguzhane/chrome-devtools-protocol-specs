@@ -1,0 +1,186 @@
+{
+    "openapi": "3.0.2",
+    "info": {
+        "title": "Chrome DevTools Protocol",
+        "description": "Auto-generated OpenAPI 3.0 specification for Chrome Dev Tools Protocol's types, events, commands",
+        "version": "1.0.0"
+    },
+    "paths": {},
+    "components": {
+        "schemas": {
+            "TypeProfile": {
+                "description": "Profile.",
+                "type": "object",
+                "properties": {
+                    "nodes": {
+                        "description": "The list of profile nodes. First item is the root node.",
+                        "type": "array",
+                        "items": {
+                            "$ref": "./Profiler.types.json#/components/schemas/TypeProfileNode"
+                        }
+                    },
+                    "startTime": {
+                        "description": "Profiling start timestamp in microseconds.",
+                        "type": "number"
+                    },
+                    "endTime": {
+                        "description": "Profiling end timestamp in microseconds.",
+                        "type": "number"
+                    },
+                    "samples": {
+                        "description": "Ids of samples top nodes.",
+                        "type": "array",
+                        "items": {
+                            "type": "integer"
+                        }
+                    },
+                    "timeDeltas": {
+                        "description": "Time intervals between adjacent samples in microseconds. The first delta is relative to the\nprofile startTime.",
+                        "type": "array",
+                        "items": {
+                            "type": "integer"
+                        }
+                    }
+                },
+                "required": [
+                    "nodes",
+                    "startTime",
+                    "endTime"
+                ]
+            },
+            "TypeProfileNode": {
+                "description": "Profile node. Holds callsite information, execution statistics and child nodes.",
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "description": "Unique id of the node.",
+                        "type": "integer"
+                    },
+                    "callFrame": {
+                        "description": "Function location.",
+                        "$ref": "./Runtime.types.json#/components/schemas/TypeCallFrame"
+                    },
+                    "hitCount": {
+                        "description": "Number of samples where this node was on top of the call stack.",
+                        "type": "integer"
+                    },
+                    "children": {
+                        "description": "Child node ids.",
+                        "type": "array",
+                        "items": {
+                            "type": "integer"
+                        }
+                    },
+                    "deoptReason": {
+                        "description": "The reason of being not optimized. The function may be deoptimized or marked as don't\noptimize.",
+                        "type": "string"
+                    },
+                    "positionTicks": {
+                        "description": "An array of source position ticks.",
+                        "type": "array",
+                        "items": {
+                            "$ref": "./Profiler.types.json#/components/schemas/TypePositionTickInfo"
+                        }
+                    }
+                },
+                "required": [
+                    "id",
+                    "callFrame"
+                ]
+            },
+            "TypePositionTickInfo": {
+                "description": "Specifies a number of samples attributed to a certain source position.",
+                "type": "object",
+                "properties": {
+                    "line": {
+                        "description": "Source line number (1-based).",
+                        "type": "integer"
+                    },
+                    "ticks": {
+                        "description": "Number of samples attributed to the source line.",
+                        "type": "integer"
+                    }
+                },
+                "required": [
+                    "line",
+                    "ticks"
+                ]
+            },
+            "TypeScriptCoverage": {
+                "description": "Coverage data for a JavaScript script.",
+                "type": "object",
+                "properties": {
+                    "scriptId": {
+                        "description": "JavaScript script id.",
+                        "$ref": "./Runtime.types.json#/components/schemas/TypeScriptId"
+                    },
+                    "url": {
+                        "description": "JavaScript script name or url.",
+                        "type": "string"
+                    },
+                    "functions": {
+                        "description": "Functions contained in the script that has coverage data.",
+                        "type": "array",
+                        "items": {
+                            "$ref": "./Profiler.types.json#/components/schemas/TypeFunctionCoverage"
+                        }
+                    }
+                },
+                "required": [
+                    "scriptId",
+                    "url",
+                    "functions"
+                ]
+            },
+            "TypeFunctionCoverage": {
+                "description": "Coverage data for a JavaScript function.",
+                "type": "object",
+                "properties": {
+                    "functionName": {
+                        "description": "JavaScript function name.",
+                        "type": "string"
+                    },
+                    "ranges": {
+                        "description": "Source ranges inside the function with coverage data.",
+                        "type": "array",
+                        "items": {
+                            "$ref": "./Profiler.types.json#/components/schemas/TypeCoverageRange"
+                        }
+                    },
+                    "isBlockCoverage": {
+                        "description": "Whether coverage data for this function has block granularity.",
+                        "type": "boolean"
+                    }
+                },
+                "required": [
+                    "functionName",
+                    "ranges",
+                    "isBlockCoverage"
+                ]
+            },
+            "TypeCoverageRange": {
+                "description": "Coverage data for a source range.",
+                "type": "object",
+                "properties": {
+                    "startOffset": {
+                        "description": "JavaScript script source offset for the range start.",
+                        "type": "integer"
+                    },
+                    "endOffset": {
+                        "description": "JavaScript script source offset for the range end.",
+                        "type": "integer"
+                    },
+                    "count": {
+                        "description": "Collected execution count of the source range.",
+                        "type": "integer"
+                    }
+                },
+                "required": [
+                    "startOffset",
+                    "endOffset",
+                    "count"
+                ]
+            }
+        }
+    }
+}

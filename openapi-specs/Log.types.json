@@ -1,0 +1,71 @@
+{
+    "openapi": "3.0.2",
+    "info": {
+        "title": "Chrome DevTools Protocol",
+        "description": "Auto-generated OpenAPI 3.0 specification for Chrome Dev Tools Protocol's types, events, commands",
+        "version": "1.0.0"
+    },
+    "paths": {},
+    "components": {
+        "schemas": {
+            "TypeLogEntry": {
+                "description": "Log entry.",
+                "type": "object",
+                "properties": {
+                    "source": {
+                        "description": "Log entry source.",
+                        "type": "string"
+                    },
+                    "level": {
+                        "description": "Log entry severity.",
+                        "type": "string"
+                    },
+                    "text": {
+                        "description": "Logged text.",
+                        "type": "string"
+                    },
+                    "category": {
+                        "type": "string"
+                    },
+                    "timestamp": {
+                        "description": "Timestamp when this entry was added.",
+                        "$ref": "./Runtime.types.json#/components/schemas/TypeTimestamp"
+                    },
+                    "url": {
+                        "description": "URL of the resource if known.",
+                        "type": "string"
+                    },
+                    "lineNumber": {
+                        "description": "Line number in the resource.",
+                        "type": "integer"
+                    },
+                    "stackTrace": {
+                        "description": "JavaScript stack trace.",
+                        "$ref": "./Runtime.types.json#/components/schemas/TypeStackTrace"
+                    },
+                    "networkRequestId": {
+                        "description": "Identifier of the network request associated with this entry.",
+                        "$ref": "./Network.types.json#/components/schemas/TypeRequestId"
+                    },
+                    "workerId": {
+                        "description": "Identifier of the worker associated with this entry.",
+                        "type": "string"
+                    },
+                    "args": {
+                        "description": "Call arguments.",
+                        "type": "array",
+                        "items": {
+                            "$ref": "./Runtime.types.json#/components/schemas/TypeRemoteObject"
+                        }
+                    }
+                },
+                "required": [
+                    "source",
+                    "level",
+                    "text",
+                    "timestamp"
+                ]
+            }
+        }
+    }
+}

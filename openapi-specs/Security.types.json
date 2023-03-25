@@ -1,0 +1,262 @@
+{
+    "openapi": "3.0.2",
+    "info": {
+        "title": "Chrome DevTools Protocol",
+        "description": "Auto-generated OpenAPI 3.0 specification for Chrome Dev Tools Protocol's types, events, commands",
+        "version": "1.0.0"
+    },
+    "paths": {},
+    "components": {
+        "schemas": {
+            "TypeMixedContentType": {
+                "description": "A description of mixed content (HTTP resources on HTTPS pages), as defined by\nhttps://www.w3.org/TR/mixed-content/#categories",
+                "type": "string"
+            },
+            "TypeSecurityState": {
+                "description": "The security level of a page or resource.",
+                "type": "string"
+            },
+            "TypeCertificateId": {
+                "description": "An internal certificate ID value.",
+                "type": "integer"
+            },
+            "TypeVisibleSecurityState": {
+                "description": "Security state information about the page.",
+                "type": "object",
+                "properties": {
+                    "securityState": {
+                        "description": "The security level of the page.",
+                        "$ref": "./Security.types.json#/components/schemas/TypeSecurityState"
+                    },
+                    "certificateSecurityState": {
+                        "description": "Security state details about the page certificate.",
+                        "$ref": "./Security.types.json#/components/schemas/TypeCertificateSecurityState"
+                    },
+                    "safetyTipInfo": {
+                        "description": "The type of Safety Tip triggered on the page. Note that this field will be set even if the Safety Tip UI was not actually shown.",
+                        "$ref": "./Security.types.json#/components/schemas/TypeSafetyTipInfo"
+                    },
+                    "securityStateIssueIds": {
+                        "description": "Array of security state issues ids.",
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "required": [
+                    "securityState",
+                    "securityStateIssueIds"
+                ]
+            },
+            "TypeCertificateSecurityState": {
+                "description": "Details about the security state of the page certificate.",
+                "type": "object",
+                "properties": {
+                    "protocol": {
+                        "description": "Protocol name (e.g. \"TLS 1.2\" or \"QUIC\").",
+                        "type": "string"
+                    },
+                    "keyExchange": {
+                        "description": "Key Exchange used by the connection, or the empty string if not applicable.",
+                        "type": "string"
+                    },
+                    "keyExchangeGroup": {
+                        "description": "(EC)DH group used by the connection, if applicable.",
+                        "type": "string"
+                    },
+                    "cipher": {
+                        "description": "Cipher name.",
+                        "type": "string"
+                    },
+                    "mac": {
+                        "description": "TLS MAC. Note that AEAD ciphers do not have separate MACs.",
+                        "type": "string"
+                    },
+                    "certificate": {
+                        "description": "Page certificate.",
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "subjectName": {
+                        "description": "Certificate subject name.",
+                        "type": "string"
+                    },
+                    "issuer": {
+                        "description": "Name of the issuing CA.",
+                        "type": "string"
+                    },
+                    "validFrom": {
+                        "description": "Certificate valid from date.",
+                        "$ref": "./Network.types.json#/components/schemas/TypeTimeSinceEpoch"
+                    },
+                    "validTo": {
+                        "description": "Certificate valid to (expiration) date",
+                        "$ref": "./Network.types.json#/components/schemas/TypeTimeSinceEpoch"
+                    },
+                    "certificateNetworkError": {
+                        "description": "The highest priority network error code, if the certificate has an error.",
+                        "type": "string"
+                    },
+                    "certificateHasWeakSignature": {
+                        "description": "True if the certificate uses a weak signature aglorithm.",
+                        "type": "boolean"
+                    },
+                    "certificateHasSha1Signature": {
+                        "description": "True if the certificate has a SHA1 signature in the chain.",
+                        "type": "boolean"
+                    },
+                    "modernSSL": {
+                        "description": "True if modern SSL",
+                        "type": "boolean"
+                    },
+                    "obsoleteSslProtocol": {
+                        "description": "True if the connection is using an obsolete SSL protocol.",
+                        "type": "boolean"
+                    },
+                    "obsoleteSslKeyExchange": {
+                        "description": "True if the connection is using an obsolete SSL key exchange.",
+                        "type": "boolean"
+                    },
+                    "obsoleteSslCipher": {
+                        "description": "True if the connection is using an obsolete SSL cipher.",
+                        "type": "boolean"
+                    },
+                    "obsoleteSslSignature": {
+                        "description": "True if the connection is using an obsolete SSL signature.",
+                        "type": "boolean"
+                    }
+                },
+                "required": [
+                    "protocol",
+                    "keyExchange",
+                    "cipher",
+                    "certificate",
+                    "subjectName",
+                    "issuer",
+                    "validFrom",
+                    "validTo",
+                    "certificateHasWeakSignature",
+                    "certificateHasSha1Signature",
+                    "modernSSL",
+                    "obsoleteSslProtocol",
+                    "obsoleteSslKeyExchange",
+                    "obsoleteSslCipher",
+                    "obsoleteSslSignature"
+                ]
+            },
+            "TypeSafetyTipInfo": {
+                "type": "object",
+                "properties": {
+                    "safetyTipStatus": {
+                        "description": "Describes whether the page triggers any safety tips or reputation warnings. Default is unknown.",
+                        "$ref": "./Security.types.json#/components/schemas/TypeSafetyTipStatus"
+                    },
+                    "safeUrl": {
+                        "description": "The URL the safety tip suggested (\"Did you mean?\"). Only filled in for lookalike matches.",
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "safetyTipStatus"
+                ]
+            },
+            "TypeSafetyTipStatus": {
+                "type": "string"
+            },
+            "TypeSecurityStateExplanation": {
+                "description": "An explanation of an factor contributing to the security state.",
+                "type": "object",
+                "properties": {
+                    "securityState": {
+                        "description": "Security state representing the severity of the factor being explained.",
+                        "$ref": "./Security.types.json#/components/schemas/TypeSecurityState"
+                    },
+                    "title": {
+                        "description": "Title describing the type of factor.",
+                        "type": "string"
+                    },
+                    "summary": {
+                        "description": "Short phrase describing the type of factor.",
+                        "type": "string"
+                    },
+                    "description": {
+                        "description": "Full text explanation of the factor.",
+                        "type": "string"
+                    },
+                    "mixedContentType": {
+                        "description": "The type of mixed content described by the explanation.",
+                        "$ref": "./Security.types.json#/components/schemas/TypeMixedContentType"
+                    },
+                    "certificate": {
+                        "description": "Page certificate.",
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "recommendations": {
+                        "description": "Recommendations to fix any issues.",
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "required": [
+                    "securityState",
+                    "title",
+                    "summary",
+                    "description",
+                    "mixedContentType",
+                    "certificate"
+                ]
+            },
+            "TypeInsecureContentStatus": {
+                "description": "Information about insecure content on the page.",
+                "type": "object",
+                "properties": {
+                    "ranMixedContent": {
+                        "description": "Always false.",
+                        "type": "boolean"
+                    },
+                    "displayedMixedContent": {
+                        "description": "Always false.",
+                        "type": "boolean"
+                    },
+                    "containedMixedForm": {
+                        "description": "Always false.",
+                        "type": "boolean"
+                    },
+                    "ranContentWithCertErrors": {
+                        "description": "Always false.",
+                        "type": "boolean"
+                    },
+                    "displayedContentWithCertErrors": {
+                        "description": "Always false.",
+                        "type": "boolean"
+                    },
+                    "ranInsecureContentStyle": {
+                        "description": "Always set to unknown.",
+                        "$ref": "./Security.types.json#/components/schemas/TypeSecurityState"
+                    },
+                    "displayedInsecureContentStyle": {
+                        "description": "Always set to unknown.",
+                        "$ref": "./Security.types.json#/components/schemas/TypeSecurityState"
+                    }
+                },
+                "required": [
+                    "ranMixedContent",
+                    "displayedMixedContent",
+                    "containedMixedForm",
+                    "ranContentWithCertErrors",
+                    "displayedContentWithCertErrors",
+                    "ranInsecureContentStyle",
+                    "displayedInsecureContentStyle"
+                ]
+            }
+        }
+    }
+}

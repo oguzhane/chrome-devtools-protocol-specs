@@ -1,0 +1,60 @@
+{
+    "openapi": "3.0.2",
+    "info": {
+        "title": "Chrome DevTools Protocol",
+        "description": "Auto-generated OpenAPI 3.0 specification for Chrome Dev Tools Protocol's types, events, commands",
+        "version": "1.0.0"
+    },
+    "paths": {},
+    "components": {
+        "schemas": {
+            "TypeRequestId": {
+                "description": "Unique request identifier.",
+                "type": "string"
+            },
+            "TypeHeaderEntry": {
+                "description": "Response HTTP header entry",
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string"
+                    },
+                    "value": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "name",
+                    "value"
+                ]
+            },
+            "TypeAuthChallenge": {
+                "description": "Authorization challenge for HTTP status code 401 or 407.",
+                "type": "object",
+                "properties": {
+                    "source": {
+                        "description": "Source of the authentication challenge.",
+                        "type": "string"
+                    },
+                    "origin": {
+                        "description": "Origin of the challenger.",
+                        "type": "string"
+                    },
+                    "scheme": {
+                        "description": "The authentication scheme used, such as basic or digest",
+                        "type": "string"
+                    },
+                    "realm": {
+                        "description": "The realm of the challenge. May be empty.",
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "origin",
+                    "scheme",
+                    "realm"
+                ]
+            }
+        }
+    }
+}

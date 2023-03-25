@@ -1,0 +1,84 @@
+{
+    "openapi": "3.0.2",
+    "info": {
+        "title": "Chrome DevTools Protocol",
+        "description": "Auto-generated OpenAPI 3.0 specification for Chrome Dev Tools Protocol's types, events, commands",
+        "version": "1.0.0"
+    },
+    "paths": {},
+    "components": {
+        "schemas": {
+            "EventConsoleProfileFinishedParams": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string"
+                    },
+                    "location": {
+                        "description": "Location of console.profileEnd().",
+                        "$ref": "./Debugger.types.json#/components/schemas/TypeLocation"
+                    },
+                    "profile": {
+                        "$ref": "./Profiler.types.json#/components/schemas/TypeProfile"
+                    },
+                    "title": {
+                        "description": "Profile title passed as an argument to console.profile().",
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "id",
+                    "location",
+                    "profile"
+                ]
+            },
+            "EventConsoleProfileStartedParams": {
+                "description": "Sent when new profile recording is started using console.profile() call.",
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string"
+                    },
+                    "location": {
+                        "description": "Location of console.profile().",
+                        "$ref": "./Debugger.types.json#/components/schemas/TypeLocation"
+                    },
+                    "title": {
+                        "description": "Profile title passed as an argument to console.profile().",
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "id",
+                    "location"
+                ]
+            },
+            "EventPreciseCoverageDeltaUpdateParams": {
+                "description": "Reports coverage delta since the last poll (either from an event like this, or from\n`takePreciseCoverage` for the current isolate. May only be sent if precise code\ncoverage has been started. This event can be trigged by the embedder to, for example,\ntrigger collection of coverage data immediately at a certain point in time.",
+                "type": "object",
+                "properties": {
+                    "timestamp": {
+                        "description": "Monotonically increasing time (in seconds) when the coverage update was taken in the backend.",
+                        "type": "number"
+                    },
+                    "occasion": {
+                        "description": "Identifier for distinguishing coverage events.",
+                        "type": "string"
+                    },
+                    "result": {
+                        "description": "Coverage data for the current isolate.",
+                        "type": "array",
+                        "items": {
+                            "$ref": "./Profiler.types.json#/components/schemas/TypeScriptCoverage"
+                        }
+                    }
+                },
+                "required": [
+                    "timestamp",
+                    "occasion",
+                    "result"
+                ]
+            }
+        }
+    }
+}

@@ -1,0 +1,157 @@
+{
+    "openapi": "3.0.2",
+    "info": {
+        "title": "Chrome DevTools Protocol",
+        "description": "Auto-generated OpenAPI 3.0 specification for Chrome Dev Tools Protocol's types, events, commands",
+        "version": "1.0.0"
+    },
+    "paths": {},
+    "components": {
+        "schemas": {
+            "EventCacheStorageContentUpdatedParams": {
+                "description": "A cache's contents have been modified.",
+                "type": "object",
+                "properties": {
+                    "origin": {
+                        "description": "Origin to update.",
+                        "type": "string"
+                    },
+                    "storageKey": {
+                        "description": "Storage key to update.",
+                        "type": "string"
+                    },
+                    "cacheName": {
+                        "description": "Name of cache in origin.",
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "origin",
+                    "storageKey",
+                    "cacheName"
+                ]
+            },
+            "EventCacheStorageListUpdatedParams": {
+                "description": "A cache has been added/deleted.",
+                "type": "object",
+                "properties": {
+                    "origin": {
+                        "description": "Origin to update.",
+                        "type": "string"
+                    },
+                    "storageKey": {
+                        "description": "Storage key to update.",
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "origin",
+                    "storageKey"
+                ]
+            },
+            "EventIndexedDbContentUpdatedParams": {
+                "description": "The origin's IndexedDB object store has been modified.",
+                "type": "object",
+                "properties": {
+                    "origin": {
+                        "description": "Origin to update.",
+                        "type": "string"
+                    },
+                    "storageKey": {
+                        "description": "Storage key to update.",
+                        "type": "string"
+                    },
+                    "databaseName": {
+                        "description": "Database to update.",
+                        "type": "string"
+                    },
+                    "objectStoreName": {
+                        "description": "ObjectStore to update.",
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "origin",
+                    "storageKey",
+                    "databaseName",
+                    "objectStoreName"
+                ]
+            },
+            "EventIndexedDbListUpdatedParams": {
+                "description": "The origin's IndexedDB database list has been modified.",
+                "type": "object",
+                "properties": {
+                    "origin": {
+                        "description": "Origin to update.",
+                        "type": "string"
+                    },
+                    "storageKey": {
+                        "description": "Storage key to update.",
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "origin",
+                    "storageKey"
+                ]
+            },
+            "EventInterestGroupAccessedParams": {
+                "description": "One of the interest groups was accessed by the associated page.",
+                "type": "object",
+                "properties": {
+                    "accessTime": {
+                        "$ref": "./Network.types.json#/components/schemas/TypeTimeSinceEpoch"
+                    },
+                    "type": {
+                        "$ref": "./Storage.types.json#/components/schemas/TypeInterestGroupAccessType"
+                    },
+                    "ownerOrigin": {
+                        "type": "string"
+                    },
+                    "name": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "accessTime",
+                    "type",
+                    "ownerOrigin",
+                    "name"
+                ]
+            },
+            "EventSharedStorageAccessedParams": {
+                "description": "Shared storage was accessed by the associated page.\nThe following parameters are included in all events.",
+                "type": "object",
+                "properties": {
+                    "accessTime": {
+                        "description": "Time of the access.",
+                        "$ref": "./Network.types.json#/components/schemas/TypeTimeSinceEpoch"
+                    },
+                    "type": {
+                        "description": "Enum value indicating the Shared Storage API method invoked.",
+                        "$ref": "./Storage.types.json#/components/schemas/TypeSharedStorageAccessType"
+                    },
+                    "mainFrameId": {
+                        "description": "DevTools Frame Token for the primary frame tree's root.",
+                        "$ref": "./Page.types.json#/components/schemas/TypeFrameId"
+                    },
+                    "ownerOrigin": {
+                        "description": "Serialized origin for the context that invoked the Shared Storage API.",
+                        "type": "string"
+                    },
+                    "params": {
+                        "description": "The sub-parameters warapped by `params` are all optional and their\npresence/absence depends on `type`.",
+                        "$ref": "./Storage.types.json#/components/schemas/TypeSharedStorageAccessParams"
+                    }
+                },
+                "required": [
+                    "accessTime",
+                    "type",
+                    "mainFrameId",
+                    "ownerOrigin",
+                    "params"
+                ]
+            }
+        }
+    }
+}

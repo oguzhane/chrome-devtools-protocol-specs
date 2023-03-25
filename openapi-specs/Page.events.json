@@ -1,0 +1,538 @@
+{
+    "openapi": "3.0.2",
+    "info": {
+        "title": "Chrome DevTools Protocol",
+        "description": "Auto-generated OpenAPI 3.0 specification for Chrome Dev Tools Protocol's types, events, commands",
+        "version": "1.0.0"
+    },
+    "paths": {},
+    "components": {
+        "schemas": {
+            "EventDomContentEventFiredParams": {
+                "type": "object",
+                "properties": {
+                    "timestamp": {
+                        "$ref": "./Network.types.json#/components/schemas/TypeMonotonicTime"
+                    }
+                },
+                "required": [
+                    "timestamp"
+                ]
+            },
+            "EventFileChooserOpenedParams": {
+                "description": "Emitted only when `page.interceptFileChooser` is enabled.",
+                "type": "object",
+                "properties": {
+                    "frameId": {
+                        "description": "Id of the frame containing input node.",
+                        "$ref": "./Page.types.json#/components/schemas/TypeFrameId"
+                    },
+                    "mode": {
+                        "description": "Input mode.",
+                        "type": "string"
+                    },
+                    "backendNodeId": {
+                        "description": "Input node id. Only present for file choosers opened via an <input type=\"file\"> element.",
+                        "$ref": "./DOM.types.json#/components/schemas/TypeBackendNodeId"
+                    }
+                },
+                "required": [
+                    "frameId",
+                    "mode"
+                ]
+            },
+            "EventFrameAttachedParams": {
+                "description": "Fired when frame has been attached to its parent.",
+                "type": "object",
+                "properties": {
+                    "frameId": {
+                        "description": "Id of the frame that has been attached.",
+                        "$ref": "./Page.types.json#/components/schemas/TypeFrameId"
+                    },
+                    "parentFrameId": {
+                        "description": "Parent frame identifier.",
+                        "$ref": "./Page.types.json#/components/schemas/TypeFrameId"
+                    },
+                    "stack": {
+                        "description": "JavaScript stack trace of when frame was attached, only set if frame initiated from script.",
+                        "$ref": "./Runtime.types.json#/components/schemas/TypeStackTrace"
+                    }
+                },
+                "required": [
+                    "frameId",
+                    "parentFrameId"
+                ]
+            },
+            "EventFrameClearedScheduledNavigationParams": {
+                "description": "Fired when frame no longer has a scheduled navigation.",
+                "type": "object",
+                "properties": {
+                    "frameId": {
+                        "description": "Id of the frame that has cleared its scheduled navigation.",
+                        "$ref": "./Page.types.json#/components/schemas/TypeFrameId"
+                    }
+                },
+                "required": [
+                    "frameId"
+                ]
+            },
+            "EventFrameDetachedParams": {
+                "description": "Fired when frame has been detached from its parent.",
+                "type": "object",
+                "properties": {
+                    "frameId": {
+                        "description": "Id of the frame that has been detached.",
+                        "$ref": "./Page.types.json#/components/schemas/TypeFrameId"
+                    },
+                    "reason": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "frameId",
+                    "reason"
+                ]
+            },
+            "EventFrameNavigatedParams": {
+                "description": "Fired once navigation of the frame has completed. Frame is now associated with the new loader.",
+                "type": "object",
+                "properties": {
+                    "frame": {
+                        "description": "Frame object.",
+                        "$ref": "./Page.types.json#/components/schemas/TypeFrame"
+                    },
+                    "type": {
+                        "$ref": "./Page.types.json#/components/schemas/TypeNavigationType"
+                    }
+                },
+                "required": [
+                    "frame",
+                    "type"
+                ]
+            },
+            "EventDocumentOpenedParams": {
+                "description": "Fired when opening document to write to.",
+                "type": "object",
+                "properties": {
+                    "frame": {
+                        "description": "Frame object.",
+                        "$ref": "./Page.types.json#/components/schemas/TypeFrame"
+                    }
+                },
+                "required": [
+                    "frame"
+                ]
+            },
+            "EventFrameResizedParams": {},
+            "EventFrameRequestedNavigationParams": {
+                "description": "Fired when a renderer-initiated navigation is requested.\nNavigation may still be cancelled after the event is issued.",
+                "type": "object",
+                "properties": {
+                    "frameId": {
+                        "description": "Id of the frame that is being navigated.",
+                        "$ref": "./Page.types.json#/components/schemas/TypeFrameId"
+                    },
+                    "reason": {
+                        "description": "The reason for the navigation.",
+                        "$ref": "./Page.types.json#/components/schemas/TypeClientNavigationReason"
+                    },
+                    "url": {
+                        "description": "The destination URL for the requested navigation.",
+                        "type": "string"
+                    },
+                    "disposition": {
+                        "description": "The disposition for the navigation.",
+                        "$ref": "./Page.types.json#/components/schemas/TypeClientNavigationDisposition"
+                    }
+                },
+                "required": [
+                    "frameId",
+                    "reason",
+                    "url",
+                    "disposition"
+                ]
+            },
+            "EventFrameScheduledNavigationParams": {
+                "description": "Fired when frame schedules a potential navigation.",
+                "type": "object",
+                "properties": {
+                    "frameId": {
+                        "description": "Id of the frame that has scheduled a navigation.",
+                        "$ref": "./Page.types.json#/components/schemas/TypeFrameId"
+                    },
+                    "delay": {
+                        "description": "Delay (in seconds) until the navigation is scheduled to begin. The navigation is not\nguaranteed to start.",
+                        "type": "number"
+                    },
+                    "reason": {
+                        "description": "The reason for the navigation.",
+                        "$ref": "./Page.types.json#/components/schemas/TypeClientNavigationReason"
+                    },
+                    "url": {
+                        "description": "The destination URL for the scheduled navigation.",
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "frameId",
+                    "delay",
+                    "reason",
+                    "url"
+                ]
+            },
+            "EventFrameStartedLoadingParams": {
+                "description": "Fired when frame has started loading.",
+                "type": "object",
+                "properties": {
+                    "frameId": {
+                        "description": "Id of the frame that has started loading.",
+                        "$ref": "./Page.types.json#/components/schemas/TypeFrameId"
+                    }
+                },
+                "required": [
+                    "frameId"
+                ]
+            },
+            "EventFrameStoppedLoadingParams": {
+                "description": "Fired when frame has stopped loading.",
+                "type": "object",
+                "properties": {
+                    "frameId": {
+                        "description": "Id of the frame that has stopped loading.",
+                        "$ref": "./Page.types.json#/components/schemas/TypeFrameId"
+                    }
+                },
+                "required": [
+                    "frameId"
+                ]
+            },
+            "EventDownloadWillBeginParams": {
+                "description": "Fired when page is about to start a download.\nDeprecated. Use Browser.downloadWillBegin instead.",
+                "type": "object",
+                "properties": {
+                    "frameId": {
+                        "description": "Id of the frame that caused download to begin.",
+                        "$ref": "./Page.types.json#/components/schemas/TypeFrameId"
+                    },
+                    "guid": {
+                        "description": "Global unique identifier of the download.",
+                        "type": "string"
+                    },
+                    "url": {
+                        "description": "URL of the resource being downloaded.",
+                        "type": "string"
+                    },
+                    "suggestedFilename": {
+                        "description": "Suggested file name of the resource (the actual name of the file saved on disk may differ).",
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "frameId",
+                    "guid",
+                    "url",
+                    "suggestedFilename"
+                ]
+            },
+            "EventDownloadProgressParams": {
+                "description": "Fired when download makes progress. Last call has |done| == true.\nDeprecated. Use Browser.downloadProgress instead.",
+                "type": "object",
+                "properties": {
+                    "guid": {
+                        "description": "Global unique identifier of the download.",
+                        "type": "string"
+                    },
+                    "totalBytes": {
+                        "description": "Total expected bytes to download.",
+                        "type": "number"
+                    },
+                    "receivedBytes": {
+                        "description": "Total bytes received.",
+                        "type": "number"
+                    },
+                    "state": {
+                        "description": "Download status.",
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "guid",
+                    "totalBytes",
+                    "receivedBytes",
+                    "state"
+                ]
+            },
+            "EventInterstitialHiddenParams": {
+                "description": "Fired when interstitial page was hidden"
+            },
+            "EventInterstitialShownParams": {
+                "description": "Fired when interstitial page was shown"
+            },
+            "EventJavascriptDialogClosedParams": {
+                "description": "Fired when a JavaScript initiated dialog (alert, confirm, prompt, or onbeforeunload) has been\nclosed.",
+                "type": "object",
+                "properties": {
+                    "result": {
+                        "description": "Whether dialog was confirmed.",
+                        "type": "boolean"
+                    },
+                    "userInput": {
+                        "description": "User input in case of prompt.",
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "result",
+                    "userInput"
+                ]
+            },
+            "EventJavascriptDialogOpeningParams": {
+                "description": "Fired when a JavaScript initiated dialog (alert, confirm, prompt, or onbeforeunload) is about to\nopen.",
+                "type": "object",
+                "properties": {
+                    "url": {
+                        "description": "Frame url.",
+                        "type": "string"
+                    },
+                    "message": {
+                        "description": "Message that will be displayed by the dialog.",
+                        "type": "string"
+                    },
+                    "type": {
+                        "description": "Dialog type.",
+                        "$ref": "./Page.types.json#/components/schemas/TypeDialogType"
+                    },
+                    "hasBrowserHandler": {
+                        "description": "True iff browser is capable showing or acting on the given dialog. When browser has no\ndialog handler for given target, calling alert while Page domain is engaged will stall\nthe page execution. Execution can be resumed via calling Page.handleJavaScriptDialog.",
+                        "type": "boolean"
+                    },
+                    "defaultPrompt": {
+                        "description": "Default dialog prompt.",
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "url",
+                    "message",
+                    "type",
+                    "hasBrowserHandler"
+                ]
+            },
+            "EventLifecycleEventParams": {
+                "description": "Fired for top level page lifecycle events such as navigation, load, paint, etc.",
+                "type": "object",
+                "properties": {
+                    "frameId": {
+                        "description": "Id of the frame.",
+                        "$ref": "./Page.types.json#/components/schemas/TypeFrameId"
+                    },
+                    "loaderId": {
+                        "description": "Loader identifier. Empty string if the request is fetched from worker.",
+                        "$ref": "./Network.types.json#/components/schemas/TypeLoaderId"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "timestamp": {
+                        "$ref": "./Network.types.json#/components/schemas/TypeMonotonicTime"
+                    }
+                },
+                "required": [
+                    "frameId",
+                    "loaderId",
+                    "name",
+                    "timestamp"
+                ]
+            },
+            "EventBackForwardCacheNotUsedParams": {
+                "description": "Fired for failed bfcache history navigations if BackForwardCache feature is enabled. Do\nnot assume any ordering with the Page.frameNavigated event. This event is fired only for\nmain-frame history navigation where the document changes (non-same-document navigations),\nwhen bfcache navigation fails.",
+                "type": "object",
+                "properties": {
+                    "loaderId": {
+                        "description": "The loader id for the associated navgation.",
+                        "$ref": "./Network.types.json#/components/schemas/TypeLoaderId"
+                    },
+                    "frameId": {
+                        "description": "The frame id of the associated frame.",
+                        "$ref": "./Page.types.json#/components/schemas/TypeFrameId"
+                    },
+                    "notRestoredExplanations": {
+                        "description": "Array of reasons why the page could not be cached. This must not be empty.",
+                        "type": "array",
+                        "items": {
+                            "$ref": "./Page.types.json#/components/schemas/TypeBackForwardCacheNotRestoredExplanation"
+                        }
+                    },
+                    "notRestoredExplanationsTree": {
+                        "description": "Tree structure of reasons why the page could not be cached for each frame.",
+                        "$ref": "./Page.types.json#/components/schemas/TypeBackForwardCacheNotRestoredExplanationTree"
+                    }
+                },
+                "required": [
+                    "loaderId",
+                    "frameId",
+                    "notRestoredExplanations"
+                ]
+            },
+            "EventPrerenderAttemptCompletedParams": {
+                "description": "Fired when a prerender attempt is completed.",
+                "type": "object",
+                "properties": {
+                    "initiatingFrameId": {
+                        "description": "The frame id of the frame initiating prerendering.",
+                        "$ref": "./Page.types.json#/components/schemas/TypeFrameId"
+                    },
+                    "prerenderingUrl": {
+                        "type": "string"
+                    },
+                    "finalStatus": {
+                        "$ref": "./Page.types.json#/components/schemas/TypePrerenderFinalStatus"
+                    },
+                    "disallowedApiMethod": {
+                        "description": "This is used to give users more information about the name of the API call\nthat is incompatible with prerender and has caused the cancellation of the attempt",
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "initiatingFrameId",
+                    "prerenderingUrl",
+                    "finalStatus"
+                ]
+            },
+            "EventPrefetchStatusUpdatedParams": {
+                "description": "TODO(crbug/1384419): Create a dedicated domain for preloading.\nFired when a prefetch attempt is updated.",
+                "type": "object",
+                "properties": {
+                    "initiatingFrameId": {
+                        "description": "The frame id of the frame initiating prefetch.",
+                        "$ref": "./Page.types.json#/components/schemas/TypeFrameId"
+                    },
+                    "prefetchUrl": {
+                        "type": "string"
+                    },
+                    "status": {
+                        "$ref": "./Page.types.json#/components/schemas/TypePrefetchStatus"
+                    }
+                },
+                "required": [
+                    "initiatingFrameId",
+                    "prefetchUrl",
+                    "status"
+                ]
+            },
+            "EventLoadEventFiredParams": {
+                "type": "object",
+                "properties": {
+                    "timestamp": {
+                        "$ref": "./Network.types.json#/components/schemas/TypeMonotonicTime"
+                    }
+                },
+                "required": [
+                    "timestamp"
+                ]
+            },
+            "EventNavigatedWithinDocumentParams": {
+                "description": "Fired when same-document navigation happens, e.g. due to history API usage or anchor navigation.",
+                "type": "object",
+                "properties": {
+                    "frameId": {
+                        "description": "Id of the frame.",
+                        "$ref": "./Page.types.json#/components/schemas/TypeFrameId"
+                    },
+                    "url": {
+                        "description": "Frame's new url.",
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "frameId",
+                    "url"
+                ]
+            },
+            "EventScreencastFrameParams": {
+                "description": "Compressed image data requested by the `startScreencast`.",
+                "type": "object",
+                "properties": {
+                    "data": {
+                        "description": "Base64-encoded compressed image. (Encoded as a base64 string when passed over JSON)",
+                        "type": "string"
+                    },
+                    "metadata": {
+                        "description": "Screencast frame metadata.",
+                        "$ref": "./Page.types.json#/components/schemas/TypeScreencastFrameMetadata"
+                    },
+                    "sessionId": {
+                        "description": "Frame number.",
+                        "type": "integer"
+                    }
+                },
+                "required": [
+                    "data",
+                    "metadata",
+                    "sessionId"
+                ]
+            },
+            "EventScreencastVisibilityChangedParams": {
+                "description": "Fired when the page with currently enabled screencast was shown or hidden `.",
+                "type": "object",
+                "properties": {
+                    "visible": {
+                        "description": "True if the page is visible.",
+                        "type": "boolean"
+                    }
+                },
+                "required": [
+                    "visible"
+                ]
+            },
+            "EventWindowOpenParams": {
+                "description": "Fired when a new window is going to be opened, via window.open(), link click, form submission,\netc.",
+                "type": "object",
+                "properties": {
+                    "url": {
+                        "description": "The URL for the new window.",
+                        "type": "string"
+                    },
+                    "windowName": {
+                        "description": "Window name.",
+                        "type": "string"
+                    },
+                    "windowFeatures": {
+                        "description": "An array of enabled window features.",
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "userGesture": {
+                        "description": "Whether or not it was triggered by user gesture.",
+                        "type": "boolean"
+                    }
+                },
+                "required": [
+                    "url",
+                    "windowName",
+                    "windowFeatures",
+                    "userGesture"
+                ]
+            },
+            "EventCompilationCacheProducedParams": {
+                "description": "Issued for every compilation cache generated. Is only available\nif Page.setGenerateCompilationCache is enabled.",
+                "type": "object",
+                "properties": {
+                    "url": {
+                        "type": "string"
+                    },
+                    "data": {
+                        "description": "Base64-encoded data (Encoded as a base64 string when passed over JSON)",
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "url",
+                    "data"
+                ]
+            }
+        }
+    }
+}

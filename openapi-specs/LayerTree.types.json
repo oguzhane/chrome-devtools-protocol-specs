@@ -1,0 +1,146 @@
+{
+    "openapi": "3.0.2",
+    "info": {
+        "title": "Chrome DevTools Protocol",
+        "description": "Auto-generated OpenAPI 3.0 specification for Chrome Dev Tools Protocol's types, events, commands",
+        "version": "1.0.0"
+    },
+    "paths": {},
+    "components": {
+        "schemas": {
+            "TypeLayerId": {
+                "description": "Unique Layer identifier.",
+                "type": "string"
+            },
+            "TypeLayer": {
+                "description": "Information about a compositing layer.",
+                "type": "object",
+                "properties": {
+                    "layerId": {
+                        "description": "The unique id for this layer.",
+                        "$ref": "./LayerTree.types.json#/components/schemas/TypeLayerId"
+                    },
+                    "parentLayerId": {
+                        "description": "The id of parent (not present for root).",
+                        "$ref": "./LayerTree.types.json#/components/schemas/TypeLayerId"
+                    },
+                    "backendNodeId": {
+                        "description": "The backend id for the node associated with this layer.",
+                        "$ref": "./DOM.types.json#/components/schemas/TypeBackendNodeId"
+                    },
+                    "offsetX": {
+                        "description": "Offset from parent layer, X coordinate.",
+                        "type": "number"
+                    },
+                    "offsetY": {
+                        "description": "Offset from parent layer, Y coordinate.",
+                        "type": "number"
+                    },
+                    "width": {
+                        "description": "Layer width.",
+                        "type": "number"
+                    },
+                    "height": {
+                        "description": "Layer height.",
+                        "type": "number"
+                    },
+                    "transform": {
+                        "description": "Transformation matrix for layer, default is identity matrix",
+                        "type": "array",
+                        "items": {
+                            "type": "number"
+                        }
+                    },
+                    "anchorX": {
+                        "description": "Transform anchor point X, absent if no transform specified",
+                        "type": "number"
+                    },
+                    "anchorY": {
+                        "description": "Transform anchor point Y, absent if no transform specified",
+                        "type": "number"
+                    },
+                    "anchorZ": {
+                        "description": "Transform anchor point Z, absent if no transform specified",
+                        "type": "number"
+                    },
+                    "paintCount": {
+                        "description": "Indicates how many time this layer has painted.",
+                        "type": "integer"
+                    },
+                    "drawsContent": {
+                        "description": "Indicates whether this layer hosts any content, rather than being used for\ntransform/scrolling purposes only.",
+                        "type": "boolean"
+                    },
+                    "invisible": {
+                        "description": "Set if layer is not visible.",
+                        "type": "boolean"
+                    },
+                    "scrollRects": {
+                        "description": "Rectangles scrolling on main thread only.",
+                        "type": "array",
+                        "items": {
+                            "$ref": "./LayerTree.types.json#/components/schemas/TypeScrollRect"
+                        }
+                    },
+                    "stickyPositionConstraint": {
+                        "description": "Sticky position constraint information",
+                        "$ref": "./LayerTree.types.json#/components/schemas/TypeStickyPositionConstraint"
+                    }
+                },
+                "required": [
+                    "layerId",
+                    "offsetX",
+                    "offsetY",
+                    "width",
+                    "height",
+                    "paintCount",
+                    "drawsContent"
+                ]
+            },
+            "TypeScrollRect": {
+                "description": "Rectangle where scrolling happens on the main thread.",
+                "type": "object",
+                "properties": {
+                    "rect": {
+                        "description": "Rectangle itself.",
+                        "$ref": "./DOM.types.json#/components/schemas/TypeRect"
+                    },
+                    "type": {
+                        "description": "Reason for rectangle to force scrolling on the main thread",
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "rect",
+                    "type"
+                ]
+            },
+            "TypeStickyPositionConstraint": {
+                "description": "Sticky position constraints.",
+                "type": "object",
+                "properties": {
+                    "stickyBoxRect": {
+                        "description": "Layout rectangle of the sticky element before being shifted",
+                        "$ref": "./DOM.types.json#/components/schemas/TypeRect"
+                    },
+                    "containingBlockRect": {
+                        "description": "Layout rectangle of the containing block of the sticky element",
+                        "$ref": "./DOM.types.json#/components/schemas/TypeRect"
+                    },
+                    "nearestLayerShiftingStickyBox": {
+                        "description": "The nearest sticky layer that shifts the sticky box",
+                        "$ref": "./LayerTree.types.json#/components/schemas/TypeLayerId"
+                    },
+                    "nearestLayerShiftingContainingBlock": {
+                        "description": "The nearest sticky layer that shifts the containing block",
+                        "$ref": "./LayerTree.types.json#/components/schemas/TypeLayerId"
+                    }
+                },
+                "required": [
+                    "stickyBoxRect",
+                    "containingBlockRect"
+                ]
+            }
+        }
+    }
+}

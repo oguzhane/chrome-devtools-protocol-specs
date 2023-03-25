@@ -1,0 +1,36 @@
+{
+    "openapi": "3.0.2",
+    "info": {
+        "title": "Chrome DevTools Protocol",
+        "description": "Auto-generated OpenAPI 3.0 specification for Chrome Dev Tools Protocol's types, events, commands",
+        "version": "1.0.0"
+    },
+    "paths": {},
+    "components": {
+        "schemas": {
+            "EventRuleSetUpdatedParams": {
+                "description": "Upsert. Currently, it is only emitted when a rule set added.",
+                "type": "object",
+                "properties": {
+                    "ruleSet": {
+                        "$ref": "./Preload.types.json#/components/schemas/TypeRuleSet"
+                    }
+                },
+                "required": [
+                    "ruleSet"
+                ]
+            },
+            "EventRuleSetRemovedParams": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "$ref": "./Preload.types.json#/components/schemas/TypeRuleSetId"
+                    }
+                },
+                "required": [
+                    "id"
+                ]
+            }
+        }
+    }
+}

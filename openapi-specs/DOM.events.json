@@ -1,0 +1,267 @@
+{
+    "openapi": "3.0.2",
+    "info": {
+        "title": "Chrome DevTools Protocol",
+        "description": "Auto-generated OpenAPI 3.0 specification for Chrome Dev Tools Protocol's types, events, commands",
+        "version": "1.0.0"
+    },
+    "paths": {},
+    "components": {
+        "schemas": {
+            "EventAttributeModifiedParams": {
+                "description": "Fired when `Element`'s attribute is modified.",
+                "type": "object",
+                "properties": {
+                    "nodeId": {
+                        "description": "Id of the node that has changed.",
+                        "$ref": "./DOM.types.json#/components/schemas/TypeNodeId"
+                    },
+                    "name": {
+                        "description": "Attribute name.",
+                        "type": "string"
+                    },
+                    "value": {
+                        "description": "Attribute value.",
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "nodeId",
+                    "name",
+                    "value"
+                ]
+            },
+            "EventAttributeRemovedParams": {
+                "description": "Fired when `Element`'s attribute is removed.",
+                "type": "object",
+                "properties": {
+                    "nodeId": {
+                        "description": "Id of the node that has changed.",
+                        "$ref": "./DOM.types.json#/components/schemas/TypeNodeId"
+                    },
+                    "name": {
+                        "description": "A ttribute name.",
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "nodeId",
+                    "name"
+                ]
+            },
+            "EventCharacterDataModifiedParams": {
+                "description": "Mirrors `DOMCharacterDataModified` event.",
+                "type": "object",
+                "properties": {
+                    "nodeId": {
+                        "description": "Id of the node that has changed.",
+                        "$ref": "./DOM.types.json#/components/schemas/TypeNodeId"
+                    },
+                    "characterData": {
+                        "description": "New text value.",
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "nodeId",
+                    "characterData"
+                ]
+            },
+            "EventChildNodeCountUpdatedParams": {
+                "description": "Fired when `Container`'s child node count has changed.",
+                "type": "object",
+                "properties": {
+                    "nodeId": {
+                        "description": "Id of the node that has changed.",
+                        "$ref": "./DOM.types.json#/components/schemas/TypeNodeId"
+                    },
+                    "childNodeCount": {
+                        "description": "New node count.",
+                        "type": "integer"
+                    }
+                },
+                "required": [
+                    "nodeId",
+                    "childNodeCount"
+                ]
+            },
+            "EventChildNodeInsertedParams": {
+                "description": "Mirrors `DOMNodeInserted` event.",
+                "type": "object",
+                "properties": {
+                    "parentNodeId": {
+                        "description": "Id of the node that has changed.",
+                        "$ref": "./DOM.types.json#/components/schemas/TypeNodeId"
+                    },
+                    "previousNodeId": {
+                        "description": "Id of the previous sibling.",
+                        "$ref": "./DOM.types.json#/components/schemas/TypeNodeId"
+                    },
+                    "node": {
+                        "description": "Inserted node data.",
+                        "$ref": "./DOM.types.json#/components/schemas/TypeNode"
+                    }
+                },
+                "required": [
+                    "parentNodeId",
+                    "previousNodeId",
+                    "node"
+                ]
+            },
+            "EventChildNodeRemovedParams": {
+                "description": "Mirrors `DOMNodeRemoved` event.",
+                "type": "object",
+                "properties": {
+                    "parentNodeId": {
+                        "description": "Parent id.",
+                        "$ref": "./DOM.types.json#/components/schemas/TypeNodeId"
+                    },
+                    "nodeId": {
+                        "description": "Id of the node that has been removed.",
+                        "$ref": "./DOM.types.json#/components/schemas/TypeNodeId"
+                    }
+                },
+                "required": [
+                    "parentNodeId",
+                    "nodeId"
+                ]
+            },
+            "EventDistributedNodesUpdatedParams": {
+                "description": "Called when distribution is changed.",
+                "type": "object",
+                "properties": {
+                    "insertionPointId": {
+                        "description": "Insertion point where distributed nodes were updated.",
+                        "$ref": "./DOM.types.json#/components/schemas/TypeNodeId"
+                    },
+                    "distributedNodes": {
+                        "description": "Distributed nodes for given insertion point.",
+                        "type": "array",
+                        "items": {
+                            "$ref": "./DOM.types.json#/components/schemas/TypeBackendNode"
+                        }
+                    }
+                },
+                "required": [
+                    "insertionPointId",
+                    "distributedNodes"
+                ]
+            },
+            "EventDocumentUpdatedParams": {
+                "description": "Fired when `Document` has been totally updated. Node ids are no longer valid."
+            },
+            "EventInlineStyleInvalidatedParams": {
+                "description": "Fired when `Element`'s inline style is modified via a CSS property modification.",
+                "type": "object",
+                "properties": {
+                    "nodeIds": {
+                        "description": "Ids of the nodes for which the inline styles have been invalidated.",
+                        "type": "array",
+                        "items": {
+                            "$ref": "./DOM.types.json#/components/schemas/TypeNodeId"
+                        }
+                    }
+                },
+                "required": [
+                    "nodeIds"
+                ]
+            },
+            "EventPseudoElementAddedParams": {
+                "description": "Called when a pseudo element is added to an element.",
+                "type": "object",
+                "properties": {
+                    "parentId": {
+                        "description": "Pseudo element's parent element id.",
+                        "$ref": "./DOM.types.json#/components/schemas/TypeNodeId"
+                    },
+                    "pseudoElement": {
+                        "description": "The added pseudo element.",
+                        "$ref": "./DOM.types.json#/components/schemas/TypeNode"
+                    }
+                },
+                "required": [
+                    "parentId",
+                    "pseudoElement"
+                ]
+            },
+            "EventTopLayerElementsUpdatedParams": {
+                "description": "Called when top layer elements are changed."
+            },
+            "EventPseudoElementRemovedParams": {
+                "description": "Called when a pseudo element is removed from an element.",
+                "type": "object",
+                "properties": {
+                    "parentId": {
+                        "description": "Pseudo element's parent element id.",
+                        "$ref": "./DOM.types.json#/components/schemas/TypeNodeId"
+                    },
+                    "pseudoElementId": {
+                        "description": "The removed pseudo element id.",
+                        "$ref": "./DOM.types.json#/components/schemas/TypeNodeId"
+                    }
+                },
+                "required": [
+                    "parentId",
+                    "pseudoElementId"
+                ]
+            },
+            "EventSetChildNodesParams": {
+                "description": "Fired when backend wants to provide client with the missing DOM structure. This happens upon\nmost of the calls requesting node ids.",
+                "type": "object",
+                "properties": {
+                    "parentId": {
+                        "description": "Parent node id to populate with children.",
+                        "$ref": "./DOM.types.json#/components/schemas/TypeNodeId"
+                    },
+                    "nodes": {
+                        "description": "Child nodes array.",
+                        "type": "array",
+                        "items": {
+                            "$ref": "./DOM.types.json#/components/schemas/TypeNode"
+                        }
+                    }
+                },
+                "required": [
+                    "parentId",
+                    "nodes"
+                ]
+            },
+            "EventShadowRootPoppedParams": {
+                "description": "Called when shadow root is popped from the element.",
+                "type": "object",
+                "properties": {
+                    "hostId": {
+                        "description": "Host element id.",
+                        "$ref": "./DOM.types.json#/components/schemas/TypeNodeId"
+                    },
+                    "rootId": {
+                        "description": "Shadow root id.",
+                        "$ref": "./DOM.types.json#/components/schemas/TypeNodeId"
+                    }
+                },
+                "required": [
+                    "hostId",
+                    "rootId"
+                ]
+            },
+            "EventShadowRootPushedParams": {
+                "description": "Called when shadow root is pushed into the element.",
+                "type": "object",
+                "properties": {
+                    "hostId": {
+                        "description": "Host element id.",
+                        "$ref": "./DOM.types.json#/components/schemas/TypeNodeId"
+                    },
+                    "root": {
+                        "description": "Shadow root.",
+                        "$ref": "./DOM.types.json#/components/schemas/TypeNode"
+                    }
+                },
+                "required": [
+                    "hostId",
+                    "root"
+                ]
+            }
+        }
+    }
+}

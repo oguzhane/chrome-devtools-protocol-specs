@@ -1,0 +1,365 @@
+{
+    "openapi": "3.0.2",
+    "info": {
+        "title": "Chrome DevTools Protocol",
+        "description": "Auto-generated OpenAPI 3.0 specification for Chrome Dev Tools Protocol's types, events, commands",
+        "version": "1.0.0"
+    },
+    "paths": {},
+    "components": {
+        "schemas": {
+            "TypeScriptId": {
+                "description": "Unique script identifier.",
+                "type": "string"
+            },
+            "TypeRemoteObject": {
+                "description": "Mirror object referencing original JavaScript object.",
+                "type": "object",
+                "properties": {
+                    "type": {
+                        "description": "Object type.",
+                        "type": "string"
+                    },
+                    "subtype": {
+                        "description": "Object subtype hint. Specified for `object` type values only.\nNOTE: If you change anything here, make sure to also update\n`subtype` in `ObjectPreview` and `PropertyPreview` below.",
+                        "type": "string"
+                    },
+                    "className": {
+                        "description": "Object class (constructor) name. Specified for `object` type values only.",
+                        "type": "string"
+                    },
+                    "value": {
+                        "description": "Remote object value in case of primitive values or JSON values (if it was requested).",
+                        "type": "any"
+                    },
+                    "unserializableValue": {
+                        "description": "Primitive value which can not be JSON-stringified does not have `value`, but gets this\nproperty.",
+                        "$ref": "./Runtime.types.json#/components/schemas/TypeUnserializableValue"
+                    },
+                    "description": {
+                        "description": "String representation of the object.",
+                        "type": "string"
+                    },
+                    "webDriverValue": {
+                        "description": "WebDriver BiDi representation of the value.",
+                        "$ref": "./Runtime.types.json#/components/schemas/TypeWebDriverValue"
+                    },
+                    "objectId": {
+                        "description": "Unique object identifier (for non-primitive values).",
+                        "$ref": "./Runtime.types.json#/components/schemas/TypeRemoteObjectId"
+                    },
+                    "preview": {
+                        "description": "Preview containing abbreviated property values. Specified for `object` type values only.",
+                        "$ref": "./Runtime.types.json#/components/schemas/TypeObjectPreview"
+                    },
+                    "customPreview": {
+                        "$ref": "./Runtime.types.json#/components/schemas/TypeCustomPreview"
+                    }
+                },
+                "required": [
+                    "type"
+                ]
+            },
+            "TypeUnserializableValue": {
+                "description": "Primitive value which cannot be JSON-stringified. Includes values `-0`, `NaN`, `Infinity`,\n`-Infinity`, and bigint literals.",
+                "type": "string"
+            },
+            "TypeWebDriverValue": {
+                "description": "Represents the value serialiazed by the WebDriver BiDi specification\nhttps://w3c.github.io/webdriver-bidi.",
+                "type": "object",
+                "properties": {
+                    "type": {
+                        "type": "string"
+                    },
+                    "value": {
+                        "type": "any"
+                    },
+                    "objectId": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "type"
+                ]
+            },
+            "TypeRemoteObjectId": {
+                "description": "Unique object identifier.",
+                "type": "string"
+            },
+            "TypeObjectPreview": {
+                "description": "Object containing abbreviated remote object value.",
+                "type": "object",
+                "properties": {
+                    "type": {
+                        "description": "Object type.",
+                        "type": "string"
+                    },
+                    "subtype": {
+                        "description": "Object subtype hint. Specified for `object` type values only.",
+                        "type": "string"
+                    },
+                    "description": {
+                        "description": "String representation of the object.",
+                        "type": "string"
+                    },
+                    "overflow": {
+                        "description": "True iff some of the properties or entries of the original object did not fit.",
+                        "type": "boolean"
+                    },
+                    "properties": {
+                        "description": "List of the properties.",
+                        "type": "array",
+                        "items": {
+                            "$ref": "./Runtime.types.json#/components/schemas/TypePropertyPreview"
+                        }
+                    },
+                    "entries": {
+                        "description": "List of the entries. Specified for `map` and `set` subtype values only.",
+                        "type": "array",
+                        "items": {
+                            "$ref": "./Runtime.types.json#/components/schemas/TypeEntryPreview"
+                        }
+                    }
+                },
+                "required": [
+                    "type",
+                    "overflow",
+                    "properties"
+                ]
+            },
+            "TypePropertyPreview": {
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "description": "Property name.",
+                        "type": "string"
+                    },
+                    "type": {
+                        "description": "Object type. Accessor means that the property itself is an accessor property.",
+                        "type": "string"
+                    },
+                    "value": {
+                        "description": "User-friendly property value string.",
+                        "type": "string"
+                    },
+                    "valuePreview": {
+                        "description": "Nested value preview.",
+                        "$ref": "./Runtime.types.json#/components/schemas/TypeObjectPreview"
+                    },
+                    "subtype": {
+                        "description": "Object subtype hint. Specified for `object` type values only.",
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "name",
+                    "type"
+                ]
+            },
+            "TypeEntryPreview": {
+                "type": "object",
+                "properties": {
+                    "key": {
+                        "description": "Preview of the key. Specified for map-like collection entries.",
+                        "$ref": "./Runtime.types.json#/components/schemas/TypeObjectPreview"
+                    },
+                    "value": {
+                        "description": "Preview of the value.",
+                        "$ref": "./Runtime.types.json#/components/schemas/TypeObjectPreview"
+                    }
+                },
+                "required": [
+                    "value"
+                ]
+            },
+            "TypeCustomPreview": {
+                "type": "object",
+                "properties": {
+                    "header": {
+                        "description": "The JSON-stringified result of formatter.header(object, config) call.\nIt contains json ML array that represents RemoteObject.",
+                        "type": "string"
+                    },
+                    "bodyGetterId": {
+                        "description": "If formatter returns true as a result of formatter.hasBody call then bodyGetterId will\ncontain RemoteObjectId for the function that returns result of formatter.body(object, config) call.\nThe result value is json ML array.",
+                        "$ref": "./Runtime.types.json#/components/schemas/TypeRemoteObjectId"
+                    }
+                },
+                "required": [
+                    "header"
+                ]
+            },
+            "TypeStackTrace": {
+                "description": "Call frames for assertions or error messages.",
+                "type": "object",
+                "properties": {
+                    "description": {
+                        "description": "String label of this stack trace. For async traces this may be a name of the function that\ninitiated the async call.",
+                        "type": "string"
+                    },
+                    "callFrames": {
+                        "description": "JavaScript function name.",
+                        "type": "array",
+                        "items": {
+                            "$ref": "./Runtime.types.json#/components/schemas/TypeCallFrame"
+                        }
+                    },
+                    "parent": {
+                        "description": "Asynchronous JavaScript stack trace that preceded this stack, if available.",
+                        "$ref": "./Runtime.types.json#/components/schemas/TypeStackTrace"
+                    },
+                    "parentId": {
+                        "description": "Asynchronous JavaScript stack trace that preceded this stack, if available.",
+                        "$ref": "./Runtime.types.json#/components/schemas/TypeStackTraceId"
+                    }
+                },
+                "required": [
+                    "callFrames"
+                ]
+            },
+            "TypeCallFrame": {
+                "description": "Stack entry for runtime errors and assertions.",
+                "type": "object",
+                "properties": {
+                    "functionName": {
+                        "description": "JavaScript function name.",
+                        "type": "string"
+                    },
+                    "scriptId": {
+                        "description": "JavaScript script id.",
+                        "$ref": "./Runtime.types.json#/components/schemas/TypeScriptId"
+                    },
+                    "url": {
+                        "description": "JavaScript script name or url.",
+                        "type": "string"
+                    },
+                    "lineNumber": {
+                        "description": "JavaScript script line number (0-based).",
+                        "type": "integer"
+                    },
+                    "columnNumber": {
+                        "description": "JavaScript script column number (0-based).",
+                        "type": "integer"
+                    }
+                },
+                "required": [
+                    "functionName",
+                    "scriptId",
+                    "url",
+                    "lineNumber",
+                    "columnNumber"
+                ]
+            },
+            "TypeStackTraceId": {
+                "description": "If `debuggerId` is set stack trace comes from another debugger and can be resolved there. This\nallows to track cross-debugger calls. See `Runtime.StackTrace` and `Debugger.paused` for usages.",
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string"
+                    },
+                    "debuggerId": {
+                        "$ref": "./Runtime.types.json#/components/schemas/TypeUniqueDebuggerId"
+                    }
+                },
+                "required": [
+                    "id"
+                ]
+            },
+            "TypeUniqueDebuggerId": {
+                "description": "Unique identifier of current debugger.",
+                "type": "string"
+            },
+            "TypeExecutionContextId": {
+                "description": "Id of an execution context.",
+                "type": "integer"
+            },
+            "TypeTimestamp": {
+                "description": "Number of milliseconds since epoch.",
+                "type": "number"
+            },
+            "TypeExceptionDetails": {
+                "description": "Detailed information about exception (or error) that was thrown during script compilation or\nexecution.",
+                "type": "object",
+                "properties": {
+                    "exceptionId": {
+                        "description": "Exception id.",
+                        "type": "integer"
+                    },
+                    "text": {
+                        "description": "Exception text, which should be used together with exception object when available.",
+                        "type": "string"
+                    },
+                    "lineNumber": {
+                        "description": "Line number of the exception location (0-based).",
+                        "type": "integer"
+                    },
+                    "columnNumber": {
+                        "description": "Column number of the exception location (0-based).",
+                        "type": "integer"
+                    },
+                    "scriptId": {
+                        "description": "Script ID of the exception location.",
+                        "$ref": "./Runtime.types.json#/components/schemas/TypeScriptId"
+                    },
+                    "url": {
+                        "description": "URL of the exception location, to be used when the script was not reported.",
+                        "type": "string"
+                    },
+                    "stackTrace": {
+                        "description": "JavaScript stack trace if available.",
+                        "$ref": "./Runtime.types.json#/components/schemas/TypeStackTrace"
+                    },
+                    "exception": {
+                        "description": "Exception object if available.",
+                        "$ref": "./Runtime.types.json#/components/schemas/TypeRemoteObject"
+                    },
+                    "executionContextId": {
+                        "description": "Identifier of the context where exception happened.",
+                        "$ref": "./Runtime.types.json#/components/schemas/TypeExecutionContextId"
+                    },
+                    "exceptionMetaData": {
+                        "description": "Dictionary with entries of meta data that the client associated\nwith this exception, such as information about associated network\nrequests, etc.",
+                        "type": "object"
+                    }
+                },
+                "required": [
+                    "exceptionId",
+                    "text",
+                    "lineNumber",
+                    "columnNumber"
+                ]
+            },
+            "TypeExecutionContextDescription": {
+                "description": "Description of an isolated world.",
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "description": "Unique id of the execution context. It can be used to specify in which execution context\nscript evaluation should be performed.",
+                        "$ref": "./Runtime.types.json#/components/schemas/TypeExecutionContextId"
+                    },
+                    "origin": {
+                        "description": "Execution context origin.",
+                        "type": "string"
+                    },
+                    "name": {
+                        "description": "Human readable name describing given context.",
+                        "type": "string"
+                    },
+                    "uniqueId": {
+                        "description": "A system-unique execution context identifier. Unlike the id, this is unique across\nmultiple processes, so can be reliably used to identify specific context while backend\nperforms a cross-process navigation.",
+                        "type": "string"
+                    },
+                    "auxData": {
+                        "description": "Embedder-specific auxiliary data.",
+                        "type": "object"
+                    }
+                },
+                "required": [
+                    "id",
+                    "origin",
+                    "name",
+                    "uniqueId"
+                ]
+            }
+        }
+    }
+}

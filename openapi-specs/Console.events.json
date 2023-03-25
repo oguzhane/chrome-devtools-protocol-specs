@@ -1,0 +1,26 @@
+{
+    "openapi": "3.0.2",
+    "info": {
+        "title": "Chrome DevTools Protocol",
+        "description": "Auto-generated OpenAPI 3.0 specification for Chrome Dev Tools Protocol's types, events, commands",
+        "version": "1.0.0"
+    },
+    "paths": {},
+    "components": {
+        "schemas": {
+            "EventMessageAddedParams": {
+                "description": "Issued when new console message is added.",
+                "type": "object",
+                "properties": {
+                    "message": {
+                        "description": "Console message that has been added.",
+                        "$ref": "./Console.types.json#/components/schemas/TypeConsoleMessage"
+                    }
+                },
+                "required": [
+                    "message"
+                ]
+            }
+        }
+    }
+}

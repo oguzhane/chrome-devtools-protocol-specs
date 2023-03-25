@@ -1,0 +1,203 @@
+{
+    "openapi": "3.0.2",
+    "info": {
+        "title": "Chrome DevTools Protocol",
+        "description": "Auto-generated OpenAPI 3.0 specification for Chrome Dev Tools Protocol's types, events, commands",
+        "version": "1.0.0"
+    },
+    "paths": {},
+    "components": {
+        "schemas": {
+            "TypeFontFace": {
+                "description": "Properties of a web font: https://www.w3.org/TR/2008/REC-CSS2-20080411/fonts.html#font-descriptions\nand additional information such as platformFontFamily and fontVariationAxes.",
+                "type": "object",
+                "properties": {
+                    "fontFamily": {
+                        "description": "The font-family.",
+                        "type": "string"
+                    },
+                    "fontStyle": {
+                        "description": "The font-style.",
+                        "type": "string"
+                    },
+                    "fontVariant": {
+                        "description": "The font-variant.",
+                        "type": "string"
+                    },
+                    "fontWeight": {
+                        "description": "The font-weight.",
+                        "type": "string"
+                    },
+                    "fontStretch": {
+                        "description": "The font-stretch.",
+                        "type": "string"
+                    },
+                    "fontDisplay": {
+                        "description": "The font-display.",
+                        "type": "string"
+                    },
+                    "unicodeRange": {
+                        "description": "The unicode-range.",
+                        "type": "string"
+                    },
+                    "src": {
+                        "description": "The src.",
+                        "type": "string"
+                    },
+                    "platformFontFamily": {
+                        "description": "The resolved platform font family",
+                        "type": "string"
+                    },
+                    "fontVariationAxes": {
+                        "description": "Available variation settings (a.k.a. \"axes\").",
+                        "type": "array",
+                        "items": {
+                            "$ref": "./CSS.types.json#/components/schemas/TypeFontVariationAxis"
+                        }
+                    }
+                },
+                "required": [
+                    "fontFamily",
+                    "fontStyle",
+                    "fontVariant",
+                    "fontWeight",
+                    "fontStretch",
+                    "fontDisplay",
+                    "unicodeRange",
+                    "src",
+                    "platformFontFamily"
+                ]
+            },
+            "TypeFontVariationAxis": {
+                "description": "Information about font variation axes for variable fonts",
+                "type": "object",
+                "properties": {
+                    "tag": {
+                        "description": "The font-variation-setting tag (a.k.a. \"axis tag\").",
+                        "type": "string"
+                    },
+                    "name": {
+                        "description": "Human-readable variation name in the default language (normally, \"en\").",
+                        "type": "string"
+                    },
+                    "minValue": {
+                        "description": "The minimum value (inclusive) the font supports for this tag.",
+                        "type": "number"
+                    },
+                    "maxValue": {
+                        "description": "The maximum value (inclusive) the font supports for this tag.",
+                        "type": "number"
+                    },
+                    "defaultValue": {
+                        "description": "The default value.",
+                        "type": "number"
+                    }
+                },
+                "required": [
+                    "tag",
+                    "name",
+                    "minValue",
+                    "maxValue",
+                    "defaultValue"
+                ]
+            },
+            "TypeCssStyleSheetHeader": {
+                "description": "CSS stylesheet metainformation.",
+                "type": "object",
+                "properties": {
+                    "styleSheetId": {
+                        "description": "The stylesheet identifier.",
+                        "$ref": "./CSS.types.json#/components/schemas/TypeStyleSheetId"
+                    },
+                    "frameId": {
+                        "description": "Owner frame identifier.",
+                        "$ref": "./Page.types.json#/components/schemas/TypeFrameId"
+                    },
+                    "sourceURL": {
+                        "description": "Stylesheet resource URL. Empty if this is a constructed stylesheet created using\nnew CSSStyleSheet() (but non-empty if this is a constructed sylesheet imported\nas a CSS module script).",
+                        "type": "string"
+                    },
+                    "sourceMapURL": {
+                        "description": "URL of source map associated with the stylesheet (if any).",
+                        "type": "string"
+                    },
+                    "origin": {
+                        "description": "Stylesheet origin.",
+                        "$ref": "./CSS.types.json#/components/schemas/TypeStyleSheetOrigin"
+                    },
+                    "title": {
+                        "description": "Stylesheet title.",
+                        "type": "string"
+                    },
+                    "ownerNode": {
+                        "description": "The backend id for the owner node of the stylesheet.",
+                        "$ref": "./DOM.types.json#/components/schemas/TypeBackendNodeId"
+                    },
+                    "disabled": {
+                        "description": "Denotes whether the stylesheet is disabled.",
+                        "type": "boolean"
+                    },
+                    "hasSourceURL": {
+                        "description": "Whether the sourceURL field value comes from the sourceURL comment.",
+                        "type": "boolean"
+                    },
+                    "isInline": {
+                        "description": "Whether this stylesheet is created for STYLE tag by parser. This flag is not set for\ndocument.written STYLE tags.",
+                        "type": "boolean"
+                    },
+                    "isMutable": {
+                        "description": "Whether this stylesheet is mutable. Inline stylesheets become mutable\nafter they have been modified via CSSOM API.\n<link> element's stylesheets become mutable only if DevTools modifies them.\nConstructed stylesheets (new CSSStyleSheet()) are mutable immediately after creation.",
+                        "type": "boolean"
+                    },
+                    "isConstructed": {
+                        "description": "True if this stylesheet is created through new CSSStyleSheet() or imported as a\nCSS module script.",
+                        "type": "boolean"
+                    },
+                    "startLine": {
+                        "description": "Line offset of the stylesheet within the resource (zero based).",
+                        "type": "number"
+                    },
+                    "startColumn": {
+                        "description": "Column offset of the stylesheet within the resource (zero based).",
+                        "type": "number"
+                    },
+                    "length": {
+                        "description": "Size of the content (in characters).",
+                        "type": "number"
+                    },
+                    "endLine": {
+                        "description": "Line offset of the end of the stylesheet within the resource (zero based).",
+                        "type": "number"
+                    },
+                    "endColumn": {
+                        "description": "Column offset of the end of the stylesheet within the resource (zero based).",
+                        "type": "number"
+                    }
+                },
+                "required": [
+                    "styleSheetId",
+                    "frameId",
+                    "sourceURL",
+                    "origin",
+                    "title",
+                    "disabled",
+                    "isInline",
+                    "isMutable",
+                    "isConstructed",
+                    "startLine",
+                    "startColumn",
+                    "length",
+                    "endLine",
+                    "endColumn"
+                ]
+            },
+            "TypeStyleSheetId": {
+                "type": "string"
+            },
+            "TypeStyleSheetOrigin": {
+                "description": "Stylesheet type: \"injected\" for stylesheets injected via extension, \"user-agent\" for user-agent\nstylesheets, \"inspector\" for stylesheets created by the inspector (i.e. those holding the \"via\ninspector\" rules), \"regular\" for regular stylesheets.",
+                "type": "string"
+            }
+        }
+    }
+}

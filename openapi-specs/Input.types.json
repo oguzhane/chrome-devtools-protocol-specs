@@ -1,0 +1,64 @@
+{
+    "openapi": "3.0.2",
+    "info": {
+        "title": "Chrome DevTools Protocol",
+        "description": "Auto-generated OpenAPI 3.0 specification for Chrome Dev Tools Protocol's types, events, commands",
+        "version": "1.0.0"
+    },
+    "paths": {},
+    "components": {
+        "schemas": {
+            "TypeDragData": {
+                "type": "object",
+                "properties": {
+                    "items": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "./Input.types.json#/components/schemas/TypeDragDataItem"
+                        }
+                    },
+                    "files": {
+                        "description": "List of filenames that should be included when dropping",
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "dragOperationsMask": {
+                        "description": "Bit field representing allowed drag operations. Copy = 1, Link = 2, Move = 16",
+                        "type": "integer"
+                    }
+                },
+                "required": [
+                    "items",
+                    "dragOperationsMask"
+                ]
+            },
+            "TypeDragDataItem": {
+                "type": "object",
+                "properties": {
+                    "mimeType": {
+                        "description": "Mime type of the dragged data.",
+                        "type": "string"
+                    },
+                    "data": {
+                        "description": "Depending of the value of `mimeType`, it contains the dragged link,\ntext, HTML markup or any other data.",
+                        "type": "string"
+                    },
+                    "title": {
+                        "description": "Title associated with a link. Only valid when `mimeType` == \"text/uri-list\".",
+                        "type": "string"
+                    },
+                    "baseURL": {
+                        "description": "Stores the base URL for the contained markup. Only valid when `mimeType`\n== \"text/html\".",
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "mimeType",
+                    "data"
+                ]
+            }
+        }
+    }
+}

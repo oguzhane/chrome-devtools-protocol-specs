@@ -1,0 +1,130 @@
+{
+    "openapi": "3.0.2",
+    "info": {
+        "title": "Chrome DevTools Protocol",
+        "description": "Auto-generated OpenAPI 3.0 specification for Chrome Dev Tools Protocol's types, events, commands",
+        "version": "1.0.0"
+    },
+    "paths": {},
+    "components": {
+        "schemas": {
+            "EventAttachedToTargetParams": {
+                "description": "Issued when attached to target because of auto-attach or `attachToTarget` command.",
+                "type": "object",
+                "properties": {
+                    "sessionId": {
+                        "description": "Identifier assigned to the session used to send/receive messages.",
+                        "$ref": "./Target.types.json#/components/schemas/TypeSessionId"
+                    },
+                    "targetInfo": {
+                        "$ref": "./Target.types.json#/components/schemas/TypeTargetInfo"
+                    },
+                    "waitingForDebugger": {
+                        "type": "boolean"
+                    }
+                },
+                "required": [
+                    "sessionId",
+                    "targetInfo",
+                    "waitingForDebugger"
+                ]
+            },
+            "EventDetachedFromTargetParams": {
+                "description": "Issued when detached from target for any reason (including `detachFromTarget` command). Can be\nissued multiple times per target if multiple sessions have been attached to it.",
+                "type": "object",
+                "properties": {
+                    "sessionId": {
+                        "description": "Detached session identifier.",
+                        "$ref": "./Target.types.json#/components/schemas/TypeSessionId"
+                    },
+                    "targetId": {
+                        "description": "Deprecated.",
+                        "$ref": "./Target.types.json#/components/schemas/TypeTargetId"
+                    }
+                },
+                "required": [
+                    "sessionId"
+                ]
+            },
+            "EventReceivedMessageFromTargetParams": {
+                "description": "Notifies about a new protocol message received from the session (as reported in\n`attachedToTarget` event).",
+                "type": "object",
+                "properties": {
+                    "sessionId": {
+                        "description": "Identifier of a session which sends a message.",
+                        "$ref": "./Target.types.json#/components/schemas/TypeSessionId"
+                    },
+                    "message": {
+                        "type": "string"
+                    },
+                    "targetId": {
+                        "description": "Deprecated.",
+                        "$ref": "./Target.types.json#/components/schemas/TypeTargetId"
+                    }
+                },
+                "required": [
+                    "sessionId",
+                    "message"
+                ]
+            },
+            "EventTargetCreatedParams": {
+                "description": "Issued when a possible inspection target is created.",
+                "type": "object",
+                "properties": {
+                    "targetInfo": {
+                        "$ref": "./Target.types.json#/components/schemas/TypeTargetInfo"
+                    }
+                },
+                "required": [
+                    "targetInfo"
+                ]
+            },
+            "EventTargetDestroyedParams": {
+                "description": "Issued when a target is destroyed.",
+                "type": "object",
+                "properties": {
+                    "targetId": {
+                        "$ref": "./Target.types.json#/components/schemas/TypeTargetId"
+                    }
+                },
+                "required": [
+                    "targetId"
+                ]
+            },
+            "EventTargetCrashedParams": {
+                "description": "Issued when a target has crashed.",
+                "type": "object",
+                "properties": {
+                    "targetId": {
+                        "$ref": "./Target.types.json#/components/schemas/TypeTargetId"
+                    },
+                    "status": {
+                        "description": "Termination status type.",
+                        "type": "string"
+                    },
+                    "errorCode": {
+                        "description": "Termination error code.",
+                        "type": "integer"
+                    }
+                },
+                "required": [
+                    "targetId",
+                    "status",
+                    "errorCode"
+                ]
+            },
+            "EventTargetInfoChangedParams": {
+                "description": "Issued when some information about a target has changed. This only happens between\n`targetCreated` and `targetDestroyed`.",
+                "type": "object",
+                "properties": {
+                    "targetInfo": {
+                        "$ref": "./Target.types.json#/components/schemas/TypeTargetInfo"
+                    }
+                },
+                "required": [
+                    "targetInfo"
+                ]
+            }
+        }
+    }
+}

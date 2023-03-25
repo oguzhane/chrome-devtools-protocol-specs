@@ -1,0 +1,45 @@
+{
+    "openapi": "3.0.2",
+    "info": {
+        "title": "Chrome DevTools Protocol",
+        "description": "Auto-generated OpenAPI 3.0 specification for Chrome Dev Tools Protocol's types, events, commands",
+        "version": "1.0.0"
+    },
+    "paths": {},
+    "components": {
+        "schemas": {
+            "TypeDatabase": {
+                "description": "Database object.",
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "description": "Database ID.",
+                        "$ref": "./Database.types.json#/components/schemas/TypeDatabaseId"
+                    },
+                    "domain": {
+                        "description": "Database domain.",
+                        "type": "string"
+                    },
+                    "name": {
+                        "description": "Database name.",
+                        "type": "string"
+                    },
+                    "version": {
+                        "description": "Database version.",
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "id",
+                    "domain",
+                    "name",
+                    "version"
+                ]
+            },
+            "TypeDatabaseId": {
+                "description": "Unique identifier of Database object.",
+                "type": "string"
+            }
+        }
+    }
+}

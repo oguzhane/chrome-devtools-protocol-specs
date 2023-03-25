@@ -1,0 +1,163 @@
+{
+    "openapi": "3.0.2",
+    "info": {
+        "title": "Chrome DevTools Protocol",
+        "description": "Auto-generated OpenAPI 3.0 specification for Chrome Dev Tools Protocol's types, events, commands",
+        "version": "1.0.0"
+    },
+    "paths": {},
+    "components": {
+        "schemas": {
+            "TypeAnimation": {
+                "description": "Animation instance.",
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "description": "`Animation`'s id.",
+                        "type": "string"
+                    },
+                    "name": {
+                        "description": "`Animation`'s name.",
+                        "type": "string"
+                    },
+                    "pausedState": {
+                        "description": "`Animation`'s internal paused state.",
+                        "type": "boolean"
+                    },
+                    "playState": {
+                        "description": "`Animation`'s play state.",
+                        "type": "string"
+                    },
+                    "playbackRate": {
+                        "description": "`Animation`'s playback rate.",
+                        "type": "number"
+                    },
+                    "startTime": {
+                        "description": "`Animation`'s start time.",
+                        "type": "number"
+                    },
+                    "currentTime": {
+                        "description": "`Animation`'s current time.",
+                        "type": "number"
+                    },
+                    "type": {
+                        "description": "Animation type of `Animation`.",
+                        "type": "string"
+                    },
+                    "source": {
+                        "description": "`Animation`'s source animation node.",
+                        "$ref": "./Animation.types.json#/components/schemas/TypeAnimationEffect"
+                    },
+                    "cssId": {
+                        "description": "A unique ID for `Animation` representing the sources that triggered this CSS\nanimation/transition.",
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "id",
+                    "name",
+                    "pausedState",
+                    "playState",
+                    "playbackRate",
+                    "startTime",
+                    "currentTime",
+                    "type"
+                ]
+            },
+            "TypeAnimationEffect": {
+                "description": "AnimationEffect instance",
+                "type": "object",
+                "properties": {
+                    "delay": {
+                        "description": "`AnimationEffect`'s delay.",
+                        "type": "number"
+                    },
+                    "endDelay": {
+                        "description": "`AnimationEffect`'s end delay.",
+                        "type": "number"
+                    },
+                    "iterationStart": {
+                        "description": "`AnimationEffect`'s iteration start.",
+                        "type": "number"
+                    },
+                    "iterations": {
+                        "description": "`AnimationEffect`'s iterations.",
+                        "type": "number"
+                    },
+                    "duration": {
+                        "description": "`AnimationEffect`'s iteration duration.",
+                        "type": "number"
+                    },
+                    "direction": {
+                        "description": "`AnimationEffect`'s playback direction.",
+                        "type": "string"
+                    },
+                    "fill": {
+                        "description": "`AnimationEffect`'s fill mode.",
+                        "type": "string"
+                    },
+                    "backendNodeId": {
+                        "description": "`AnimationEffect`'s target node.",
+                        "$ref": "./DOM.types.json#/components/schemas/TypeBackendNodeId"
+                    },
+                    "keyframesRule": {
+                        "description": "`AnimationEffect`'s keyframes.",
+                        "$ref": "./Animation.types.json#/components/schemas/TypeKeyframesRule"
+                    },
+                    "easing": {
+                        "description": "`AnimationEffect`'s timing function.",
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "delay",
+                    "endDelay",
+                    "iterationStart",
+                    "iterations",
+                    "duration",
+                    "direction",
+                    "fill",
+                    "easing"
+                ]
+            },
+            "TypeKeyframesRule": {
+                "description": "Keyframes Rule",
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "description": "CSS keyframed animation's name.",
+                        "type": "string"
+                    },
+                    "keyframes": {
+                        "description": "List of animation keyframes.",
+                        "type": "array",
+                        "items": {
+                            "$ref": "./Animation.types.json#/components/schemas/TypeKeyframeStyle"
+                        }
+                    }
+                },
+                "required": [
+                    "keyframes"
+                ]
+            },
+            "TypeKeyframeStyle": {
+                "description": "Keyframe Style",
+                "type": "object",
+                "properties": {
+                    "offset": {
+                        "description": "Keyframe's time offset.",
+                        "type": "string"
+                    },
+                    "easing": {
+                        "description": "`AnimationEffect`'s timing function.",
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "offset",
+                    "easing"
+                ]
+            }
+        }
+    }
+}

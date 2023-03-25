@@ -1,0 +1,162 @@
+{
+    "openapi": "3.0.2",
+    "info": {
+        "title": "Chrome DevTools Protocol",
+        "description": "Auto-generated OpenAPI 3.0 specification for Chrome Dev Tools Protocol's types, events, commands",
+        "version": "1.0.0"
+    },
+    "paths": {},
+    "components": {
+        "schemas": {
+            "EventBindingCalledParams": {
+                "description": "Notification is issued every time when binding is called.",
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string"
+                    },
+                    "payload": {
+                        "type": "string"
+                    },
+                    "executionContextId": {
+                        "description": "Identifier of the context where the call was made.",
+                        "$ref": "./Runtime.types.json#/components/schemas/TypeExecutionContextId"
+                    }
+                },
+                "required": [
+                    "name",
+                    "payload",
+                    "executionContextId"
+                ]
+            },
+            "EventConsoleApiCalledParams": {
+                "description": "Issued when console API was called.",
+                "type": "object",
+                "properties": {
+                    "type": {
+                        "description": "Type of the call.",
+                        "type": "string"
+                    },
+                    "args": {
+                        "description": "Call arguments.",
+                        "type": "array",
+                        "items": {
+                            "$ref": "./Runtime.types.json#/components/schemas/TypeRemoteObject"
+                        }
+                    },
+                    "executionContextId": {
+                        "description": "Identifier of the context where the call was made.",
+                        "$ref": "./Runtime.types.json#/components/schemas/TypeExecutionContextId"
+                    },
+                    "timestamp": {
+                        "description": "Call timestamp.",
+                        "$ref": "./Runtime.types.json#/components/schemas/TypeTimestamp"
+                    },
+                    "stackTrace": {
+                        "description": "Stack trace captured when the call was made. The async stack chain is automatically reported for\nthe following call types: `assert`, `error`, `trace`, `warning`. For other types the async call\nchain can be retrieved using `Debugger.getStackTrace` and `stackTrace.parentId` field.",
+                        "$ref": "./Runtime.types.json#/components/schemas/TypeStackTrace"
+                    },
+                    "context": {
+                        "description": "Console context descriptor for calls on non-default console context (not console.*):\n'anonymous#unique-logger-id' for call on unnamed context, 'name#unique-logger-id' for call\non named context.",
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "type",
+                    "args",
+                    "executionContextId",
+                    "timestamp"
+                ]
+            },
+            "EventExceptionRevokedParams": {
+                "description": "Issued when unhandled exception was revoked.",
+                "type": "object",
+                "properties": {
+                    "reason": {
+                        "description": "Reason describing why exception was revoked.",
+                        "type": "string"
+                    },
+                    "exceptionId": {
+                        "description": "The id of revoked exception, as reported in `exceptionThrown`.",
+                        "type": "integer"
+                    }
+                },
+                "required": [
+                    "reason",
+                    "exceptionId"
+                ]
+            },
+            "EventExceptionThrownParams": {
+                "description": "Issued when exception was thrown and unhandled.",
+                "type": "object",
+                "properties": {
+                    "timestamp": {
+                        "description": "Timestamp of the exception.",
+                        "$ref": "./Runtime.types.json#/components/schemas/TypeTimestamp"
+                    },
+                    "exceptionDetails": {
+                        "$ref": "./Runtime.types.json#/components/schemas/TypeExceptionDetails"
+                    }
+                },
+                "required": [
+                    "timestamp",
+                    "exceptionDetails"
+                ]
+            },
+            "EventExecutionContextCreatedParams": {
+                "description": "Issued when new execution context is created.",
+                "type": "object",
+                "properties": {
+                    "context": {
+                        "description": "A newly created execution context.",
+                        "$ref": "./Runtime.types.json#/components/schemas/TypeExecutionContextDescription"
+                    }
+                },
+                "required": [
+                    "context"
+                ]
+            },
+            "EventExecutionContextDestroyedParams": {
+                "description": "Issued when execution context is destroyed.",
+                "type": "object",
+                "properties": {
+                    "executionContextId": {
+                        "description": "Id of the destroyed context",
+                        "$ref": "./Runtime.types.json#/components/schemas/TypeExecutionContextId"
+                    },
+                    "executionContextUniqueId": {
+                        "description": "Unique Id of the destroyed context",
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "executionContextId",
+                    "executionContextUniqueId"
+                ]
+            },
+            "EventExecutionContextsClearedParams": {
+                "description": "Issued when all executionContexts were cleared in browser"
+            },
+            "EventInspectRequestedParams": {
+                "description": "Issued when object should be inspected (for example, as a result of inspect() command line API\ncall).",
+                "type": "object",
+                "properties": {
+                    "object": {
+                        "$ref": "./Runtime.types.json#/components/schemas/TypeRemoteObject"
+                    },
+                    "hints": {
+                        "type": "object"
+                    },
+                    "executionContextId": {
+                        "description": "Identifier of the context where the call was made.",
+                        "$ref": "./Runtime.types.json#/components/schemas/TypeExecutionContextId"
+                    }
+                },
+                "required": [
+                    "object",
+                    "hints"
+                ]
+            }
+        }
+    }
+}

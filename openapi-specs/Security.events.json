@@ -1,0 +1,84 @@
+{
+    "openapi": "3.0.2",
+    "info": {
+        "title": "Chrome DevTools Protocol",
+        "description": "Auto-generated OpenAPI 3.0 specification for Chrome Dev Tools Protocol's types, events, commands",
+        "version": "1.0.0"
+    },
+    "paths": {},
+    "components": {
+        "schemas": {
+            "EventCertificateErrorParams": {
+                "description": "There is a certificate error. If overriding certificate errors is enabled, then it should be\nhandled with the `handleCertificateError` command. Note: this event does not fire if the\ncertificate error has been allowed internally. Only one client per target should override\ncertificate errors at the same time.",
+                "type": "object",
+                "properties": {
+                    "eventId": {
+                        "description": "The ID of the event.",
+                        "type": "integer"
+                    },
+                    "errorType": {
+                        "description": "The type of the error.",
+                        "type": "string"
+                    },
+                    "requestURL": {
+                        "description": "The url that was requested.",
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "eventId",
+                    "errorType",
+                    "requestURL"
+                ]
+            },
+            "EventVisibleSecurityStateChangedParams": {
+                "description": "The security state of the page changed.",
+                "type": "object",
+                "properties": {
+                    "visibleSecurityState": {
+                        "description": "Security state information about the page.",
+                        "$ref": "./Security.types.json#/components/schemas/TypeVisibleSecurityState"
+                    }
+                },
+                "required": [
+                    "visibleSecurityState"
+                ]
+            },
+            "EventSecurityStateChangedParams": {
+                "description": "The security state of the page changed. No longer being sent.",
+                "type": "object",
+                "properties": {
+                    "securityState": {
+                        "description": "Security state.",
+                        "$ref": "./Security.types.json#/components/schemas/TypeSecurityState"
+                    },
+                    "schemeIsCryptographic": {
+                        "description": "True if the page was loaded over cryptographic transport such as HTTPS.",
+                        "type": "boolean"
+                    },
+                    "explanations": {
+                        "description": "Previously a list of explanations for the security state. Now always\nempty.",
+                        "type": "array",
+                        "items": {
+                            "$ref": "./Security.types.json#/components/schemas/TypeSecurityStateExplanation"
+                        }
+                    },
+                    "insecureContentStatus": {
+                        "description": "Information about insecure content on the page.",
+                        "$ref": "./Security.types.json#/components/schemas/TypeInsecureContentStatus"
+                    },
+                    "summary": {
+                        "description": "Overrides user-visible description of the state. Always omitted.",
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "securityState",
+                    "schemeIsCryptographic",
+                    "explanations",
+                    "insecureContentStatus"
+                ]
+            }
+        }
+    }
+}

@@ -1,0 +1,146 @@
+{
+    "openapi": "3.0.2",
+    "info": {
+        "title": "Chrome DevTools Protocol",
+        "description": "Auto-generated OpenAPI 3.0 specification for Chrome Dev Tools Protocol's types, events, commands",
+        "version": "1.0.0"
+    },
+    "paths": {},
+    "components": {
+        "schemas": {
+            "TypeBreakpointId": {
+                "description": "Breakpoint identifier.",
+                "type": "string"
+            },
+            "TypeLocation": {
+                "description": "Location in the source code.",
+                "type": "object",
+                "properties": {
+                    "scriptId": {
+                        "description": "Script identifier as reported in the `Debugger.scriptParsed`.",
+                        "$ref": "./Runtime.types.json#/components/schemas/TypeScriptId"
+                    },
+                    "lineNumber": {
+                        "description": "Line number in the script (0-based).",
+                        "type": "integer"
+                    },
+                    "columnNumber": {
+                        "description": "Column number in the script (0-based).",
+                        "type": "integer"
+                    }
+                },
+                "required": [
+                    "scriptId",
+                    "lineNumber"
+                ]
+            },
+            "TypeCallFrame": {
+                "description": "JavaScript call frame. Array of call frames form the call stack.",
+                "type": "object",
+                "properties": {
+                    "callFrameId": {
+                        "description": "Call frame identifier. This identifier is only valid while the virtual machine is paused.",
+                        "$ref": "./Debugger.types.json#/components/schemas/TypeCallFrameId"
+                    },
+                    "functionName": {
+                        "description": "Name of the JavaScript function called on this call frame.",
+                        "type": "string"
+                    },
+                    "functionLocation": {
+                        "description": "Location in the source code.",
+                        "$ref": "./Debugger.types.json#/components/schemas/TypeLocation"
+                    },
+                    "location": {
+                        "description": "Location in the source code.",
+                        "$ref": "./Debugger.types.json#/components/schemas/TypeLocation"
+                    },
+                    "url": {
+                        "description": "JavaScript script name or url.\nDeprecated in favor of using the `location.scriptId` to resolve the URL via a previously\nsent `Debugger.scriptParsed` event.",
+                        "type": "string"
+                    },
+                    "scopeChain": {
+                        "description": "Scope chain for this call frame.",
+                        "type": "array",
+                        "items": {
+                            "$ref": "./Debugger.types.json#/components/schemas/TypeScope"
+                        }
+                    },
+                    "this": {
+                        "description": "`this` object for this call frame.",
+                        "$ref": "./Runtime.types.json#/components/schemas/TypeRemoteObject"
+                    },
+                    "returnValue": {
+                        "description": "The value being returned, if the function is at return point.",
+                        "$ref": "./Runtime.types.json#/components/schemas/TypeRemoteObject"
+                    },
+                    "canBeRestarted": {
+                        "description": "Valid only while the VM is paused and indicates whether this frame\ncan be restarted or not. Note that a `true` value here does not\nguarantee that Debugger#restartFrame with this CallFrameId will be\nsuccessful, but it is very likely.",
+                        "type": "boolean"
+                    }
+                },
+                "required": [
+                    "callFrameId",
+                    "functionName",
+                    "location",
+                    "url",
+                    "scopeChain",
+                    "this"
+                ]
+            },
+            "TypeCallFrameId": {
+                "description": "Call frame identifier.",
+                "type": "string"
+            },
+            "TypeScope": {
+                "description": "Scope description.",
+                "type": "object",
+                "properties": {
+                    "type": {
+                        "description": "Scope type.",
+                        "type": "string"
+                    },
+                    "object": {
+                        "description": "Object representing the scope. For `global` and `with` scopes it represents the actual\nobject; for the rest of the scopes, it is artificial transient object enumerating scope\nvariables as its properties.",
+                        "$ref": "./Runtime.types.json#/components/schemas/TypeRemoteObject"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "startLocation": {
+                        "description": "Location in the source code where scope starts",
+                        "$ref": "./Debugger.types.json#/components/schemas/TypeLocation"
+                    },
+                    "endLocation": {
+                        "description": "Location in the source code where scope ends",
+                        "$ref": "./Debugger.types.json#/components/schemas/TypeLocation"
+                    }
+                },
+                "required": [
+                    "type",
+                    "object"
+                ]
+            },
+            "TypeScriptLanguage": {
+                "description": "Enum of possible script languages.",
+                "type": "string"
+            },
+            "TypeDebugSymbols": {
+                "description": "Debug symbols available for a wasm script.",
+                "type": "object",
+                "properties": {
+                    "type": {
+                        "description": "Type of the debug symbols.",
+                        "type": "string"
+                    },
+                    "externalURL": {
+                        "description": "URL of the external symbol source.",
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "type"
+                ]
+            }
+        }
+    }
+}

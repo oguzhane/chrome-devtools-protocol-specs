@@ -1,0 +1,128 @@
+{
+    "openapi": "3.0.2",
+    "info": {
+        "title": "Chrome DevTools Protocol",
+        "description": "Auto-generated OpenAPI 3.0 specification for Chrome Dev Tools Protocol's types, events, commands",
+        "version": "1.0.0"
+    },
+    "paths": {},
+    "components": {
+        "schemas": {
+            "TypeTimelineEvent": {
+                "type": "object",
+                "properties": {
+                    "frameId": {
+                        "description": "Identifies the frame that this event is related to. Empty for non-frame targets.",
+                        "$ref": "./Page.types.json#/components/schemas/TypeFrameId"
+                    },
+                    "type": {
+                        "description": "The event type, as specified in https://w3c.github.io/performance-timeline/#dom-performanceentry-entrytype\nThis determines which of the optional \"details\" fiedls is present.",
+                        "type": "string"
+                    },
+                    "name": {
+                        "description": "Name may be empty depending on the type.",
+                        "type": "string"
+                    },
+                    "time": {
+                        "description": "Time in seconds since Epoch, monotonically increasing within document lifetime.",
+                        "$ref": "./Network.types.json#/components/schemas/TypeTimeSinceEpoch"
+                    },
+                    "duration": {
+                        "description": "Event duration, if applicable.",
+                        "type": "number"
+                    },
+                    "lcpDetails": {
+                        "$ref": "./PerformanceTimeline.types.json#/components/schemas/TypeLargestContentfulPaint"
+                    },
+                    "layoutShiftDetails": {
+                        "$ref": "./PerformanceTimeline.types.json#/components/schemas/TypeLayoutShift"
+                    }
+                },
+                "required": [
+                    "frameId",
+                    "type",
+                    "name",
+                    "time"
+                ]
+            },
+            "TypeLargestContentfulPaint": {
+                "description": "See https://github.com/WICG/LargestContentfulPaint and largest_contentful_paint.idl",
+                "type": "object",
+                "properties": {
+                    "renderTime": {
+                        "$ref": "./Network.types.json#/components/schemas/TypeTimeSinceEpoch"
+                    },
+                    "loadTime": {
+                        "$ref": "./Network.types.json#/components/schemas/TypeTimeSinceEpoch"
+                    },
+                    "size": {
+                        "description": "The number of pixels being painted.",
+                        "type": "number"
+                    },
+                    "elementId": {
+                        "description": "The id attribute of the element, if available.",
+                        "type": "string"
+                    },
+                    "url": {
+                        "description": "The URL of the image (may be trimmed).",
+                        "type": "string"
+                    },
+                    "nodeId": {
+                        "$ref": "./DOM.types.json#/components/schemas/TypeBackendNodeId"
+                    }
+                },
+                "required": [
+                    "renderTime",
+                    "loadTime",
+                    "size"
+                ]
+            },
+            "TypeLayoutShift": {
+                "description": "See https://wicg.github.io/layout-instability/#sec-layout-shift and layout_shift.idl",
+                "type": "object",
+                "properties": {
+                    "value": {
+                        "description": "Score increment produced by this event.",
+                        "type": "number"
+                    },
+                    "hadRecentInput": {
+                        "type": "boolean"
+                    },
+                    "lastInputTime": {
+                        "$ref": "./Network.types.json#/components/schemas/TypeTimeSinceEpoch"
+                    },
+                    "sources": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "./PerformanceTimeline.types.json#/components/schemas/TypeLayoutShiftAttribution"
+                        }
+                    }
+                },
+                "required": [
+                    "value",
+                    "hadRecentInput",
+                    "lastInputTime",
+                    "sources"
+                ]
+            },
+            "TypeLayoutShiftAttribution": {
+                "type": "object",
+                "properties": {
+                    "previousRect": {
+                        "$ref": "./DOM.types.json#/components/schemas/TypeRect"
+                    },
+                    "currentRect": {
+                        "$ref": "./DOM.types.json#/components/schemas/TypeRect"
+                    },
+                    "nodeId": {
+                        "$ref": "./DOM.types.json#/components/schemas/TypeBackendNodeId"
+                    }
+                },
+                "required": [
+                    "previousRect",
+                    "currentRect"
+                ]
+            }
+        }
+    }
+}

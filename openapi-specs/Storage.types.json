@@ -1,0 +1,95 @@
+{
+    "openapi": "3.0.2",
+    "info": {
+        "title": "Chrome DevTools Protocol",
+        "description": "Auto-generated OpenAPI 3.0 specification for Chrome Dev Tools Protocol's types, events, commands",
+        "version": "1.0.0"
+    },
+    "paths": {},
+    "components": {
+        "schemas": {
+            "TypeInterestGroupAccessType": {
+                "description": "Enum of interest group access types.",
+                "type": "string"
+            },
+            "TypeSharedStorageAccessType": {
+                "description": "Enum of shared storage access types.",
+                "type": "string"
+            },
+            "TypeSharedStorageAccessParams": {
+                "description": "Bundles the parameters for shared storage access events whose\npresence/absence can vary according to SharedStorageAccessType.",
+                "type": "object",
+                "properties": {
+                    "scriptSourceUrl": {
+                        "description": "Spec of the module script URL.\nPresent only for SharedStorageAccessType.documentAddModule.",
+                        "type": "string"
+                    },
+                    "operationName": {
+                        "description": "Name of the registered operation to be run.\nPresent only for SharedStorageAccessType.documentRun and\nSharedStorageAccessType.documentSelectURL.",
+                        "type": "string"
+                    },
+                    "serializedData": {
+                        "description": "The operation's serialized data in bytes (converted to a string).\nPresent only for SharedStorageAccessType.documentRun and\nSharedStorageAccessType.documentSelectURL.",
+                        "type": "string"
+                    },
+                    "urlsWithMetadata": {
+                        "description": "Array of candidate URLs' specs, along with any associated metadata.\nPresent only for SharedStorageAccessType.documentSelectURL.",
+                        "type": "array",
+                        "items": {
+                            "$ref": "./Storage.types.json#/components/schemas/TypeSharedStorageUrlWithMetadata"
+                        }
+                    },
+                    "key": {
+                        "description": "Key for a specific entry in an origin's shared storage.\nPresent only for SharedStorageAccessType.documentSet,\nSharedStorageAccessType.documentAppend,\nSharedStorageAccessType.documentDelete,\nSharedStorageAccessType.workletSet,\nSharedStorageAccessType.workletAppend,\nSharedStorageAccessType.workletDelete, and\nSharedStorageAccessType.workletGet.",
+                        "type": "string"
+                    },
+                    "value": {
+                        "description": "Value for a specific entry in an origin's shared storage.\nPresent only for SharedStorageAccessType.documentSet,\nSharedStorageAccessType.documentAppend,\nSharedStorageAccessType.workletSet, and\nSharedStorageAccessType.workletAppend.",
+                        "type": "string"
+                    },
+                    "ignoreIfPresent": {
+                        "description": "Whether or not to set an entry for a key if that key is already present.\nPresent only for SharedStorageAccessType.documentSet and\nSharedStorageAccessType.workletSet.",
+                        "type": "boolean"
+                    }
+                }
+            },
+            "TypeSharedStorageUrlWithMetadata": {
+                "description": "Bundles a candidate URL with its reporting metadata.",
+                "type": "object",
+                "properties": {
+                    "url": {
+                        "description": "Spec of candidate URL.",
+                        "type": "string"
+                    },
+                    "reportingMetadata": {
+                        "description": "Any associated reporting metadata.",
+                        "type": "array",
+                        "items": {
+                            "$ref": "./Storage.types.json#/components/schemas/TypeSharedStorageReportingMetadata"
+                        }
+                    }
+                },
+                "required": [
+                    "url",
+                    "reportingMetadata"
+                ]
+            },
+            "TypeSharedStorageReportingMetadata": {
+                "description": "Pair of reporting metadata details for a candidate URL for `selectURL()`.",
+                "type": "object",
+                "properties": {
+                    "eventType": {
+                        "type": "string"
+                    },
+                    "reportingUrl": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "eventType",
+                    "reportingUrl"
+                ]
+            }
+        }
+    }
+}

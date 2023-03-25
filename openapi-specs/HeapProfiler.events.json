@@ -1,0 +1,75 @@
+{
+    "openapi": "3.0.2",
+    "info": {
+        "title": "Chrome DevTools Protocol",
+        "description": "Auto-generated OpenAPI 3.0 specification for Chrome Dev Tools Protocol's types, events, commands",
+        "version": "1.0.0"
+    },
+    "paths": {},
+    "components": {
+        "schemas": {
+            "EventAddHeapSnapshotChunkParams": {
+                "type": "object",
+                "properties": {
+                    "chunk": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "chunk"
+                ]
+            },
+            "EventHeapStatsUpdateParams": {
+                "description": "If heap objects tracking has been started then backend may send update for one or more fragments",
+                "type": "object",
+                "properties": {
+                    "statsUpdate": {
+                        "description": "An array of triplets. Each triplet describes a fragment. The first integer is the fragment\nindex, the second integer is a total count of objects for the fragment, the third integer is\na total size of the objects for the fragment.",
+                        "type": "array",
+                        "items": {
+                            "type": "integer"
+                        }
+                    }
+                },
+                "required": [
+                    "statsUpdate"
+                ]
+            },
+            "EventLastSeenObjectIdParams": {
+                "description": "If heap objects tracking has been started then backend regularly sends a current value for last\nseen object id and corresponding timestamp. If the were changes in the heap since last event\nthen one or more heapStatsUpdate events will be sent before a new lastSeenObjectId event.",
+                "type": "object",
+                "properties": {
+                    "lastSeenObjectId": {
+                        "type": "integer"
+                    },
+                    "timestamp": {
+                        "type": "number"
+                    }
+                },
+                "required": [
+                    "lastSeenObjectId",
+                    "timestamp"
+                ]
+            },
+            "EventReportHeapSnapshotProgressParams": {
+                "type": "object",
+                "properties": {
+                    "done": {
+                        "type": "integer"
+                    },
+                    "total": {
+                        "type": "integer"
+                    },
+                    "finished": {
+                        "type": "boolean"
+                    }
+                },
+                "required": [
+                    "done",
+                    "total"
+                ]
+            },
+            "EventResetProfilesParams": {}
+        }
+    }
+}

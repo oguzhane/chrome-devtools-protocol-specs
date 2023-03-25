@@ -1,0 +1,104 @@
+{
+    "openapi": "3.0.2",
+    "info": {
+        "title": "Chrome DevTools Protocol",
+        "description": "Auto-generated OpenAPI 3.0 specification for Chrome Dev Tools Protocol's types, events, commands",
+        "version": "1.0.0"
+    },
+    "paths": {},
+    "components": {
+        "schemas": {
+            "EventPlayerPropertiesChangedParams": {
+                "description": "This can be called multiple times, and can be used to set / override /\nremove player properties. A null propValue indicates removal.",
+                "type": "object",
+                "properties": {
+                    "playerId": {
+                        "$ref": "./Media.types.json#/components/schemas/TypePlayerId"
+                    },
+                    "properties": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "./Media.types.json#/components/schemas/TypePlayerProperty"
+                        }
+                    }
+                },
+                "required": [
+                    "playerId",
+                    "properties"
+                ]
+            },
+            "EventPlayerEventsAddedParams": {
+                "description": "Send events as a list, allowing them to be batched on the browser for less\ncongestion. If batched, events must ALWAYS be in chronological order.",
+                "type": "object",
+                "properties": {
+                    "playerId": {
+                        "$ref": "./Media.types.json#/components/schemas/TypePlayerId"
+                    },
+                    "events": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "./Media.types.json#/components/schemas/TypePlayerEvent"
+                        }
+                    }
+                },
+                "required": [
+                    "playerId",
+                    "events"
+                ]
+            },
+            "EventPlayerMessagesLoggedParams": {
+                "description": "Send a list of any messages that need to be delivered.",
+                "type": "object",
+                "properties": {
+                    "playerId": {
+                        "$ref": "./Media.types.json#/components/schemas/TypePlayerId"
+                    },
+                    "messages": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "./Media.types.json#/components/schemas/TypePlayerMessage"
+                        }
+                    }
+                },
+                "required": [
+                    "playerId",
+                    "messages"
+                ]
+            },
+            "EventPlayerErrorsRaisedParams": {
+                "description": "Send a list of any errors that need to be delivered.",
+                "type": "object",
+                "properties": {
+                    "playerId": {
+                        "$ref": "./Media.types.json#/components/schemas/TypePlayerId"
+                    },
+                    "errors": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "./Media.types.json#/components/schemas/TypePlayerError"
+                        }
+                    }
+                },
+                "required": [
+                    "playerId",
+                    "errors"
+                ]
+            },
+            "EventPlayersCreatedParams": {
+                "description": "Called whenever a player is created, or when a new agent joins and receives\na list of active players. If an agent is restored, it will receive the full\nlist of player ids and all events again.",
+                "type": "object",
+                "properties": {
+                    "players": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "./Media.types.json#/components/schemas/TypePlayerId"
+                        }
+                    }
+                },
+                "required": [
+                    "players"
+                ]
+            }
+        }
+    }
+}

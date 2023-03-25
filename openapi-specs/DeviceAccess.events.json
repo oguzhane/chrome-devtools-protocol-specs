@@ -1,0 +1,32 @@
+{
+    "openapi": "3.0.2",
+    "info": {
+        "title": "Chrome DevTools Protocol",
+        "description": "Auto-generated OpenAPI 3.0 specification for Chrome Dev Tools Protocol's types, events, commands",
+        "version": "1.0.0"
+    },
+    "paths": {},
+    "components": {
+        "schemas": {
+            "EventDeviceRequestPromptedParams": {
+                "description": "A device request opened a user prompt to select a device. Respond with the\nselectPrompt or cancelPrompt command.",
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "$ref": "./DeviceAccess.types.json#/components/schemas/TypeRequestId"
+                    },
+                    "devices": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "./DeviceAccess.types.json#/components/schemas/TypePromptDevice"
+                        }
+                    }
+                },
+                "required": [
+                    "id",
+                    "devices"
+                ]
+            }
+        }
+    }
+}

@@ -1,0 +1,37 @@
+{
+    "openapi": "3.0.2",
+    "info": {
+        "title": "Chrome DevTools Protocol",
+        "description": "Auto-generated OpenAPI 3.0 specification for Chrome Dev Tools Protocol's types, events, commands",
+        "version": "1.0.0"
+    },
+    "paths": {},
+    "components": {
+        "schemas": {
+            "TypeStorageId": {
+                "description": "DOM Storage identifier.",
+                "type": "object",
+                "properties": {
+                    "securityOrigin": {
+                        "description": "Security origin for the storage.",
+                        "type": "string"
+                    },
+                    "storageKey": {
+                        "description": "Represents a key by which DOM Storage keys its CachedStorageAreas",
+                        "$ref": "./DOMStorage.types.json#/components/schemas/TypeSerializedStorageKey"
+                    },
+                    "isLocalStorage": {
+                        "description": "Whether the storage is local storage (not session storage).",
+                        "type": "boolean"
+                    }
+                },
+                "required": [
+                    "isLocalStorage"
+                ]
+            },
+            "TypeSerializedStorageKey": {
+                "type": "string"
+            }
+        }
+    }
+}

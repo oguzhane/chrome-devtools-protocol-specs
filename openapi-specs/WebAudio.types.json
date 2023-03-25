@@ -1,0 +1,207 @@
+{
+    "openapi": "3.0.2",
+    "info": {
+        "title": "Chrome DevTools Protocol",
+        "description": "Auto-generated OpenAPI 3.0 specification for Chrome Dev Tools Protocol's types, events, commands",
+        "version": "1.0.0"
+    },
+    "paths": {},
+    "components": {
+        "schemas": {
+            "TypeBaseAudioContext": {
+                "description": "Protocol object for BaseAudioContext",
+                "type": "object",
+                "properties": {
+                    "contextId": {
+                        "$ref": "./WebAudio.types.json#/components/schemas/TypeGraphObjectId"
+                    },
+                    "contextType": {
+                        "$ref": "./WebAudio.types.json#/components/schemas/TypeContextType"
+                    },
+                    "contextState": {
+                        "$ref": "./WebAudio.types.json#/components/schemas/TypeContextState"
+                    },
+                    "realtimeData": {
+                        "$ref": "./WebAudio.types.json#/components/schemas/TypeContextRealtimeData"
+                    },
+                    "callbackBufferSize": {
+                        "description": "Platform-dependent callback buffer size.",
+                        "type": "number"
+                    },
+                    "maxOutputChannelCount": {
+                        "description": "Number of output channels supported by audio hardware in use.",
+                        "type": "number"
+                    },
+                    "sampleRate": {
+                        "description": "Context sample rate.",
+                        "type": "number"
+                    }
+                },
+                "required": [
+                    "contextId",
+                    "contextType",
+                    "contextState",
+                    "callbackBufferSize",
+                    "maxOutputChannelCount",
+                    "sampleRate"
+                ]
+            },
+            "TypeGraphObjectId": {
+                "description": "An unique ID for a graph object (AudioContext, AudioNode, AudioParam) in Web Audio API",
+                "type": "string"
+            },
+            "TypeContextType": {
+                "description": "Enum of BaseAudioContext types",
+                "type": "string"
+            },
+            "TypeContextState": {
+                "description": "Enum of AudioContextState from the spec",
+                "type": "string"
+            },
+            "TypeContextRealtimeData": {
+                "description": "Fields in AudioContext that change in real-time.",
+                "type": "object",
+                "properties": {
+                    "currentTime": {
+                        "description": "The current context time in second in BaseAudioContext.",
+                        "type": "number"
+                    },
+                    "renderCapacity": {
+                        "description": "The time spent on rendering graph divided by render quantum duration,\nand multiplied by 100. 100 means the audio renderer reached the full\ncapacity and glitch may occur.",
+                        "type": "number"
+                    },
+                    "callbackIntervalMean": {
+                        "description": "A running mean of callback interval.",
+                        "type": "number"
+                    },
+                    "callbackIntervalVariance": {
+                        "description": "A running variance of callback interval.",
+                        "type": "number"
+                    }
+                },
+                "required": [
+                    "currentTime",
+                    "renderCapacity",
+                    "callbackIntervalMean",
+                    "callbackIntervalVariance"
+                ]
+            },
+            "TypeAudioListener": {
+                "description": "Protocol object for AudioListener",
+                "type": "object",
+                "properties": {
+                    "listenerId": {
+                        "$ref": "./WebAudio.types.json#/components/schemas/TypeGraphObjectId"
+                    },
+                    "contextId": {
+                        "$ref": "./WebAudio.types.json#/components/schemas/TypeGraphObjectId"
+                    }
+                },
+                "required": [
+                    "listenerId",
+                    "contextId"
+                ]
+            },
+            "TypeAudioNode": {
+                "description": "Protocol object for AudioNode",
+                "type": "object",
+                "properties": {
+                    "nodeId": {
+                        "$ref": "./WebAudio.types.json#/components/schemas/TypeGraphObjectId"
+                    },
+                    "contextId": {
+                        "$ref": "./WebAudio.types.json#/components/schemas/TypeGraphObjectId"
+                    },
+                    "nodeType": {
+                        "$ref": "./WebAudio.types.json#/components/schemas/TypeNodeType"
+                    },
+                    "numberOfInputs": {
+                        "type": "number"
+                    },
+                    "numberOfOutputs": {
+                        "type": "number"
+                    },
+                    "channelCount": {
+                        "type": "number"
+                    },
+                    "channelCountMode": {
+                        "$ref": "./WebAudio.types.json#/components/schemas/TypeChannelCountMode"
+                    },
+                    "channelInterpretation": {
+                        "$ref": "./WebAudio.types.json#/components/schemas/TypeChannelInterpretation"
+                    }
+                },
+                "required": [
+                    "nodeId",
+                    "contextId",
+                    "nodeType",
+                    "numberOfInputs",
+                    "numberOfOutputs",
+                    "channelCount",
+                    "channelCountMode",
+                    "channelInterpretation"
+                ]
+            },
+            "TypeNodeType": {
+                "description": "Enum of AudioNode types",
+                "type": "string"
+            },
+            "TypeChannelCountMode": {
+                "description": "Enum of AudioNode::ChannelCountMode from the spec",
+                "type": "string"
+            },
+            "TypeChannelInterpretation": {
+                "description": "Enum of AudioNode::ChannelInterpretation from the spec",
+                "type": "string"
+            },
+            "TypeAudioParam": {
+                "description": "Protocol object for AudioParam",
+                "type": "object",
+                "properties": {
+                    "paramId": {
+                        "$ref": "./WebAudio.types.json#/components/schemas/TypeGraphObjectId"
+                    },
+                    "nodeId": {
+                        "$ref": "./WebAudio.types.json#/components/schemas/TypeGraphObjectId"
+                    },
+                    "contextId": {
+                        "$ref": "./WebAudio.types.json#/components/schemas/TypeGraphObjectId"
+                    },
+                    "paramType": {
+                        "$ref": "./WebAudio.types.json#/components/schemas/TypeParamType"
+                    },
+                    "rate": {
+                        "$ref": "./WebAudio.types.json#/components/schemas/TypeAutomationRate"
+                    },
+                    "defaultValue": {
+                        "type": "number"
+                    },
+                    "minValue": {
+                        "type": "number"
+                    },
+                    "maxValue": {
+                        "type": "number"
+                    }
+                },
+                "required": [
+                    "paramId",
+                    "nodeId",
+                    "contextId",
+                    "paramType",
+                    "rate",
+                    "defaultValue",
+                    "minValue",
+                    "maxValue"
+                ]
+            },
+            "TypeParamType": {
+                "description": "Enum of AudioParam types",
+                "type": "string"
+            },
+            "TypeAutomationRate": {
+                "description": "Enum of AudioParam::AutomationRate from the spec",
+                "type": "string"
+            }
+        }
+    }
+}

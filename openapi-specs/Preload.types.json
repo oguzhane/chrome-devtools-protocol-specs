@@ -1,0 +1,39 @@
+{
+    "openapi": "3.0.2",
+    "info": {
+        "title": "Chrome DevTools Protocol",
+        "description": "Auto-generated OpenAPI 3.0 specification for Chrome Dev Tools Protocol's types, events, commands",
+        "version": "1.0.0"
+    },
+    "paths": {},
+    "components": {
+        "schemas": {
+            "TypeRuleSet": {
+                "description": "Corresponds to SpeculationRuleSet",
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "$ref": "./Preload.types.json#/components/schemas/TypeRuleSetId"
+                    },
+                    "loaderId": {
+                        "description": "Identifies a document which the rule set is associated with.",
+                        "$ref": "./Network.types.json#/components/schemas/TypeLoaderId"
+                    },
+                    "sourceText": {
+                        "description": "Source text of JSON representing the rule set. If it comes from\n<script> tag, it is the textContent of the node. Note that it is\na JSON for valid case.\n\nSee also:\n- https://wicg.github.io/nav-speculation/speculation-rules.html\n- https://github.com/WICG/nav-speculation/blob/main/triggers.md",
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "id",
+                    "loaderId",
+                    "sourceText"
+                ]
+            },
+            "TypeRuleSetId": {
+                "description": "Unique id",
+                "type": "string"
+            }
+        }
+    }
+}

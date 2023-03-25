@@ -1,0 +1,234 @@
+{
+    "openapi": "3.0.2",
+    "info": {
+        "title": "Chrome DevTools Protocol",
+        "description": "Auto-generated OpenAPI 3.0 specification for Chrome Dev Tools Protocol's types, events, commands",
+        "version": "1.0.0"
+    },
+    "paths": {},
+    "components": {
+        "schemas": {
+            "TypeBackendNodeId": {
+                "description": "Unique DOM node identifier used to reference a node that may not have been pushed to the\nfront-end.",
+                "type": "integer"
+            },
+            "TypeNodeId": {
+                "description": "Unique DOM node identifier.",
+                "type": "integer"
+            },
+            "TypeNode": {
+                "description": "DOM interaction is implemented in terms of mirror objects that represent the actual DOM nodes.\nDOMNode is a base node mirror type.",
+                "type": "object",
+                "properties": {
+                    "nodeId": {
+                        "description": "Node identifier that is passed into the rest of the DOM messages as the `nodeId`. Backend\nwill only push node with given `id` once. It is aware of all requested nodes and will only\nfire DOM events for nodes known to the client.",
+                        "$ref": "./DOM.types.json#/components/schemas/TypeNodeId"
+                    },
+                    "parentId": {
+                        "description": "The id of the parent node if any.",
+                        "$ref": "./DOM.types.json#/components/schemas/TypeNodeId"
+                    },
+                    "backendNodeId": {
+                        "description": "The BackendNodeId for this node.",
+                        "$ref": "./DOM.types.json#/components/schemas/TypeBackendNodeId"
+                    },
+                    "nodeType": {
+                        "description": "`Node`'s nodeType.",
+                        "type": "integer"
+                    },
+                    "nodeName": {
+                        "description": "`Node`'s nodeName.",
+                        "type": "string"
+                    },
+                    "localName": {
+                        "description": "`Node`'s localName.",
+                        "type": "string"
+                    },
+                    "nodeValue": {
+                        "description": "`Node`'s nodeValue.",
+                        "type": "string"
+                    },
+                    "childNodeCount": {
+                        "description": "Child count for `Container` nodes.",
+                        "type": "integer"
+                    },
+                    "children": {
+                        "description": "Child nodes of this node when requested with children.",
+                        "type": "array",
+                        "items": {
+                            "$ref": "./DOM.types.json#/components/schemas/TypeNode"
+                        }
+                    },
+                    "attributes": {
+                        "description": "Attributes of the `Element` node in the form of flat array `[name1, value1, name2, value2]`.",
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "documentURL": {
+                        "description": "Document URL that `Document` or `FrameOwner` node points to.",
+                        "type": "string"
+                    },
+                    "baseURL": {
+                        "description": "Base URL that `Document` or `FrameOwner` node uses for URL completion.",
+                        "type": "string"
+                    },
+                    "publicId": {
+                        "description": "`DocumentType`'s publicId.",
+                        "type": "string"
+                    },
+                    "systemId": {
+                        "description": "`DocumentType`'s systemId.",
+                        "type": "string"
+                    },
+                    "internalSubset": {
+                        "description": "`DocumentType`'s internalSubset.",
+                        "type": "string"
+                    },
+                    "xmlVersion": {
+                        "description": "`Document`'s XML version in case of XML documents.",
+                        "type": "string"
+                    },
+                    "name": {
+                        "description": "`Attr`'s name.",
+                        "type": "string"
+                    },
+                    "value": {
+                        "description": "`Attr`'s value.",
+                        "type": "string"
+                    },
+                    "pseudoType": {
+                        "description": "Pseudo element type for this node.",
+                        "$ref": "./DOM.types.json#/components/schemas/TypePseudoType"
+                    },
+                    "pseudoIdentifier": {
+                        "description": "Pseudo element identifier for this node. Only present if there is a\nvalid pseudoType.",
+                        "type": "string"
+                    },
+                    "shadowRootType": {
+                        "description": "Shadow root type.",
+                        "$ref": "./DOM.types.json#/components/schemas/TypeShadowRootType"
+                    },
+                    "frameId": {
+                        "description": "Frame ID for frame owner elements.",
+                        "$ref": "./Page.types.json#/components/schemas/TypeFrameId"
+                    },
+                    "contentDocument": {
+                        "description": "Content document for frame owner elements.",
+                        "$ref": "./DOM.types.json#/components/schemas/TypeNode"
+                    },
+                    "shadowRoots": {
+                        "description": "Shadow root list for given element host.",
+                        "type": "array",
+                        "items": {
+                            "$ref": "./DOM.types.json#/components/schemas/TypeNode"
+                        }
+                    },
+                    "templateContent": {
+                        "description": "Content document fragment for template elements.",
+                        "$ref": "./DOM.types.json#/components/schemas/TypeNode"
+                    },
+                    "pseudoElements": {
+                        "description": "Pseudo elements associated with this node.",
+                        "type": "array",
+                        "items": {
+                            "$ref": "./DOM.types.json#/components/schemas/TypeNode"
+                        }
+                    },
+                    "importedDocument": {
+                        "description": "Deprecated, as the HTML Imports API has been removed (crbug.com/937746).\nThis property used to return the imported document for the HTMLImport links.\nThe property is always undefined now.",
+                        "$ref": "./DOM.types.json#/components/schemas/TypeNode"
+                    },
+                    "distributedNodes": {
+                        "description": "Distributed nodes for given insertion point.",
+                        "type": "array",
+                        "items": {
+                            "$ref": "./DOM.types.json#/components/schemas/TypeBackendNode"
+                        }
+                    },
+                    "isSVG": {
+                        "description": "Whether the node is SVG.",
+                        "type": "boolean"
+                    },
+                    "compatibilityMode": {
+                        "$ref": "./DOM.types.json#/components/schemas/TypeCompatibilityMode"
+                    },
+                    "assignedSlot": {
+                        "$ref": "./DOM.types.json#/components/schemas/TypeBackendNode"
+                    }
+                },
+                "required": [
+                    "nodeId",
+                    "backendNodeId",
+                    "nodeType",
+                    "nodeName",
+                    "localName",
+                    "nodeValue"
+                ]
+            },
+            "TypePseudoType": {
+                "description": "Pseudo element type.",
+                "type": "string"
+            },
+            "TypeShadowRootType": {
+                "description": "Shadow root type.",
+                "type": "string"
+            },
+            "TypeBackendNode": {
+                "description": "Backend node with a friendly name.",
+                "type": "object",
+                "properties": {
+                    "nodeType": {
+                        "description": "`Node`'s nodeType.",
+                        "type": "integer"
+                    },
+                    "nodeName": {
+                        "description": "`Node`'s nodeName.",
+                        "type": "string"
+                    },
+                    "backendNodeId": {
+                        "$ref": "./DOM.types.json#/components/schemas/TypeBackendNodeId"
+                    }
+                },
+                "required": [
+                    "nodeType",
+                    "nodeName",
+                    "backendNodeId"
+                ]
+            },
+            "TypeCompatibilityMode": {
+                "description": "Document compatibility mode.",
+                "type": "string"
+            },
+            "TypeRect": {
+                "description": "Rectangle.",
+                "type": "object",
+                "properties": {
+                    "x": {
+                        "description": "X coordinate",
+                        "type": "number"
+                    },
+                    "y": {
+                        "description": "Y coordinate",
+                        "type": "number"
+                    },
+                    "width": {
+                        "description": "Rectangle width",
+                        "type": "number"
+                    },
+                    "height": {
+                        "description": "Rectangle height",
+                        "type": "number"
+                    }
+                },
+                "required": [
+                    "x",
+                    "y",
+                    "width",
+                    "height"
+                ]
+            }
+        }
+    }
+}

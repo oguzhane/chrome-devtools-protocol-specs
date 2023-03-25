@@ -1,0 +1,69 @@
+{
+    "openapi": "3.0.2",
+    "info": {
+        "title": "Chrome DevTools Protocol",
+        "description": "Auto-generated OpenAPI 3.0 specification for Chrome Dev Tools Protocol's types, events, commands",
+        "version": "1.0.0"
+    },
+    "paths": {},
+    "components": {
+        "schemas": {
+            "EventDownloadWillBeginParams": {
+                "description": "Fired when page is about to start a download.",
+                "type": "object",
+                "properties": {
+                    "frameId": {
+                        "description": "Id of the frame that caused the download to begin.",
+                        "$ref": "./Page.types.json#/components/schemas/TypeFrameId"
+                    },
+                    "guid": {
+                        "description": "Global unique identifier of the download.",
+                        "type": "string"
+                    },
+                    "url": {
+                        "description": "URL of the resource being downloaded.",
+                        "type": "string"
+                    },
+                    "suggestedFilename": {
+                        "description": "Suggested file name of the resource (the actual name of the file saved on disk may differ).",
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "frameId",
+                    "guid",
+                    "url",
+                    "suggestedFilename"
+                ]
+            },
+            "EventDownloadProgressParams": {
+                "description": "Fired when download makes progress. Last call has |done| == true.",
+                "type": "object",
+                "properties": {
+                    "guid": {
+                        "description": "Global unique identifier of the download.",
+                        "type": "string"
+                    },
+                    "totalBytes": {
+                        "description": "Total expected bytes to download.",
+                        "type": "number"
+                    },
+                    "receivedBytes": {
+                        "description": "Total bytes received.",
+                        "type": "number"
+                    },
+                    "state": {
+                        "description": "Download status.",
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "guid",
+                    "totalBytes",
+                    "receivedBytes",
+                    "state"
+                ]
+            }
+        }
+    }
+}

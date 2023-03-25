@@ -1,0 +1,40 @@
+{
+    "openapi": "3.0.2",
+    "info": {
+        "title": "Chrome DevTools Protocol",
+        "description": "Auto-generated OpenAPI 3.0 specification for Chrome Dev Tools Protocol's types, events, commands",
+        "version": "1.0.0"
+    },
+    "paths": {},
+    "components": {
+        "schemas": {
+            "EventSinksUpdatedParams": {
+                "description": "This is fired whenever the list of available sinks changes. A sink is a\ndevice or a software surface that you can cast to.",
+                "type": "object",
+                "properties": {
+                    "sinks": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "./Cast.types.json#/components/schemas/TypeSink"
+                        }
+                    }
+                },
+                "required": [
+                    "sinks"
+                ]
+            },
+            "EventIssueUpdatedParams": {
+                "description": "This is fired whenever the outstanding issue/error message changes.\n|issueMessage| is empty if there is no issue.",
+                "type": "object",
+                "properties": {
+                    "issueMessage": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "issueMessage"
+                ]
+            }
+        }
+    }
+}

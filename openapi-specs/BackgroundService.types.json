@@ -1,0 +1,83 @@
+{
+    "openapi": "3.0.2",
+    "info": {
+        "title": "Chrome DevTools Protocol",
+        "description": "Auto-generated OpenAPI 3.0 specification for Chrome Dev Tools Protocol's types, events, commands",
+        "version": "1.0.0"
+    },
+    "paths": {},
+    "components": {
+        "schemas": {
+            "TypeServiceName": {
+                "description": "The Background Service that will be associated with the commands/events.\nEvery Background Service operates independently, but they share the same\nAPI.",
+                "type": "string"
+            },
+            "TypeBackgroundServiceEvent": {
+                "type": "object",
+                "properties": {
+                    "timestamp": {
+                        "description": "Timestamp of the event (in seconds).",
+                        "$ref": "./Network.types.json#/components/schemas/TypeTimeSinceEpoch"
+                    },
+                    "origin": {
+                        "description": "The origin this event belongs to.",
+                        "type": "string"
+                    },
+                    "serviceWorkerRegistrationId": {
+                        "description": "The Service Worker ID that initiated the event.",
+                        "$ref": "./ServiceWorker.types.json#/components/schemas/TypeRegistrationId"
+                    },
+                    "service": {
+                        "description": "The Background Service this event belongs to.",
+                        "$ref": "./BackgroundService.types.json#/components/schemas/TypeServiceName"
+                    },
+                    "eventName": {
+                        "description": "A description of the event.",
+                        "type": "string"
+                    },
+                    "instanceId": {
+                        "description": "An identifier that groups related events together.",
+                        "type": "string"
+                    },
+                    "eventMetadata": {
+                        "description": "A list of event-specific information.",
+                        "type": "array",
+                        "items": {
+                            "$ref": "./BackgroundService.types.json#/components/schemas/TypeEventMetadata"
+                        }
+                    },
+                    "storageKey": {
+                        "description": "Storage key this event belongs to.",
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "timestamp",
+                    "origin",
+                    "serviceWorkerRegistrationId",
+                    "service",
+                    "eventName",
+                    "instanceId",
+                    "eventMetadata",
+                    "storageKey"
+                ]
+            },
+            "TypeEventMetadata": {
+                "description": "A key-value pair for additional event information to pass along.",
+                "type": "object",
+                "properties": {
+                    "key": {
+                        "type": "string"
+                    },
+                    "value": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "key",
+                    "value"
+                ]
+            }
+        }
+    }
+}

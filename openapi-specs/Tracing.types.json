@@ -1,0 +1,21 @@
+{
+    "openapi": "3.0.2",
+    "info": {
+        "title": "Chrome DevTools Protocol",
+        "description": "Auto-generated OpenAPI 3.0 specification for Chrome Dev Tools Protocol's types, events, commands",
+        "version": "1.0.0"
+    },
+    "paths": {},
+    "components": {
+        "schemas": {
+            "TypeStreamFormat": {
+                "description": "Data format of a trace. Can be either the legacy JSON format or the\nprotocol buffer format. Note that the JSON format will be deprecated soon.",
+                "type": "string"
+            },
+            "TypeStreamCompression": {
+                "description": "Compression type to use for traces returned via streams.",
+                "type": "string"
+            }
+        }
+    }
+}

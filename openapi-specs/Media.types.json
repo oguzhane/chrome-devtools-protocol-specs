@@ -1,0 +1,123 @@
+{
+    "openapi": "3.0.2",
+    "info": {
+        "title": "Chrome DevTools Protocol",
+        "description": "Auto-generated OpenAPI 3.0 specification for Chrome Dev Tools Protocol's types, events, commands",
+        "version": "1.0.0"
+    },
+    "paths": {},
+    "components": {
+        "schemas": {
+            "TypePlayerId": {
+                "description": "Players will get an ID that is unique within the agent context.",
+                "type": "string"
+            },
+            "TypePlayerProperty": {
+                "description": "Corresponds to kMediaPropertyChange",
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string"
+                    },
+                    "value": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "name",
+                    "value"
+                ]
+            },
+            "TypePlayerEvent": {
+                "description": "Corresponds to kMediaEventTriggered",
+                "type": "object",
+                "properties": {
+                    "timestamp": {
+                        "$ref": "./Media.types.json#/components/schemas/TypeTimestamp"
+                    },
+                    "value": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "timestamp",
+                    "value"
+                ]
+            },
+            "TypeTimestamp": {
+                "type": "number"
+            },
+            "TypePlayerMessage": {
+                "description": "Have one type per entry in MediaLogRecord::Type\nCorresponds to kMessage",
+                "type": "object",
+                "properties": {
+                    "level": {
+                        "description": "Keep in sync with MediaLogMessageLevel\nWe are currently keeping the message level 'error' separate from the\nPlayerError type because right now they represent different things,\nthis one being a DVLOG(ERROR) style log message that gets printed\nbased on what log level is selected in the UI, and the other is a\nrepresentation of a media::PipelineStatus object. Soon however we're\ngoing to be moving away from using PipelineStatus for errors and\nintroducing a new error type which should hopefully let us integrate\nthe error log level into the PlayerError type.",
+                        "type": "string"
+                    },
+                    "message": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "level",
+                    "message"
+                ]
+            },
+            "TypePlayerError": {
+                "description": "Corresponds to kMediaError",
+                "type": "object",
+                "properties": {
+                    "errorType": {
+                        "type": "string"
+                    },
+                    "code": {
+                        "description": "Code is the numeric enum entry for a specific set of error codes, such\nas PipelineStatusCodes in media/base/pipeline_status.h",
+                        "type": "integer"
+                    },
+                    "stack": {
+                        "description": "A trace of where this error was caused / where it passed through.",
+                        "type": "array",
+                        "items": {
+                            "$ref": "./Media.types.json#/components/schemas/TypePlayerErrorSourceLocation"
+                        }
+                    },
+                    "cause": {
+                        "description": "Errors potentially have a root cause error, ie, a DecoderError might be\ncaused by an WindowsError",
+                        "type": "array",
+                        "items": {
+                            "$ref": "./Media.types.json#/components/schemas/TypePlayerError"
+                        }
+                    },
+                    "data": {
+                        "description": "Extra data attached to an error, such as an HRESULT, Video Codec, etc.",
+                        "type": "object"
+                    }
+                },
+                "required": [
+                    "errorType",
+                    "code",
+                    "stack",
+                    "cause",
+                    "data"
+                ]
+            },
+            "TypePlayerErrorSourceLocation": {
+                "description": "Represents logged source line numbers reported in an error.\nNOTE: file and line are from chromium c++ implementation code, not js.",
+                "type": "object",
+                "properties": {
+                    "file": {
+                        "type": "string"
+                    },
+                    "line": {
+                        "type": "integer"
+                    }
+                },
+                "required": [
+                    "file",
+                    "line"
+                ]
+            }
+        }
+    }
+}

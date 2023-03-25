@@ -1,0 +1,54 @@
+{
+    "openapi": "3.0.2",
+    "info": {
+        "title": "Chrome DevTools Protocol",
+        "description": "Auto-generated OpenAPI 3.0 specification for Chrome Dev Tools Protocol's types, events, commands",
+        "version": "1.0.0"
+    },
+    "paths": {},
+    "components": {
+        "schemas": {
+            "EventInspectNodeRequestedParams": {
+                "description": "Fired when the node should be inspected. This happens after call to `setInspectMode` or when\nuser manually inspects an element.",
+                "type": "object",
+                "properties": {
+                    "backendNodeId": {
+                        "description": "Id of the node to inspect.",
+                        "$ref": "./DOM.types.json#/components/schemas/TypeBackendNodeId"
+                    }
+                },
+                "required": [
+                    "backendNodeId"
+                ]
+            },
+            "EventNodeHighlightRequestedParams": {
+                "description": "Fired when the node should be highlighted. This happens after call to `setInspectMode`.",
+                "type": "object",
+                "properties": {
+                    "nodeId": {
+                        "$ref": "./DOM.types.json#/components/schemas/TypeNodeId"
+                    }
+                },
+                "required": [
+                    "nodeId"
+                ]
+            },
+            "EventScreenshotRequestedParams": {
+                "description": "Fired when user asks to capture screenshot of some area on the page.",
+                "type": "object",
+                "properties": {
+                    "viewport": {
+                        "description": "Viewport to capture, in device independent pixels (dip).",
+                        "$ref": "./Page.types.json#/components/schemas/TypeViewport"
+                    }
+                },
+                "required": [
+                    "viewport"
+                ]
+            },
+            "EventInspectModeCanceledParams": {
+                "description": "Fired when user cancels the inspect mode."
+            }
+        }
+    }
+}
