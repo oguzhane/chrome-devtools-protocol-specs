@@ -1,0 +1,31 @@
+{
+  "name": "chrome-devtools-protocol-specs",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/oguzhane/chrome-devtools-protocol-specs.git"
+  },
+  "keywords": [
+    "chrome",
+    "dev",
+    "tools",
+    "spec",
+    "autorest",
+    "json",
+    "schema"
+  ],
+  "author": "Oguzhan Ergin",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/oguzhane/chrome-devtools-protocol-specs/issues"
+  },
+  "homepage": "https://github.com/oguzhane/chrome-devtools-protocol-specs#readme",
+  "dependencies": {
+    "change-case": "^4.1.2"
+  }
+}
