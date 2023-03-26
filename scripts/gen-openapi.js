@@ -1,5 +1,6 @@
 import { pascalCase } from "change-case";
 import { writeJsonFile, readJsonFile, dirname } from "./utils.js";
+import {JSONPath} from 'jsonpath-plus';
 import path from "path";
 
 
@@ -95,7 +96,6 @@ function makeSchema(domain, modelGroup, modelName, modelSubPath) {
             // copyProp("optional", prop, valProp);
             copyProp("type", prop, valProp);
             
-            
             if (!valProp["optional"]) {
                 if (!schema.required) {
                     schema.required = [];
@@ -176,6 +176,7 @@ function saveSchemaStore() {
     }
 
     for (const [fileName, value] of Object.entries(files)) {
+        polishSchema(value);
         writeJsonFile(path.join(dirname(), `../openapi-specs/${fileName}`), value);
     }
 }
@@ -195,6 +196,18 @@ function generateSchemaStore() {
     
         makeSchema(domain, modelGroup, modelName);
     }    
+}
+
+function polishSchema(data) {
+    JSONPath({resultType:'parent', json: data, path: "$..type",
+        callback: function (parent) {
+            if (parent && parent.type === "any") {
+                console.log(parent);
+                delete parent.type;
+            }
+            // delete res.parent[res.parentProperty].template;
+        }
+    });
 }
 
 generateSchemaStore()

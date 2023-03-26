@@ -29,8 +29,7 @@
                         "type": "string"
                     },
                     "value": {
-                        "description": "Remote object value in case of primitive values or JSON values (if it was requested).",
-                        "type": "any"
+                        "description": "Remote object value in case of primitive values or JSON values (if it was requested)."
                     },
                     "unserializableValue": {
                         "description": "Primitive value which can not be JSON-stringified does not have `value`, but gets this\nproperty.",
@@ -71,9 +70,7 @@
                     "type": {
                         "type": "string"
                     },
-                    "value": {
-                        "type": "any"
-                    },
+                    "value": {},
                     "objectId": {
                         "type": "string"
                     }
