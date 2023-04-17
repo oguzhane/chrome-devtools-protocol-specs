@@ -1,9 +1,9 @@
 # chrome-devtools-protocol-specs
 
-Repository that emits Chrome DevTools Protocol Spec into form of OpenAPI and Json Schema standards.
+Repository that has Chrome DevTools Protocol Spec in the form of OpenAPI and Json Schema standards.
 
 ## Goal
-This project aims to open a door for making use of existing tooling around OpenAPI/JsonSchema for generating data models(commands, events, types) in Chrome DevTools Protocol for any language.
+This project aims to open a door for making use of existing tooling around OpenAPI/JsonSchema for generating data models(commands, events, types) of Chrome DevTools Protocol for any language.
 
 Developers can use those specs to generate the data models in Chrome Dev Protocol for any language by leveraging tremendous toolings for OpenAPI/JsonSchema.
 
